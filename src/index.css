@@ -1,4 +1,7 @@
 :root{
+    --font-family: "Montserrat", sans-serif;
+
+
   --black: #000;
   --white: #fff;
   --background: #fbfcf8;
@@ -12,6 +15,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--white)
 }
 
 a{
