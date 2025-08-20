@@ -1,10 +1,12 @@
-import React from 'react';
-import css from "./Layout.module.css"
+import React, { Suspense } from 'react';
+// import css from "./Layout.module.css"
 
-const Layout = () => {
+const Layout = ({children}) => {
   return (
-    <div className={css.wrap}>
-      layout
+    <div className="container">
+      <Suspense>
+        {children}
+      </Suspense>
     </div>
   )
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 import css from "./Signup.module.css"
 
-const signup = () => {
+const Signup = () => {
   return (
     <div className={css.wrap}>
-      
+      signup
     </div>
   )
 }
 
-export default signup
+export default Signup
