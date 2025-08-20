@@ -20,6 +20,9 @@ nav{
     gap: 32px;
 }
 
+.active{
+    text-decoration: underline;
+}
 @media (max-width: 768px) {
     .wrap{
         min-height: fit-content;

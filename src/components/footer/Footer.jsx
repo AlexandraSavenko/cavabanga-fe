@@ -9,8 +9,8 @@ const Footer = () => {
       <Logo />
       <p>© 2025 CookingCompanion. All rights reserved.</p>
       <nav>
-        <NavLink to={"#"}>Recipes</NavLink>
-        <NavLink to={"#"}>Account</NavLink>
+        <NavLink className={({isActive}) => isActive && css.active} to={"#"}>Recipes</NavLink>
+        <NavLink className={({isActive}) => isActive && css.active} to={"#"}>Account</NavLink>
       </nav>
     </div>
   );
