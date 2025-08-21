@@ -33,7 +33,7 @@ export default function LoginForm () {
                     <label className={css.label} htmlFor="passwordId">Enter your password</label>
                     <Field className={css.field} type="password" name="password" id="passwordId" placeholder="********"/>
                     <ErrorMessage className={css.error} name="password" component="span" />
-                    <button className={css.btn}>Login</button>
+                    <button type="submit" className={css.btn}>Login</button>
                 </Form>
             </Formik >
             <p>Don't have an account?</p>
