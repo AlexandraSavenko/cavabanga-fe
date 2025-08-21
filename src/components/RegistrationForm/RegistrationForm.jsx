@@ -20,8 +20,7 @@ export default function RegistrationForm () {
     });
 
     const handleSubmit = (values, actions) => {
-                console.log("onSubmit");
-
+        console.log("onSubmit");
         console.log(values);
         actions.resetForm();
     };
