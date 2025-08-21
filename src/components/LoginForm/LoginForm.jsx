@@ -1,4 +1,5 @@
 import css from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
 
 export default function LoginForm () {
     // const loginForm = {
@@ -12,7 +13,7 @@ export default function LoginForm () {
                 <button className={css.btn}>Login</button>
             </form>
             <p>Don't have an account?</p>
-            {/* <Link className={css.link} to='auth/register'>Register</Link> */}
+            <Link className={css.link} to='auth/register'>Register</Link>
         </div>
     )
 };

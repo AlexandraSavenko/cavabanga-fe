@@ -1,6 +1,7 @@
 import css from "./RegistrationForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 export default function RegistrationForm () {
     const regForm = {
@@ -51,7 +52,7 @@ export default function RegistrationForm () {
                 </Form>
             </Formik >
             <p className={css.alt}>Already have an account?</p>
-            {/* <Link className={css.link} to='/auth/login'>Log in</Link> */}
+            <Link className={css.link} to='/auth/login'>Log in</Link>
         </div>
     )
 };
