@@ -2,8 +2,11 @@ import css from "./RegistrationForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 
-export default function RegistrationForm () {
+export default function RegistrationForm() {
+    const dispatch = useDispatch();
     const regForm = {
         email: "",
         name: "",
@@ -20,8 +23,9 @@ export default function RegistrationForm () {
     });
 
     const handleSubmit = (values, actions) => {
-        console.log("onSubmit");
-        console.log(values);
+        const { email, name, password } = values;
+        const payload = { name, email, password };
+        dispatch(register(payload));
         actions.resetForm();
     };
 
