@@ -8,14 +8,15 @@ import { lazy, Suspense } from 'react'
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Signin = lazy(() => import("./pages/signin/Signin"));
-const Signup = lazy(() => import("./pages/signup/signup"));
+const Register = lazy(() => import("./pages/register/Register"))
+
 
 function App() {
 return <Layout>
   <Suspense>
   <Routes>
     <Route path="/" element={<Home/>} />
-    <Route path="/signup" element={<Signup/>} />
+    <Route path="/signup" element={<Register/>} />
     <Route path="/signin" element={<Signin/>} />
 
   </Routes>
