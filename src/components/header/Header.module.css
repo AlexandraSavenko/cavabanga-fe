@@ -1,0 +1,43 @@
+.wrap{
+    width: 100%;
+    height: 74px;
+    background-color: var(--darck-brown);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.userNav{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.userInfo span{
+    background-color: var(--light-brown);
+    padding: 6px 8px;
+    border-radius: 50%;
+}
+.br{
+    width: 1px;
+    height: 28px;
+    background-color: var(--white);
+}
+
+.wrap button {
+    background-color: transparent;
+    border: none;
+
+}
+.icon{
+    display: block;
+    width: 24px;
+    height: 28px;
+    stroke: var(--white);
+    fill: none;
+}
