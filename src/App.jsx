@@ -1,23 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './components/layout/Layout'
+// import AuthPage from './pages/AuthPage/AuthPage'
 // import Home from './pages/home/Home'
-// import Signin from './pages/signin/Signin'
-// import Signup from './pages/signup/signup'
 import { lazy, Suspense } from 'react'
 
 const Home = lazy(() => import("./pages/home/Home"));
-const Signin = lazy(() => import("./pages/signin/Signin"));
-const Signup = lazy(() => import("./pages/signup/signup"));
+const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 
 function App() {
 return <Layout>
   <Suspense>
   <Routes>
-    <Route path="/" element={<Home/>} />
-    <Route path="/signup" element={<Signup/>} />
-    <Route path="/signin" element={<Signin/>} />
-
+    <Route path="/" element={<Home />} />
+    <Route path="/auth/:authType" element={<AuthPage />} />
   </Routes>
   </Suspense>
 </Layout>
