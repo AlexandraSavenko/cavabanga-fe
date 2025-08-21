@@ -15,7 +15,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: var(--white)
+  color: var(--white);
+  /* border: 1px solid red; */
 }
 
 a{
@@ -26,25 +27,32 @@ ol, ul{
   list-style: none;
 }
 
+body{
+  font-family: var(--font-family);
+ background-color: var(--background); 
+}
 .container{
-background-color: var(--background);
 margin: 0 auto;
 }
 
+
 @media only screen and (min-width: 393px) {
   .container {
-    max-width: 361px;
+    padding: 16px;
+    max-width: 393px;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .container {
-    max-width: 704px;
+    padding: 0 32px;
+    max-width: 768px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .container {
-    max-width: 1225px;
+    padding: 0 107px;
+    max-width: 1440px;
   }
 }

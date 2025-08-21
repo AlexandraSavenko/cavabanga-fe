@@ -7,8 +7,10 @@ const Header = () => {
   const isLoggedIn = true;
   return (
     <div className={css.wrap}>
-      <Logo />
+      <div className={`${css.header} container`} >
+      <Logo/>
       <nav>
+        <div className={css.siteNav}>
         <NavLink to={"#"}>Recipes</NavLink>
         {isLoggedIn ? (
           <NavLink to={"#"}>My profile</NavLink>
@@ -19,9 +21,8 @@ const Header = () => {
           <NavLink to={"#"}>Add Recipe</NavLink>
         ) : (
           <NavLink to={"#"}>Register</NavLink>
-        )}
-      </nav>
-      {isLoggedIn && (
+        )}</div>
+{isLoggedIn && (
         <div className={css.userNav}>
           {" "}
           <div className={css.userInfo}>
@@ -36,6 +37,13 @@ const Header = () => {
           </button>{" "}
         </div>
       )}
+      </nav>
+      <button className={css.burgerBtn}>
+         <svg className={css.icon}>
+              <use href={`./icons.svg#icon-burger-menu`}></use>
+            </svg>
+      </button>
+      </div>
     </div>
   );
 };
