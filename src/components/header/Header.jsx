@@ -4,9 +4,9 @@ import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const [mobileNav, setMobileNav] = useState(false);
-  const toggleModal = () => {
+  const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
   return (
@@ -17,7 +17,7 @@ const Header = () => {
           {mobileNav && (
             <div className={css.modalLogoWrap}>
               <Logo />
-              <button onClick={toggleModal} className={css.closeModal}>
+              <button onClick={toggleModalNav} className={css.closeModalNav}>
                 <svg>
                   <use href="./icons.svg#icon-close"></use>
                 </svg>
@@ -26,7 +26,6 @@ const Header = () => {
           )}
           <div className={css.siteNav}>
             <NavLink to={"#"}>Recipes</NavLink>
-            <div className={css.regMenu}>
               {isLoggedIn ? (
                 <NavLink to={"#"}>My profile</NavLink>
               ) : (
@@ -41,7 +40,6 @@ const Header = () => {
                   Register
                 </NavLink>
               )}
-            </div>
             {isLoggedIn && (
               <div className={css.userNav}>
                 {" "}
@@ -60,7 +58,7 @@ const Header = () => {
           </div>
         </nav>
         <button
-          onClick={toggleModal}
+          onClick={toggleModalNav}
           className={`${mobileNav ? css.burgerHidden : css.burgerBtn}`}
         >
           <svg className={css.icon}>
