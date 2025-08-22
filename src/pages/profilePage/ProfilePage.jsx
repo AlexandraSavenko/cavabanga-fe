@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation.jsx';
-import RecipesList from '../../components/RecipesList/RecipesList.jsx';
-import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
+import ProfileNavigation from '../../components/profileNavigation/ProfileNavigation.jsx';
+import RecipesList from '../../components/recipesList/RecipesList.jsx';
+import LoadMoreBtn from '../../components/loadMoreBtn/LoadMoreBtn.jsx';
 
 import { fetchRecipes, clearRecipes } from '../../redux/recipes/recipesSlice.js';
 import { selectRecipes, selectHasMore, selectLoading} from '../../redux/recipes/recipesSelectors.js';

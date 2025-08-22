@@ -1,4 +1,4 @@
-import RecipeCard from '../RecipeCard/RecipeCard.jsx';
+import RecipeCard from '../recipeCard/RecipeCard.jsx';
 import styles from './RecipesList.module.css';
 
 const RecipesList = ({ recipes, recipeType }) => {

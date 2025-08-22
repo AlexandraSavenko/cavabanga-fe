@@ -16,7 +16,7 @@ return <Layout>
   <Suspense>
   <Routes>
     <Route path="/" element={<Home/>} />
-    <Route path="/signup" element={<Register/>} />
+    <Route path="/signup" element={<Register/>} /> 
     <Route path="/signin" element={<Signin/>} />
     <Route path="/profile/:recipeType" element={<ProfilePage />} />
   </Routes>
