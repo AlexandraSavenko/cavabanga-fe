@@ -1,8 +1,11 @@
 .container {
+  color: black;
 }
 .header {
+  color: #000;
 }
 .descr {
+  color: black;
 }
 .form {
   display: flex;
@@ -14,11 +17,14 @@
   margin: 24px auto 0 auto;
 }
 .label {
+  color: #000;
 }
 .field {
+  color: #000;
 }
 .error {
   color: red;
 }
-.alt {
+.container .alt {
+  color: #000;
 }
