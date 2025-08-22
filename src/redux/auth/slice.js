@@ -1,36 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { register } from "./operations";
+import { ErrorMessage } from "formik";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
       name: null,
-      email: null
+      email: null,
+      savedRecipes: []
     },
     token: null,
     isLoggedIn: false,
-    error: false
+    error: false,
+    // ErrorMessage: ""
   },
-  extraReducers: builder => builder.addCase(register.fulfilled, (state, action) => {
-    state.user = action.payload.user;
-  })
-//   reducers: {},
-//   extraReducers: builder => {
-//     builder
-//       .addCase(register.pending, handlePending)
-//       .addCase(register.fulfilled, (state, action) => {
-//         state.isLoggedIn = true;
-//         state.user = action.payload.user;
-//         state.token = action.payload.token;
-//       })
-//       .addCase(register.rejected, handleError)
-//       .addCase(login.pending, handlePending)
-//       .addCase(login.fulfilled, (state, action) => {
-//         state.isLoggedIn = true;
-//         state.user = action.payload.user;
-//         state.token = action.payload.token;
-//       })
+  // reducers: {},
+  extraReducers: builder =>
+    builder
+      // .addCase(register.pending, (state, action) => {} OR handlePending)
+      .addCase(register.fulfilled, (state, action) => {
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
+        state.user.savedRecipes = action.payload.user.savedRecipes;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      })
+      // .addCase(register.rejected, (state, action) => { } OR handleError)
+      // .addCase(login.fulfilled, (state, action) => {
+      //   state.isLoggedIn = true;
+      //   state.user = action.payload.user;
+      //   state.token = action.payload.token;
+      // })
 //       .addCase(login.rejected, handleError)
 //       .addCase(logout.pending, handlePending)
 //       .addCase(logout.fulfilled, (state) => {
