@@ -1,8 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './components/layout/Layout'
-// import AuthPage from './pages/AuthPage/AuthPage'
-// import Home from './pages/home/Home'
+import ProfilePage from './pages/profilePage/ProfilePage'
 import { lazy, Suspense } from 'react'
 
 const Home = lazy(() => import("./pages/home/Home"));
@@ -12,8 +11,8 @@ function App() {
 return <Layout>
   <Suspense>
   <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/auth/:authType" element={<AuthPage />} />
+    <Route path="/" element={<Home/>} />
+    <Route path="/profile/:recipeType" element={<ProfilePage />} />
   </Routes>
   </Suspense>
 </Layout>
