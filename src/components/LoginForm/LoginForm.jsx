@@ -2,8 +2,11 @@ import css from "./LoginForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {login} from "../../redux/auth/operations"
 
-export default function LoginForm () {
+export default function LoginForm() {
+    const dispatch = useDispatch();
     const loginForm = {
         email: "",
         password: ""
@@ -13,8 +16,7 @@ export default function LoginForm () {
         password: Yup.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must not exceed 128 characters.").required("Password is required"),
     });
     const handleSubmit = (values, actions) => {
-        console.log("onSubmit");
-        console.log(values);
+        dispatch(login(values));
         actions.resetForm();
     };
 
