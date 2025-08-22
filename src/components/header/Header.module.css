@@ -14,10 +14,16 @@
   flex-grow: 1;
 }
 
-.header nav {
+.nav {
+  background-color: var(--darck-brown);
   display: flex;
   align-items: center;
-  background-color: var(--darck-brown);
+}
+
+.navOpen {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .burgerBtn {
@@ -30,53 +36,74 @@
   height: 32px;
 }
 
- .siteNav{
-    display: flex;
-    align-items: center;
-  }
-  .modalLogoWrap{
-    display: none;
-  }
+.siteNav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.regMenu {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+.modalLogoWrap {
+  width: 100%;
+  display: none;
+}
 @media (max-width: 767px) {
-  .header nav {
-    flex-direction: column;
+  .nav{
+    background-color: wheat;
+        flex-direction: column;
     padding: 14px 18px;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
   }
-  .modalClosed {
+
+  .navClosed {
     transform: translateX(200%);
+  }
+.siteNav{
+  width: 100%;
+}
+  .regMenu{
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .regMenu a:last-child{
+    width: 100%;
+    max-width: 300px;
   }
   .burgerBtn {
     display: block;
   }
-  .hidden {
+  .burgerHidden {
     display: none;
   }
-  .header nav .open {
-    transform: translateX(0);
-  }
- .siteNav{
+
+  .siteNav {
     gap: 32px;
     flex-direction: column;
- }
+  }
 
- .modalLogoWrap{
+  .modalLogoWrap {
     max-width: 300px;
 
     display: flex;
     align-items: center;
- }
- .closeModal svg{
+  }
+  .closeModal svg {
     display: block;
     border: 1px solid var(--white);
     border-radius: 100%;
-  width: 32px;
-  height: 32px;
-  fill: var(--white)
-}
+    width: 32px;
+    height: 32px;
+    fill: var(--white);
+  }
 }
 
 .btn {
@@ -119,5 +146,3 @@
   stroke: var(--white);
   fill: none;
 }
-
-
