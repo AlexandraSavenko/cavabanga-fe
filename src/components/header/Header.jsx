@@ -4,7 +4,7 @@ import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const [mobileNav, setMobileNav] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
@@ -25,18 +25,18 @@ const Header = () => {
             </div>
           )}
           <div className={css.siteNav}>
-            <NavLink to={"#"}>Recipes</NavLink>
+            <NavLink className={({isActive}) => isActive && css.active} to={"#"}>Recipes</NavLink>
               {isLoggedIn ? (
-                <NavLink to={"#"}>My profile</NavLink>
+                <NavLink className={({isActive}) => isActive && css.active} to={"/profile/:recipeType"}>My profile</NavLink>
               ) : (
-                <NavLink to={"#"}>Log in</NavLink>
+                <NavLink className={({isActive}) => isActive && css.active} to={"/login"}>Log in</NavLink>
               )}
               {isLoggedIn ? (
-                <NavLink className={css.btn} to={"#"}>
+                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"#"}>
                   Add Recipe
                 </NavLink>
               ) : (
-                <NavLink className={css.btn} to={"#"}>
+                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"/register"}>
                   Register
                 </NavLink>
               )}

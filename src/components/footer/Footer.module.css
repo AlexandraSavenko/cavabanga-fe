@@ -1,16 +1,17 @@
 .wrap{
-    height: 94px;
     background-color: var(--darck-brown);
     width: 100%;
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     padding: 24px;
 }
 
-.wrap p{
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer p{
     font-weight: 400;
 font-size: 12px;
 }
@@ -24,7 +25,7 @@ nav{
     text-decoration: underline;
 }
 @media (max-width: 768px) {
-    .wrap{
+    .footer{
         min-height: fit-content;
         flex-direction: column;
         gap: 32px;
