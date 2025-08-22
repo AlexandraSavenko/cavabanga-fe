@@ -1,10 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './components/layout/Layout'
-// import AuthPage from './pages/AuthPage/AuthPage'
-// import Home from './pages/home/Home'
-// import Signin from './pages/signin/Signin'
-// import Signup from './pages/signup/signup'
 import ProfilePage from './pages/profilePage/ProfilePage'
 import { lazy, Suspense } from 'react'
 
