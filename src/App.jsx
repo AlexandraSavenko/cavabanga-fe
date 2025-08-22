@@ -12,7 +12,8 @@ return <Layout>
   <Suspense>
   <Routes>
     <Route path="/" element={<Home/>} />
-    <Route path="/profile/:recipeType" element={<ProfilePage />} />
+      <Route path="/profile/:recipeType" element={<ProfilePage />} />
+      <Route path="/auth/:authType" element={<AuthPage />} />
   </Routes>
   </Suspense>
 </Layout>
