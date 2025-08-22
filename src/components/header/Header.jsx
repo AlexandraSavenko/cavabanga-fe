@@ -4,7 +4,7 @@ import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const [mobileNav, setMobileNav] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
