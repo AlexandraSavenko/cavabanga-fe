@@ -25,18 +25,18 @@ const Header = () => {
             </div>
           )}
           <div className={css.siteNav}>
-            <NavLink className={({isActive}) => isActive && css.active} to={"#"}>Recipes</NavLink>
+            <NavLink className={({isActive}) => isActive ? css.active : ""} to={"#"}>Recipes</NavLink>
               {isLoggedIn ? (
-                <NavLink className={({isActive}) => isActive && css.active} to={"/profile/:recipeType"}>My profile</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} to={"/profile/:recipeType"}>My profile</NavLink>
               ) : (
-                <NavLink className={({isActive}) => isActive && css.active} to={"/login"}>Log in</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} to={"/auth/login"}>Log in</NavLink>
               )}
               {isLoggedIn ? (
                 <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"#"}>
                   Add Recipe
                 </NavLink>
               ) : (
-                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"/register"}>
+                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"/auth/register"}>
                   Register
                 </NavLink>
               )}
