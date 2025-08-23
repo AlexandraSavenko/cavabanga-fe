@@ -4,9 +4,11 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
 
 export default function RegistrationForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const regForm = {
         email: "",
         name: "",
@@ -22,10 +24,14 @@ export default function RegistrationForm() {
         terms: Yup.boolean().oneOf([true], "You must agree to the Terms of Service and Privacy Policy.")
     });
 
-    const handleSubmit = (values, actions) => {
+    const handleSubmit = async (values, actions) => {
         const { email, name, password } = values;
         const payload = { name, email, password };
-        dispatch(register(payload));
+        const res = await dispatch(register(payload));
+        if (register.fulfilled.match(res)) {
+            // console.log("WORKING!")
+            navigate('/');
+        }
         actions.resetForm();
     };
 
