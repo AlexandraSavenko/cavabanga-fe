@@ -28,8 +28,6 @@ export const login = createAsyncThunk("auth/login", async (values, thunkAPI) => 
         const token = auth.data.data.accessToken;
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         const res = await axios.get('/api/users/current');
-        // console.log("LoginOp => res.data:", res.data);
-        // console.log("LoginOp => res.data.data:", res.data.data);
         const payload = {
             user: res.data,
             token
