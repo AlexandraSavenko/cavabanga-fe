@@ -1,0 +1,16 @@
+.wrap {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--white);
+}
+
+.text {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 18px;
+}

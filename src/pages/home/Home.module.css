@@ -1,0 +1,7 @@
+.icon{
+    border: 1px solid red;
+    stroke: var(--black);
+    fill: var(--black);
+    width: 32px;
+    height: 32px;
+}

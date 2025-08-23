@@ -1,0 +1,33 @@
+.container {
+  color: black;
+}
+.header {
+  color: #000;
+}
+.descr {
+  color: black;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 16px 12px;
+  margin: 24px auto 0 auto;
+}
+.label {
+  color: #000;
+}
+.field {
+  color: #000;
+}
+.error {
+  color: red;
+}
+.container .alt {
+  color: #000;
+}
+.container .link {
+  color: #000;
+}

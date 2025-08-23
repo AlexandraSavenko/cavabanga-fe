@@ -1,0 +1,153 @@
+.wrap {
+  width: 100%;
+  background-color: var(--darck-brown);
+  position: relative;
+  padding: 14px;
+}
+.wrap button {
+  background-color: transparent;
+  border: none;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.nav {
+  background-color: var(--darck-brown);
+  display: flex;
+  align-items: center;
+}
+
+.navOpen {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.burgerBtn {
+  display: none;
+  cursor: pointer;
+}
+
+.burgerBtn .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.siteNav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.regMenu {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+.modalLogoWrap {
+  width: 100%;
+  display: none;
+}
+.btn {
+  background-color: var(--light-brown);
+  padding: 12px 16px;
+  border-radius: 8px;
+  order: 1;
+}
+.userNav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  order: 2;
+}
+@media (max-width: 767px) {
+  .header div:first-child {
+  flex-grow: 1;
+}
+  .nav{
+    background-color: var(--darck-brown);
+        flex-direction: column;
+    padding: 14px 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .navClosed {
+    transform: translateX(200%);
+  }
+.siteNav{
+  width: 100%;
+      gap: 32px;
+    flex-direction: column;
+    text-align: center;
+}
+
+  .siteNav a:last-child{
+    width: 100%;
+    max-width: 300px;
+  }
+  .burgerBtn {
+    display: block;
+  }
+  .burgerHidden {
+    display: none;
+  }
+
+  .modalLogoWrap {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+  }
+  .closeModalNav svg {
+    display: block;
+    border: 1px solid var(--white);
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    fill: var(--white);
+  }
+
+.btn{
+  order: 2
+}
+.userNav{
+  order: 1;
+}
+}
+
+
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.userInfo span {
+  background-color: var(--light-brown);
+  padding: 6px 8px;
+  border-radius: 50%;
+}
+.br {
+  width: 1px;
+  height: 28px;
+  background-color: var(--white);
+}
+
+
+.icon {
+  display: block;
+  width: 24px;
+  height: 28px;
+  stroke: var(--white);
+  fill: none;
+}
+.active{
+    text-decoration: underline;
+}
