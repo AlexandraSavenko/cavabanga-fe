@@ -2,6 +2,8 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
+// axios.defaults.baseURL = "http://localhost:3000/";
+
 
 export const register = createAsyncThunk("auth/register", async (values, thunkAPI) => {
     try {
@@ -21,17 +23,15 @@ export const register = createAsyncThunk("auth/register", async (values, thunkAP
 });
 
 export const login = createAsyncThunk("auth/login", async (values, thunkAPI) => {
-    // console.log("LoginOp => values:", values);
     try {
-        const auth = await axios.post("/api/auth/login", values);
+        const auth = await axios.post('/api/auth/login', values);
         const token = auth.data.data.accessToken;
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        const res = await axios.get("/api/users/current");
-        // console.log("resData:", resData);
-        // console.log("LoginOp => res(axios.get):", res);
+        const res = await axios.get('/api/users/current');
+        // console.log("LoginOp => res.data:", res.data);
         // console.log("LoginOp => res.data.data:", res.data.data);
         const payload = {
-            user: res.data.data,
+            user: res.data,
             token
         }
         return payload;
