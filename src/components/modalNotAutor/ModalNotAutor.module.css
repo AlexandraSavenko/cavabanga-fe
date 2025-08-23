@@ -1,0 +1,66 @@
+.wrap{
+    position: absolute;
+    top: 10%;
+    background: var(--light-beige);
+    border-radius: 32px;
+padding: 56px 32px;
+width: 420px;
+height: 277px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+}
+
+.button{
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.button svg{
+    width: 24px;
+    height: 24px;
+    stroke: var(--black)
+}
+.title{
+font-weight: 600;
+font-size: 32px;
+text-align: center;
+color: var(--black);
+
+}
+
+.text{
+font-weight: 400;
+font-size: 16px;
+line-height: 155%;
+text-align: center;
+color: var(--black);
+}
+.linkWrap{
+    display: flex;
+    gap: 27px;
+}
+.login{
+    text-align: center;
+    border: 1px solid var(--black);
+border-radius: 8px;
+padding: 8px;
+font-weight: 600;
+font-size: 16px;
+color: var(--black);
+}
+
+.register{
+    text-align: center;
+    background: var(--light-brown);
+    border-radius: 8px;
+padding: 8px;
+font-weight: 600;
+font-size: 16px;
+color: var(--white);
+}

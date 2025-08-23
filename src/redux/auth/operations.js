@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
-// axios.defaults.baseURL = "http://localhost:3000/";
+// axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3000/";
 
 
 export const register = createAsyncThunk("auth/register", async (values, thunkAPI) => {
