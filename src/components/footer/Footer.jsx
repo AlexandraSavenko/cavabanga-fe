@@ -4,7 +4,6 @@ import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
 import ProtectedLink from "../protectedLink/ProtectedLink";
 import ModalNotAutor from "../modalNotAutor/ModalNotAutor";
-import { createPortal } from "react-dom";
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +29,7 @@ const Footer = () => {
           </ProtectedLink>
         </nav>
       </div>
-      {showModal && createPortal( <ModalNotAutor closeModal={setShowModal}/>, document.body) }
+      {showModal && <ModalNotAutor closeModal={setShowModal}/> }
     </div>
   );
 };

@@ -1,8 +1,9 @@
 .backdrop{
-    position: absolute;
+    position: fixed;
     top: 0;
-    height: 100%;
-    width: 100%;
+    left: 0;
+    height: 100vh;
+    width: 100vh;
     background: var(--black);
 opacity: 0.6;
 }
@@ -10,7 +11,7 @@ opacity: 0.6;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
     background: var(--light-beige);
     border-radius: 32px;
 padding: 56px 32px;
@@ -54,7 +55,9 @@ color: var(--black);
 }
 .linkWrap{
     display: flex;
+    justify-content: center;
     gap: 27px;
+    width: 100%;
 }
 .login{
     text-align: center;
@@ -64,6 +67,7 @@ padding: 8px;
 font-weight: 600;
 font-size: 16px;
 color: var(--black);
+flex-grow: 1;
 }
 
 .register{
@@ -74,4 +78,5 @@ padding: 8px;
 font-weight: 600;
 font-size: 16px;
 color: var(--white);
+flex-grow: 1;
 }
