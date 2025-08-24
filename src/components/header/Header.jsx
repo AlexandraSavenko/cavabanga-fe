@@ -25,18 +25,18 @@ const Header = () => {
             </div>
           )}
           <div className={css.siteNav}>
-            <NavLink className={({isActive}) => isActive ? css.active : ""} to={"#"}>Recipes</NavLink>
+            <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"#"}>Recipes</NavLink>
               {isLoggedIn ? (
-                <NavLink className={({isActive}) => isActive ? css.active : ""} to={"/profile/:recipeType"}>My profile</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"/profile/:recipeType"}>My profile</NavLink>
               ) : (
-                <NavLink className={({isActive}) => isActive ? css.active : ""} to={"/auth/login"}>Log in</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"/auth/login"}>Log in</NavLink>
               )}
               {isLoggedIn ? (
-                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"#"}>
+                <NavLink className={({isActive}) => `${isActive && css.active}  ${css.btn}`} onClick={toggleModalNav} to={"#"}>
                   Add Recipe
                 </NavLink>
               ) : (
-                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} to={"/auth/register"}>
+                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} onClick={toggleModalNav} to={"/auth/register"}>
                   Register
                 </NavLink>
               )}

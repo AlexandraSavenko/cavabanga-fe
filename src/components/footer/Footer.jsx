@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./Footer.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
@@ -7,8 +7,7 @@ import ModalNotAutor from "../modalNotAutor/ModalNotAutor";
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {console.log(showModal)}, [showModal])
-  const user = true;
+  const user = null;
   return (
     <div className={css.wrap}>
       <div className={`${css.footer} container`}>
@@ -30,7 +29,7 @@ const Footer = () => {
           </ProtectedLink>
         </nav>
       </div>
-      {showModal && <ModalNotAutor/> }
+      {showModal && <ModalNotAutor closeModal={setShowModal}/> }
     </div>
   );
 };

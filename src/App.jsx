@@ -10,16 +10,17 @@ const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 
 function App() {
   return (
-    <Layout>
-      <Suspense>
+    <>
+      <Suspense fallback={ <div>Loading...</div> }>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Layout/>}>
           <Route path="/profile/:recipeType" element={<ProfilePage />} />
           <Route path="/auth/:authType" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </Suspense>
-    </Layout>
+    </>
   );
 }
 
