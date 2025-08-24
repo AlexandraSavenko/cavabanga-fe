@@ -25,18 +25,18 @@ const Header = () => {
             </div>
           )}
           <div className={css.siteNav}>
-            <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"#"}>Recipes</NavLink>
+            <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={() => setMobileNav(false)} to={"#"}>Recipes</NavLink>
               {isLoggedIn ? (
-                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"/profile/:recipeType"}>My profile</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={() => setMobileNav(false)} to={"/profile/:recipeType"}>My profile</NavLink>
               ) : (
-                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={toggleModalNav} to={"/auth/login"}>Log in</NavLink>
+                <NavLink className={({isActive}) => isActive ? css.active : ""} onClick={() => setMobileNav(false)} to={"/auth/login"}>Log in</NavLink>
               )}
               {isLoggedIn ? (
-                <NavLink className={({isActive}) => `${isActive && css.active}  ${css.btn}`} onClick={toggleModalNav} to={"#"}>
+                <NavLink className={({isActive}) => `${isActive && css.active}  ${css.btn}`} onClick={() => setMobileNav(false)} to={"#"}>
                   Add Recipe
                 </NavLink>
               ) : (
-                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} onClick={toggleModalNav} to={"/auth/register"}>
+                <NavLink className={({isActive}) => `${isActive && css.active} ${css.btn}`} onClick={() => setMobileNav(false)} to={"/auth/register"}>
                   Register
                 </NavLink>
               )}

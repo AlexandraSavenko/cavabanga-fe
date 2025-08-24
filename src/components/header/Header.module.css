@@ -22,12 +22,6 @@
   transition: all 1s ease;
 }
 
-.navOpen {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
 .burgerBtn {
   display: none;
   cursor: pointer;
@@ -99,6 +93,7 @@
     flex-grow: 1;
   }
   .nav {
+      border: 4px solid red;
     background-color: var(--darck-brown);
     flex-direction: column;
     padding: 14px 18px;
@@ -107,7 +102,11 @@
     left: 0;
     width: 100%;
   }
-
+.navOpen {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
   .navClosed {
     transform: translateY(-200%);
   }
