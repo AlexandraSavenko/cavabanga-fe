@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/operations";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const dispatch = useDispatch()
+  const isLoggedIn = true;
   const [mobileNav, setMobileNav] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
+  const handleLogout = () => {
+    dispatch(logout())
+  }
   return (
     <div className={css.wrap}>
       <div className={`${css.header} container`}>
@@ -48,7 +54,7 @@ const Header = () => {
                   <span className={css.userIcon}>M</span> <p>User</p>
                 </div>{" "}
                 <div className={css.br}></div>
-                <button>
+                <button onClick={handleLogout}>
                   <svg className={css.icon}>
                     <use href={`./icons.svg#icon-log-out`}></use>
                   </svg>

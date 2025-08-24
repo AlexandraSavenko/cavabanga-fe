@@ -89,11 +89,10 @@
 }
 
 @media (max-width: 767px) {
-  .header div:first-child {
+  .header a:first-child {
     flex-grow: 1;
   }
   .nav {
-      border: 4px solid red;
     background-color: var(--darck-brown);
     flex-direction: column;
     padding: 14px 18px;
