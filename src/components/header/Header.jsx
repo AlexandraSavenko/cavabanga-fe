@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
@@ -9,7 +9,6 @@ const Header = () => {
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
-  useEffect(() => console.log(mobileNav), [mobileNav])
   return (
     <div className={css.wrap}>
       <div className={`${css.header} container`}>
