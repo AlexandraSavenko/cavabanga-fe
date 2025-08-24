@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { lazy, Suspense } from "react";
-import RecipesList from "./components/loadMoreBtn/LoadMoreBtn";
 
+const Loader = lazy(() => import("./components/loader/Loader"));
 const Layout = lazy(() => import("./components/layout/Layout"));
 const MainPage = lazy(() => import("./pages/mainPage/MainPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
@@ -12,7 +12,7 @@ const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   return (
     <>
-      <Suspense fallback={ <div>Loading...</div> }>
+      <Suspense fallback={ <Loader/> }>
         <Routes>
           <Route path="/" element={<Layout/>}>
           <Route index element={<MainPage/>} />
@@ -20,7 +20,6 @@ function App() {
           <Route path="/auth/:authType" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="/list" element={<RecipesList />}/>
         </Routes>
       </Suspense>
     </>
