@@ -1,6 +1,16 @@
+.backdrop{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--black);
+opacity: 0.6;
+}
 .wrap{
     position: absolute;
-    top: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: var(--light-beige);
     border-radius: 32px;
 padding: 56px 32px;
@@ -11,6 +21,7 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 gap: 20px;
+z-index: 1111111;
 }
 
 .button{
