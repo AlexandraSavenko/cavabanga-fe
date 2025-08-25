@@ -20,9 +20,9 @@ export default function LoginForm() {
     const handleSubmit = async(values, actions) => {
         const res = await dispatch(login(values));
         if (login.fulfilled.match(res)) {
+            actions.resetForm();
             navigate('/');
         }
-        actions.resetForm();
     };
 
     return (

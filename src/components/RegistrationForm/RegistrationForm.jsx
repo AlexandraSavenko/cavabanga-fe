@@ -29,10 +29,9 @@ export default function RegistrationForm() {
         const payload = { name, email, password };
         const res = await dispatch(register(payload));
         if (register.fulfilled.match(res)) {
-            // console.log("WORKING!")
+            actions.resetForm();
             navigate('/');
         }
-        actions.resetForm();
     };
 
     return (
