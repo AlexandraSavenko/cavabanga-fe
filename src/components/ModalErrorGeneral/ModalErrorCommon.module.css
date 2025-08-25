@@ -1,0 +1,81 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: var(--black);
+  opacity: 0.6;
+}
+.wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--light-beige);
+  border-radius: 32px;
+  padding: 56px 32px;
+  width: 420px;
+  height: 277px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 1111111;
+}
+
+.button {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.button svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--black);
+}
+.title {
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  color: var(--black);
+}
+
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  text-align: center;
+  color: var(--black);
+}
+.linkWrap {
+  display: flex;
+  justify-content: center;
+  gap: 27px;
+  width: 100%;
+}
+.login {
+  text-align: center;
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--black);
+  flex-grow: 1;
+}
+
+.register {
+  text-align: center;
+  background: var(--light-brown);
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white);
+  flex-grow: 1;
+}

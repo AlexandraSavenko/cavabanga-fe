@@ -21,26 +21,25 @@ const authSlice = createSlice({
     },
     token: null,
     isLoggedIn: false,
-    isAuthError: null,
+    authError: null,
     isLoading: false
   },
   reducers: {
     clearAuthError: (state) => {
-      state.isAuthError = null;
+      state.authError = null;
     }
   },
   extraReducers: builder =>
     builder
       .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, action) => {
-
         state.user.id = action.payload.user._id;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
         state.user.savedRecipes = action.payload.user.savedRecipes;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.error = false;
+        state.authError = null;
       })
       .addCase(register.rejected, handleError)
       .addCase(login.fulfilled, (state, action) => {
@@ -50,12 +49,12 @@ const authSlice = createSlice({
         state.user.savedRecipes = action.payload.user.savedRecipes;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.error = false;
+        state.authError = null;
       })
       .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, (state) => {
         state.isLoggedIn = false;
-        state.isError = false;
+        state.authError = null;
         state.token = null;
         state.user.id = null;
         state.user.name = null;
