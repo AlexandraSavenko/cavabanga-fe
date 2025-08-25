@@ -4,9 +4,10 @@ import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 
 const Header = () => {
+  const user = useSelector(selectUser)
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [mobileNav, setMobileNav] = useState(false);
@@ -37,7 +38,7 @@ const Header = () => {
             <NavLink
               className={({ isActive }) => (isActive ? css.active : "")}
               onClick={() => setMobileNav(false)}
-              to={"#"}
+              to={"/"}
             >
               Recipes
             </NavLink>
@@ -84,7 +85,7 @@ const Header = () => {
                 {" "}
                 <div className={css.userInfo}>
                   {" "}
-                  <span className={css.userIcon}>M</span> <p>User</p>
+                  <span className={css.userIcon}>{user.name[0].toUpperCase()}</span> <p>{user.name}</p>
                 </div>{" "}
                 <div className={css.br}></div>
                 <button onClick={handleLogout}>
