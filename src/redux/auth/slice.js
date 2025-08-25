@@ -21,6 +21,7 @@ const authSlice = createSlice({
     builder
       // .addCase(register.pending, (state, action) => {} OR handlePending)
       .addCase(register.fulfilled, (state, action) => {
+
         state.user.id = action.payload.user._id;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;

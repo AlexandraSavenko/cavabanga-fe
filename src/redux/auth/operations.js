@@ -25,11 +25,12 @@ export const register = createAsyncThunk("auth/register", async (values, thunkAP
 export const login = createAsyncThunk("auth/login", async (values, thunkAPI) => {
     try {
         const auth = await axios.post('/api/auth/login', values);
+
         const token = auth.data.data.accessToken;
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        const res = await axios.get('/api/users/current');
+        const res = await axios.get('/api/users');
         const payload = {
-            user: res.data,
+            user: res.data.data,
             token
         }
         return payload;
