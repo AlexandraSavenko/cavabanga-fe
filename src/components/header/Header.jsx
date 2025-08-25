@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [mobileNav, setMobileNav] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
