@@ -3,7 +3,7 @@ import css from "./GeneralInfo.module.css";
 export default function GeneralInfo({ category, cookingTime, calories }) {
   return (
     <div className={css.generalInfo}>
-      <h2 className={css.recipeTitle}>{recipe.title}</h2>
+      <h2 className={css.generalInfoTitle}>General information</h2>
       <ul className={css.recipeDetails}>
         <li className={css.recipeDetailItem}>Category: {category}</li>
         <li className={css.recipeDetailItem}>

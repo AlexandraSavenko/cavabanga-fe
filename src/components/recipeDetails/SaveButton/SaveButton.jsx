@@ -1,9 +1,9 @@
 import css from "./SaveButton.module.css";
 
-export default function SaveButton({ onClick }) {
+export default function SaveButton({ onClick, isFavorite }) {
   return (
     <button className={css.saveButton} onClick={onClick}>
-      Save
+      {isFavorite ? "Remove from Favorites" : "Save"}
     </button>
   );
 }
