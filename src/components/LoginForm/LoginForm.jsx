@@ -3,10 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {login} from "../../redux/auth/operations"
+import { login } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const loginForm = {
         email: "",
         password: ""
@@ -15,8 +17,11 @@ export default function LoginForm() {
         email: Yup.string().email("Must be a valid email").max(128, "Email must not exceed 128 characters.").required("Email is a required field"),
         password: Yup.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must not exceed 128 characters.").required("Password is required"),
     });
-    const handleSubmit = (values, actions) => {
-        dispatch(login(values));
+    const handleSubmit = async(values, actions) => {
+        const res = await dispatch(login(values));
+        if (login.fulfilled.match(res)) {
+            navigate('/');
+        }
         actions.resetForm();
     };
 

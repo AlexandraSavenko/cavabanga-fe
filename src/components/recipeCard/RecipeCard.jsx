@@ -1,61 +1,62 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addToFavorites, removeFromFavorites } from '../../redux/recipes/favoritesSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { addToFavorites, removeFromFavorites } from '../../redux/recipes/favoritesSlice';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './RecipeCard.module.css';
+import css from './RecipeCard.module.css';
 
 
 const RecipeCard = ({ recipe, recipeType }) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isAuth = useSelector((state) =>state.auth.isAuth);
 
-    const isFavorite = useSelector((state) =>
-        state.favorites.items.includes(recipe.id)
-    );
+    // const isAuth = useSelector((state) =>state.auth.isAuth);
 
-    const handleFavoriteClick = () => {
-        if (!isAuth) {
-            navigate("/login");
-            return;
-        }
+    // const isFavorite = useSelector((state) =>
+    //     state.favorites.items.includes(recipe.id)
+    // );
 
-        if (isFavorite) {
-            dispatch(removeFromFavorites(recipe.id));
-        } else {
-            dispatch(addToFavorites(recipe.id));
-        }
-    };
+    // const handleFavoriteClick = () => {
+    //     if (!isAuth) {
+    //         navigate("/login");
+    //         return;
+    //     }
+
+    //     if (isFavorite) {
+    //         dispatch(removeFromFavorites(recipe.id));
+    //     } else {
+    //         dispatch(addToFavorites(recipe.id));
+    //     }
+    // };
 
     return (
-        <div className={styles.card}>
-            <img
-             src={recipe.image || "/placeholder.jpg"}
+        <div className={css.card}>
+            <img            
+             src={recipe.thumb || "/placeholder.jpg"}
              alt={recipe.title}
-             className={styles.image}
+             className={css.image}
             />
-            <h3 className={styles.title}>{recipe.title}</h3>
-            <p className={styles.time}>⏱ {recipe.time || "-"}</p>
-            <p className={styles.desc}>{recipe.desc}</p>
-            <p className={styles.cals}> 
+            <h3 className={css.title}>{recipe.title}</h3>
+            {/* <p className={css.time}>⏱ {recipe.time || "-"}</p> */}
+            <p className={css.desc}>{recipe.description}</p>
+            {/* <p className={css.cals}> 
                 {recipe.cals ? `~${recipe.cals} cals` : "-"} 
-            </p>
+            </p> */}
             
             <button 
-                className={styles.btn} 
+                className={css.btn} 
                 onClick={() => navigate(`/recipes/${recipe.id}`)}
             >
             Learn more
             </button>
 
-            {recipeType !== 'own' && (
+            {/* {recipeType !== 'own' && (
                 <button 
-                    className={styles.favoritesBtn} 
+                    className={css.favoritesBtn} 
                     onClick={handleFavoriteClick}
                 >
                     {isFavorite ? '❤️' : '🤍' }  
                 </button>
-            )}
+            )} */}
         </div>
     );
 };

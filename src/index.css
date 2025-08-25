@@ -1,5 +1,6 @@
 :root{
     --font-family: "Montserrat", sans-serif;
+    --second-family: "DM Sans", sans-serif;
 
 
   --black: #000;
@@ -30,6 +31,12 @@ ol, ul{
 body{
   font-family: var(--font-family);
  background-color: var(--background); 
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 .container{
 margin: 0 auto;
