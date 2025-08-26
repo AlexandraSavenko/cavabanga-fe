@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RecipeCard from '../recipeCard/RecipeCard.jsx';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn.jsx';
+import { useDispatch } from 'react-redux';
 
 const arr = [
   {
@@ -64,10 +65,11 @@ const arr = [
 
 
 const RecipesList = ({ recipeType }) => {
+  const dispatch = useDispatch()
   const [recipes] = useState(arr);
   const [visibleCount, setVisibleCount] = useState(16);
 
-
+useEffect()
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + 16);
   };

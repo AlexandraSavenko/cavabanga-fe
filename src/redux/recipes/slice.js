@@ -9,7 +9,8 @@ const recipeSlice = createSlice({
     name: "recipes",
     initialState: {
 recipesState
-    }
+    },
+    extraReducers: builder => builder.addCase()
 })
 
 export default recipeSlice.reducer;
