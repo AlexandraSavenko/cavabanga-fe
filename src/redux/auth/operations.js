@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
+axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
 axios.defaults.baseURL = "http://localhost:3000/";
 
 
