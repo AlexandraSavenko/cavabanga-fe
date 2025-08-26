@@ -20,9 +20,9 @@ export default function LoginForm() {
     const handleSubmit = async(values, actions) => {
         const res = await dispatch(login(values));
         if (login.fulfilled.match(res)) {
+            actions.resetForm();
             navigate('/');
         }
-        actions.resetForm();
     };
 
     return (
@@ -43,7 +43,7 @@ export default function LoginForm() {
                     <button type="submit" className={css.btn}>Login</button>
                 </Form>
             </Formik >
-            <p>Don't have an account?</p>
+            <p className={css.alt}>Don't have an account?</p>
             <Link className={css.link} to='/auth/register'>Register</Link>
         </div>
     )
