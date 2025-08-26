@@ -3,7 +3,7 @@ import './App.css';
 import { lazy, Suspense } from 'react';
 
 import RestrictedRoute from "./components/RestrictedRoute";
-import Logo from "./components/logo/Logo";
+
 
 const Loader = lazy(() => import('./components/loader/Loader'));
 const Layout = lazy(() => import('./components/layout/Layout'));
@@ -11,18 +11,18 @@ const MainPage = lazy(() => import('./pages/mainPage/MainPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
 const ProfilePage = lazy(() => import('./pages/profilePage/ProfilePage'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
-const AddRecipePage = lazy(() => import('./pages/AddRecipePage/AddRecipePage'));
+const AddRecipePage = lazy(() => import('./pages/addRecipePage/AddRecipePage'));
 
 function App() {
   return (
     <>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader/>}>
         <Routes>
           <Route
             path="/add-recipe"
             element={
               <RestrictedRoute
-                component={<Logo/>}
+                component={<AddRecipePage/>}
                 redirectTo="/auth/login"
               />
             }
