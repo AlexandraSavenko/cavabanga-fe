@@ -65,7 +65,7 @@ const Header = () => {
                   `${isActive && css.active}  ${css.btn}`
                 }
                 onClick={() => setMobileNav(false)}
-                to={"#"}
+                to={"/add-recipe"}
               >
                 Add Recipe
               </NavLink>
