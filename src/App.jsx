@@ -1,15 +1,17 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import { lazy, Suspense } from "react";
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { lazy, Suspense } from 'react';
+
 import RestrictedRoute from "./components/RestrictedRoute";
 import Logo from "./components/logo/Logo";
 
-const Loader = lazy(() => import("./components/loader/Loader"));
-const Layout = lazy(() => import("./components/layout/Layout"));
-const MainPage = lazy(() => import("./pages/mainPage/MainPage"));
-const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
-const ProfilePage = lazy(() => import("./pages/profilePage/ProfilePage"));
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const Loader = lazy(() => import('./components/loader/Loader'));
+const Layout = lazy(() => import('./components/layout/Layout'));
+const MainPage = lazy(() => import('./pages/mainPage/MainPage'));
+const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
+const ProfilePage = lazy(() => import('./pages/profilePage/ProfilePage'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const AddRecipePage = lazy(() => import('./pages/AddRecipePage/AddRecipePage'));
 
 function App() {
   return (
@@ -38,3 +40,4 @@ function App() {
 }
 
 export default App;
+
