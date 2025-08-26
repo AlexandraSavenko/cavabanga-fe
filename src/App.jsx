@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { lazy, Suspense } from "react";
+import RestrictedRoute from "./components/RestrictedRoute";
+import Logo from "./components/logo/Logo";
 
 const Loader = lazy(() => import("./components/loader/Loader"));
 const Layout = lazy(() => import("./components/layout/Layout"));
@@ -12,13 +14,22 @@ const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   return (
     <>
-      <Suspense fallback={ <Loader/> }>
+      <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Layout/>}>
-          <Route index element={<MainPage/>} />
-          <Route path="/profile/:recipeType" element={<ProfilePage />} />
-          <Route path="/auth/:authType" element={<AuthPage />} />
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="/add-recipe"
+            element={
+              <RestrictedRoute
+                component={<Logo/>}
+                redirectTo="/auth/login"
+              />
+            }
+          />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+            <Route path="/profile/:recipeType" element={<ProfilePage />} />
+            <Route path="/auth/:authType" element={<AuthPage />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
