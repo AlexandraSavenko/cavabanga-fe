@@ -1,6 +1,5 @@
-
 import AddRecipeForm from "../../components/AddRecipeForm/AddRecipeForm";
-import css from "./AddRecipePage.module.css"; 
+import css from "./AddRecipesPage.module.css"
 
 const AddRecipePage = () => {
   return (
