@@ -11,7 +11,7 @@ const MainPage = lazy(() => import('./pages/mainPage/MainPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
 const ProfilePage = lazy(() => import('./pages/profilePage/ProfilePage'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
-const AddRecipePage = lazy(() => import('./pages/addRecipePage/AddRecipePage'));
+const AddRecipesPage = lazy(() => import('./pages/addRecipePage/AddRecipesPage'));
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             path="/add-recipe"
             element={
               <RestrictedRoute
-                component={<AddRecipePage/>}
+                component={<AddRecipesPage/>}
                 redirectTo="/auth/login"
               />
             }
