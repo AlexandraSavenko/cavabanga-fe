@@ -26,6 +26,7 @@ const authSlice = createSlice({
   },
   reducers: {
     clearAuthError: (state) => {
+      console.log("executing clearAuthError")
       state.authError = null;
     }
   },
@@ -67,4 +68,5 @@ const authSlice = createSlice({
       .addCase(login.rejected, handleError)
 });
 
-  export default authSlice.reducer;
+export default authSlice.reducer;
+export const { clearAuthError } = authSlice.actions;
