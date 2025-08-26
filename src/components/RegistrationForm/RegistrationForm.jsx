@@ -14,14 +14,14 @@ export default function RegistrationForm() {
         name: "",
         password: "",
         confirmPassword: "",
-        terms: false
+        // terms: false
     };
     const RegValidSchema = Yup.object().shape({
         email: Yup.string().email("Must be a valid email").max(128, "Email must not exceed 128 characters.").required("Email is a required field"),
         name: Yup.string().max(16, "Name must not exceed 16 characters.").required("Name is a required field."),
         password: Yup.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must not exceed 128 characters.").required("Password is required"),
         confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "The passwords must match.").required("Please, confirm the password."),
-        terms: Yup.boolean().oneOf([true], "You must agree to the Terms of Service and Privacy Policy.")
+        // terms: Yup.boolean().oneOf([true], "You must agree to the Terms of Service and Privacy Policy.")
     });
 
     const handleSubmit = async (values, actions) => {
@@ -56,9 +56,9 @@ export default function RegistrationForm() {
                     <label className={css.label} htmlFor="confirmPasId">Repeat your password</label>
                     < Field className={css.field} type="password" name="confirmPassword" id="confirmPasId" placeholder="********"/>
                     <ErrorMessage className={css.error} name="confirmPassword" component="span" />
-                    <label className={css.label} htmlFor="termsId">I agree to the Terms of Service and Privacy Policy</label>
+                    {/* <label className={css.label} htmlFor="termsId">I agree to the Terms of Service and Privacy Policy</label>
                     <Field className={css.field} type="checkbox" name="terms" id="termsId" />
-                    <ErrorMessage className={css.error} name="terms" component="span"/>
+                    <ErrorMessage className={css.error} name="terms" component="span"/> */}
                     <button className={css.btn} type="submit">Create account</button>
                 </Form>
             </Formik >
