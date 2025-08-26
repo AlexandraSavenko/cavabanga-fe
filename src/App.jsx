@@ -1,29 +1,31 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import { lazy, Suspense } from "react";
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { lazy, Suspense } from 'react';
 
-const Loader = lazy(() => import("./components/loader/Loader"));
-const Layout = lazy(() => import("./components/layout/Layout"));
-const MainPage = lazy(() => import("./pages/mainPage/MainPage"));
-const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
-const ProfilePage = lazy(() => import("./pages/profilePage/ProfilePage"));
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+
+const Loader = lazy(() => import('./components/loader/Loader'));
+const Layout = lazy(() => import('./components/layout/Layout'));
+const MainPage = lazy(() => import('./pages/mainPage/MainPage'));
+const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
+const ProfilePage = lazy(() => import('./pages/profilePage/ProfilePage'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const AddRecipePage = lazy(() => import('./pages/AddRecipePage/AddRecipePage'));
 
 function App() {
   return (
-    <>
-      <Suspense fallback={ <Loader/> }>
-        <Routes>
-          <Route path="/" element={<Layout/>}>
-          <Route index element={<MainPage/>} />
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage />} />
           <Route path="/profile/:recipeType" element={<ProfilePage />} />
           <Route path="/auth/:authType" element={<AuthPage />} />
+          <Route path="/add-recipe" element={<AddRecipePage />} />
           <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </>
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 
 export default App;
+
