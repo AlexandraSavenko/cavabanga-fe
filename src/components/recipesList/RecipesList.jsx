@@ -15,9 +15,9 @@ const RecipesList = ({ recipeType }) => {
 useEffect(() => {
   dispatch(getRecipeList(2))
 }, [])
-  const handleLoadMore = () => {
-    setVisibleCount(prev => prev + 16);
-  };
+  // const handleLoadMore = () => {
+  //   setVisibleCount(prev => prev + 16);
+  // };
 
 
   // Якщо рецептів немає
@@ -38,9 +38,9 @@ useEffect(() => {
         ))}
       </ul>
 
-      {visibleCount < recipes.length && (
+      {/* {visibleCount < recipes.length && (
         <LoadMoreBtn onClick={handleLoadMore} />
-      )}
+      )} */}
     </div>
   );
 };
