@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     favorites: favoritesReducer,
-    recipes: recipesReducer, // 👈 додай сюди
+    recipes: recipesReducer, 
   },
 });
