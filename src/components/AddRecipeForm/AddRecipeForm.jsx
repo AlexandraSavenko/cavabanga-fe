@@ -127,12 +127,12 @@ const AddRecipeForm = () => {
           
           <div className={css.fieldBlock}>
             <label className={css.label}>Category</label>
-            <Field as="select" name="category" className={css.input}>
+            {/* <Field as="select" name="category" className={css.input}>
               <option value="">Select a category</option>
               {categories.map(cat => (
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
               ))}
-            </Field>
+            </Field> */}
             <ErrorMessage name="category" component="div" className={css.error}/>
           </div>
 
@@ -140,12 +140,12 @@ const AddRecipeForm = () => {
   <label className={css.label}>Ingredients</label>
 
 
-  <Field as="select" name="ingredient" className={css.input}>
+  {/* <Field as="select" name="ingredient" className={css.input}>
     <option value="">Name</option>
     {ingredientsList.map(ing => (
       <option key={ing._id} value={ing._id}>{ing.name}</option>
     ))}
-  </Field>
+  </Field> */}
 
     <Field name="ingredientAmount" placeholder="Amount" className={css.input}/>
 
