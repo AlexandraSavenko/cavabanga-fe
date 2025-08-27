@@ -67,7 +67,7 @@
   /* font-weight: 400; */
 }
 .errorField {
-  border-color: var(--red);
+  border: 1.5px solid var(--red);
   color: var(--red);
 }
 .errorField::placeholder {

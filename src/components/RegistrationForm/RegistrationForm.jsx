@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
-// need to install and import clsx!!!
+import clsx from "clsx";
 
 export default function RegistrationForm() {
     const dispatch = useDispatch();
@@ -44,26 +44,26 @@ export default function RegistrationForm() {
                 validationSchema={RegValidSchema}
                 onSubmit={handleSubmit}
             >
+            {({ errors }) => (
                 <Form className={css.form}>
                     <div className={css.fieldWrapper}>
                         <label className={css.label} htmlFor="emailId">Enter your email address</label>
-                        < Field className={css.field} type="email" name="email" id="emailId" placeholder="email@gmail.com" />
-                        {/* < Field className={css.field, ErrorMessage.email && touched.email && css.errorField} type="email" name="email" id="emailId" placeholder="email@gmail.com"/> */}
+                        < Field className={clsx(css.field, errors.email && css.errorField)} type="email" name="email" id="emailId" placeholder="email@gmail.com" />
                         <ErrorMessage className={css.error} name="email" component="span" />
                     </div>
                     <div className={css.fieldWrapper}>
                         <label className={css.label} htmlFor="nameId">Enter your name</label>
-                        < Field className={css.field} type="text" name="name" id="nameId" placeholder="Max"/>
+                        < Field className={clsx(css.field, errors.name && css.errorField)} type="text" name="name" id="nameId" placeholder="Max"/>    
                         <ErrorMessage className={css.error} name="name" component="span" />
                     </div>
                     <div className={css.fieldWrapper}>
                         <label className={css.label} htmlFor="passwordId">Create a strong password</label>
-                        < Field className={css.field} type="password" name="password" id="passwordId" placeholder="********"/>
+                        < Field className={clsx(css.field, errors.password && css.errorField)} type="password" name="password" id="passwordId" placeholder="********"/>
                         <ErrorMessage className={css.error} name="password" component="span" />
                     </div>
                     <div className={css.fieldWrapper}>
                         <label className={css.label} htmlFor="confirmPasId">Repeat your password</label>
-                        < Field className={css.field} type="password" name="confirmPassword" id="confirmPasId" placeholder="********"/>
+                        < Field className={clsx(css.field, errors.confirmPassword && css.errorField)} type="password" name="confirmPassword" id="confirmPasId" placeholder="********"/>
                         <ErrorMessage className={css.error} name="confirmPassword" component="span" />
                     </div>
                     {/* <label className={css.label} htmlFor="termsId">I agree to the Terms of Service and Privacy Policy</label>
@@ -71,6 +71,7 @@ export default function RegistrationForm() {
                     <ErrorMessage className={css.error} name="terms" component="span"/> */}
                     <button className={css.btn} type="submit">Create account</button>
                 </Form>
+            )}
             </Formik >
             <div className={css.linkWrapper}>
                 <p className={css.alt}>Already have an account? </p>
