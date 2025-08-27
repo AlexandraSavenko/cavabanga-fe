@@ -30,7 +30,7 @@ const recipeSlice = createSlice({
     })
   .addCase(getRecipeList.fulfilled, (state, action) => {
     state.loading = false;
-      state.allRecipes = action.payload.dishes;
+      state.allRecipes = action.payload.data;
       state.page = action.payload.page;
       state.totalItems = action.payload.totalItems;
       state.totalPages = action.payload.totalPages;

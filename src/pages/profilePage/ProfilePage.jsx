@@ -6,29 +6,25 @@ import ProfileNavigation from '../../components/profileNavigation/ProfileNavigat
 import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import LoadMoreBtn from '../../components/loadMoreBtn/LoadMoreBtn.jsx';
 
-import { fetchRecipes, clearRecipes } from '../../redux/recipes/recipesSlice.js';
-import { selectRecipes, selectHasMore, selectLoading} from '../../redux/recipes/recipesSelectors.js';
-
 import styles from './ProfilePage.module.css';
+import { getRecipeList } from '../../redux/recipes/operations.js';
+import { selectAllRecipes } from '../../redux/recipes/selectors.js';
+
 
 const ProfilePage = () => {
     const { recipeType } = useParams();
     const dispatch = useDispatch();
-    const recipes = useSelector(selectRecipes);
-    const loading = useSelector(selectLoading);
+    const recipes = useSelector(selectAllRecipes);
 
-    useEffect(() => {
-        dispatch(clearRecipes());
-        dispatch(fetchRecipes({ type: recipeType}));
-    }, [dispatch, recipeType]);
-
+  useEffect(() => {
+dispatch(getRecipeList({type: "own", page: 1, perPage: 12}))
+  }, [dispatch])
 
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>My profile</h2>
             <ProfileNavigation />
-            {loading && <p>Loading...</p>}
-            <RecipesList recipes={recipes} recipeType={recipeType} />
+            <RecipesList allRecipes={recipes} recipeType={recipeType} />
            
             <p className={styles.subtitle}>Showing: {recipeType} </p>
         </div>

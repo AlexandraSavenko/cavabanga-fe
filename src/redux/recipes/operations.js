@@ -13,6 +13,7 @@ export const getRecipeList = createAsyncThunk("api/recires", async (params, thun
         })
         const url = type === "all" ? "/api/recipes" : `/api/recipes/${type}/`
         const res = await axios.get(`${url}?${query.toString()}`);
+        console.log(res)
         return res.data.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message)
