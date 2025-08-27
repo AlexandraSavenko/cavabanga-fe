@@ -4,8 +4,4 @@ export const selectIngredient = (state) => state.filters.ingredient;
 export const selectCategories = (state) => state.filters.categories;
 export const selectIngredients = (state) => state.filters.ingredients;
 export const selectSearchQuery = (state) => state.filters.searchQuery;
-export const selectFilter = (state) => state.filters.recipe;
-export const selectCategory = (state) => state.filters.category;
-export const selectIngredient = (state) => state.filters.ingredient;
-export const selectCategories = (state) => state.filters.categories;
-export const selectIngredients = (state) => state.filters.ingredients;
+
