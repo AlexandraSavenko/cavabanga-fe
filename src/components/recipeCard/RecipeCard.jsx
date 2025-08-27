@@ -1,32 +1,28 @@
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { addToFavorites, removeFromFavorites } from '../../redux/recipes/favoritesSlice';
 import { useNavigate } from 'react-router-dom';
 
 import css from './RecipeCard.module.css';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { toggleFavourites } from '../../redux/recipes/operations';
+import { selectUserFavourites } from '../../redux/recipes/selectors';
 
 
 const RecipeCard = ({ recipe, recipeType }) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isAuth = useSelector(selectIsLoggedIn);
+    const userFavorites = useSelector(selectUserFavourites);
+    const isFavorite = userFavorites.includes(recipe.id)
 
-    // const isAuth = useSelector((state) =>state.auth.isAuth);
+    const handleFavoriteClick = () => {
+        if (!isAuth) {
+            navigate("/login");
+            return;
+        }
 
-    // const isFavorite = useSelector((state) =>
-    //     state.favorites.items.includes(recipe.id)
-    // );
-
-    // const handleFavoriteClick = () => {
-    //     if (!isAuth) {
-    //         navigate("/login");
-    //         return;
-    //     }
-
-    //     if (isFavorite) {
-    //         dispatch(removeFromFavorites(recipe.id));
-    //     } else {
-    //         dispatch(addToFavorites(recipe.id));
-    //     }
-    // };
+       dispatch(toggleFavourites({recipeId: recipe._id}))
+    };
 
     return (
         <div className={css.card}>
@@ -49,14 +45,14 @@ const RecipeCard = ({ recipe, recipeType }) => {
             Learn more
             </button>
 
-            {/* {recipeType !== 'own' && (
+            {recipeType !== 'own' && (
                 <button 
                     className={css.favoritesBtn} 
                     onClick={handleFavoriteClick}
                 >
                     {isFavorite ? '❤️' : '🤍' }  
                 </button>
-            )} */}
+            )}
         </div>
     );
 };

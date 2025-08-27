@@ -13,10 +13,30 @@ export const getRecipeList = createAsyncThunk("api/recires", async (params, thun
         })
         const url = type === "all" ? "/api/recipes" : `/api/recipes/${type}/`
         const res = await axios.get(`${url}?${query.toString()}`);
-        console.log(res)
         return res.data.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message)
     }
 } )
+
+export const getUserFavourites = createAsyncThunk("user/getFavourites", async (_, thunkAPI) => {
+try {
+    const res = await axios.get("api/recipes/favorites");
+    console.log(res.data.data)
+    return res.data.data;
+} catch (error) {
+                    return thunkAPI.rejectWithValue(error.message)
+}
+})
+
+export const toggleFavourites = createAsyncThunk("recipes/toggleFavourite", async ({ recipeId, toDo }, thunkAPI) => {
+    try {
+        const res = toDo === "add" ? await axios.post(`api/recipes/${recipeId}`) : await axios.delete(`api/recipes/${recipeId}`);
+        return { recipeId, toDo, data: res.data };
+    } catch (error) {
+                return thunkAPI.rejectWithValue(error.message)
+
+    }
+})
+
 

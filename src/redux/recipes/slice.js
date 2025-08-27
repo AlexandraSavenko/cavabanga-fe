@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRecipeList } from "./operations";
+import { getRecipeList, getUserFavourites } from "./operations";
 
 const recipesState = {
   allRecipes: [],
+  favorites: [],
   page: 1,
   perPage: 12,
   totalItems: 0,
@@ -37,6 +38,10 @@ const recipeSlice = createSlice({
     }).addCase(getRecipeList.rejected, (state) => {
         state.loading = false;
         state.error = true;
+    }).addCase(getUserFavourites.pending, (state) => {
+      state.loading = true;
+    }).addCase(getUserFavourites.fulfilled, (state, action) => {
+state.favorites = action.payload
     })
 });
 

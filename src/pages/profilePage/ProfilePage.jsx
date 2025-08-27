@@ -7,7 +7,7 @@ import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import LoadMoreBtn from '../../components/loadMoreBtn/LoadMoreBtn.jsx';
 
 import styles from './ProfilePage.module.css';
-import { getRecipeList } from '../../redux/recipes/operations.js';
+import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
 import { selectAllRecipes } from '../../redux/recipes/selectors.js';
 
 
@@ -17,7 +17,8 @@ const ProfilePage = () => {
     const recipes = useSelector(selectAllRecipes);
 
   useEffect(() => {
-dispatch(getRecipeList({type: "own", page: 1, perPage: 12}))
+dispatch(getRecipeList({type: "own", page: 1, perPage: 12}));
+dispatch(getUserFavourites())
   }, [dispatch])
 
     return (
