@@ -34,17 +34,23 @@ export default function LoginForm() {
                 onSubmit={handleSubmit}
             >
                 <Form className={css.form}>
-                    <label className={css.label} htmlFor="emailId">Enter your email address</label>
-                    <Field className={css.field} type="email" name="email" id="emailId" placeholder="email@gmail.com"/>
-                    <ErrorMessage className={css.error} name="email" component="span" />
-                    <label className={css.label} htmlFor="passwordId">Enter your password</label>
-                    <Field className={css.field} type="password" name="password" id="passwordId" placeholder="********"/>
-                    <ErrorMessage className={css.error} name="password" component="span" />
+                    <div className={css.fieldWrapper}>
+                        <label className={css.label} htmlFor="emailId">Enter your email address</label>
+                        <Field className={css.field} type="email" name="email" id="emailId" placeholder="email@gmail.com"/>
+                        <ErrorMessage className={css.error} name="email" component="span" />
+                    </div>
+                    <div className={css.fieldWrapper}>                        
+                        <label className={css.label} htmlFor="passwordId">Enter your password</label>
+                        <Field className={css.field} type="password" name="password" id="passwordId" placeholder="********"/>
+                        <ErrorMessage className={css.error} name="password" component="span" />
+                    </div>
                     <button type="submit" className={css.btn}>Login</button>
                 </Form>
             </Formik >
-            <p className={css.alt}>Don't have an account?</p>
-            <Link className={css.link} to='/auth/register'>Register</Link>
+            <div className={css.linkWrapper}>
+                <p className={css.alt}>Don't have an account? </p>
+                <Link className={css.link} to='/auth/register'>Register</Link>
+            </div>
         </div>
     )
 };

@@ -73,7 +73,7 @@ export default function RegistrationForm() {
                 </Form>
             </Formik >
             <div className={css.linkWrapper}>
-                <p className={css.alt}>Already have an account?</p>
+                <p className={css.alt}>Already have an account? </p>
                 <Link className={css.link} to='/auth/login'>Log in</Link>
             </div>
         </div>
