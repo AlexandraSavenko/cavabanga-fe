@@ -8,11 +8,10 @@ export default function ModalErrorCommon({ isopen, onClose,
     <div className={css.backdrop} onClick={onClose}></div>
       <div className={css.wrap} onClick={(e) => e.stopPropagation()}>
         <button className={css.closeButton} onClick={onClose}>
-          <svg className={css.icon}>
-            <use href={`./icons.svg#icon-close`}></use>
+          <svg className={css.icon} width={24} height={24} stroke="black">
+            <use href={'/icons.svg#icon-close'}></use>
           </svg>
       </button>
-      {/* <p>WORKING</p> */}
         {children}
       </div>
     </>
