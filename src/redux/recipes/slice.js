@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRecipeList, getUserFavourites } from "./operations";
+import { getRecipeList, getUserFavourites, toggleFavourites } from "./operations";
 
 const recipesState = {
   allRecipes: [],
-  favorites: [],
+  listOfFavorites: [],
+  favoriteRecipes: [],
   page: 1,
   perPage: 12,
   totalItems: 0,
@@ -41,7 +42,10 @@ const recipeSlice = createSlice({
     }).addCase(getUserFavourites.pending, (state) => {
       state.loading = true;
     }).addCase(getUserFavourites.fulfilled, (state, action) => {
-state.favorites = action.payload
+state.favoriteRecipes = action.payload
+    }).addCase(toggleFavourites.fulfilled, (state, action) => {
+      const { recipeId, toDo } = action.payload;
+state.listOfFavorites
     })
 });
 
