@@ -13,7 +13,7 @@ import {
 import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
-import ModalErrorCommon from "../../components/ModalErrorGeneral/ModalErrorCommon"
+import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
 
 export default function AuthPage() {
     const { authType } = useParams()
@@ -36,11 +36,10 @@ export default function AuthPage() {
     return (
         <div className={css.container}>
             <ModalErrorCommon isopen={error} onClose={handleCloseModal}>
-            <p className={css.title}>Authentification Error</p>
+            <p className={css.title}>{`${error}`}</p>
             <p className={css.text}>
                 We couldn't process your request. Make sure your information is correct, or try again later.
                 </p>
-                <p>{`${error}`}</p>
             </ModalErrorCommon>
             {authType === "register" && <RegistrationForm />}
             {authType === "login" && <LoginForm />}
