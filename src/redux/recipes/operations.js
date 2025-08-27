@@ -28,11 +28,11 @@ try {
 }
 })
 
-export const toggleFavourites = createAsyncThunk("recipes/toggleFavourite", async ({ recipeId, toDo }, thunkAPI) => {
-    console.log("todo", toDo)
+export const deleteFromFavorite = createAsyncThunk("recipes/deleteFromFavourite", async ({ recipeId }, thunkAPI) => {
     try {
-        const res = toDo === "add" ? await axios.post(`api/recipes/favorites/${recipeId}`) : await axios.delete(`api/recipes/favorites/${recipeId}`);
-        return { recipeId, toDo, data: res.data };
+        const res = await axios.delete(`api/recipes/favorites/${recipeId}`);
+       console.log(res.data)
+        return { recipeId, data: res.data };
     } catch (error) {
                 return thunkAPI.rejectWithValue(error.message)
 

@@ -4,24 +4,25 @@ import { useNavigate } from "react-router-dom";
 
 import css from "./RecipeCard.module.css";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { toggleFavourites } from "../../redux/recipes/operations";
-import { selectUserFavourites } from "../../redux/recipes/selectors";
+import { selectFavRecipesIds } from "../../redux/recipes/selectors";
+import { deleteFromFavorite } from "../../redux/recipes/operations";
 
 const RecipeCard = ({ recipe, recipeType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector(selectIsLoggedIn);
-  const userFavorites = useSelector(selectUserFavourites);
-  const isFavorite = userFavorites.includes(recipe.id);
+  const userFavorites = useSelector(selectFavRecipesIds);
+  const isFavorite = userFavorites.includes(recipe._id);
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
     if (!isAuth) {
       console.log("No");
       return;
     }
-    dispatch(toggleFavourites({ recipeId: recipe._id, toDo }));
+    console.log("this recipe", recipe._id)
+    console.log(userFavorites)
+    dispatch(deleteFromFavorite({ recipeId: recipe._id, toDo }));
   };
-console.log(userFavorites)
   return (
     <div className={css.card}>
       <img
