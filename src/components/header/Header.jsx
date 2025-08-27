@@ -65,7 +65,7 @@ const Header = () => {
                   `${isActive && css.active}  ${css.btn}`
                 }
                 onClick={() => setMobileNav(false)}
-                to={"#"}
+                to={"/add-recipe"}
               >
                 Add Recipe
               </NavLink>
@@ -90,7 +90,7 @@ const Header = () => {
                 <div className={css.br}></div>
                 <button onClick={handleLogout}>
                   <svg className={css.icon}>
-                    <use href={`./icons.svg#icon-log-out`}></use>
+                    <use href={`/icons.svg#icon-log-out`}></use>
                   </svg>
                 </button>{" "}
               </div>

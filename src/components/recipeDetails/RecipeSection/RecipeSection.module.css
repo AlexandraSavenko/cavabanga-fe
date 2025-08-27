@@ -1,0 +1,17 @@
+.recipeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: flex-start;
+}
+.sectionTitle {
+  font-size: 32px;
+  color: #000;
+  margin-bottom: 8px;
+}
+.sectionText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #000;
+}

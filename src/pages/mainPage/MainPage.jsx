@@ -1,5 +1,7 @@
 import React from "react";
 import css from "./MainPage.module.css";
+import React from "react";
+import css from "./MainPage.module.css";
 
 import Logo from "../../components/logo/Logo";
 import RecipesList from "../../components/recipesList/RecipesList";
