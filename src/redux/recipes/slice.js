@@ -4,12 +4,15 @@ import { getRecipeList } from "./operations";
 const recipesState = {
   allRecipes: [],
   page: 1,
+  perPage: 12,
   totalItems: 0,
   totalPages: 0,
   favRecipes: [],
   ownRecipes: [],
+  filters: {},
+  title: "",
   loading: false,
-  error: false
+  error: null
 };
 const recipeSlice = createSlice({
   name: "recipes",
