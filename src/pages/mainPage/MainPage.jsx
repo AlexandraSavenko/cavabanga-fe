@@ -15,7 +15,7 @@ const MainPage = () => {
   const allRecipes = useSelector(selectAllRecipes);
   const page = useSelector(selectPage)
   useEffect(() => {
-  dispatch(getRecipeList({page, perPage: 12}))
+  dispatch(getRecipeList({type: "all", page, perPage: 12}))
 }, [page, dispatch])
   return (
     <div className={css.wrap}>
