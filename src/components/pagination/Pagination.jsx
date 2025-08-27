@@ -1,9 +1,11 @@
 import React from "react";
 import css from "./Pagination.module.css"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectPage, selectTotalPages } from "../../redux/recipes/selectors";
+import { setPage } from "../../redux/recipes/slice";
 
-export default function Pagination({ onPageChange }) {
+export default function Pagination() {
+  const dispatch = useDispatch()
   const currentPage = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages)
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -13,7 +15,7 @@ export default function Pagination({ onPageChange }) {
       {}
       <button
         className={css.arrow}
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => dispatch(setPage(currentPage - 1))}
         disabled={currentPage === 1}
       >
         <svg className={css.icon}>
@@ -28,7 +30,7 @@ export default function Pagination({ onPageChange }) {
           className={`${css.page} ${
             currentPage === page ? css.active : ""
           }`}
-          onClick={() => onPageChange(page)}
+          onClick={() => dispatch(setPage(page))}
         >
           {page}
         </button>
@@ -37,7 +39,7 @@ export default function Pagination({ onPageChange }) {
       {}
       <button
         className={css.arrow}
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => dispatch(setPage(currentPage + 1))}
         disabled={currentPage === totalPages}
       >
         <svg className={css.icon}>

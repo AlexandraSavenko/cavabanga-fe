@@ -15,7 +15,6 @@ const ProfilePage = () => {
     const { recipeType } = useParams();
     const dispatch = useDispatch();
     const recipes = useSelector(selectRecipes);
-    const hasMore = useSelector(selectHasMore);
     const loading = useSelector(selectLoading);
 
     useEffect(() => {
@@ -23,9 +22,6 @@ const ProfilePage = () => {
         dispatch(fetchRecipes({ type: recipeType}));
     }, [dispatch, recipeType]);
 
-   const handleLoadMore = () => {
-    dispatch(fetchRecipes({ type: recipeType, page: recipes.length / 16 + 1}));
-   };
 
     return (
         <div className={styles.container}>
@@ -33,9 +29,7 @@ const ProfilePage = () => {
             <ProfileNavigation />
             {loading && <p>Loading...</p>}
             <RecipesList recipes={recipes} recipeType={recipeType} />
-            {hasMore && (
-                 <LoadMoreBtn onClick={handleLoadMore} />
-            )}
+           
             <p className={styles.subtitle}>Showing: {recipeType} </p>
         </div>
     );

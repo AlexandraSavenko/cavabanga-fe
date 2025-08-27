@@ -17,7 +17,14 @@ const recipesState = {
 const recipeSlice = createSlice({
   name: "recipes",
   initialState: recipesState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action) => {
+      const newPage = action.payload
+      if(newPage >= 1 && newPage <= state.totalPages){
+        state.page = newPage;
+      }
+      },
+  },
   extraReducers: (builder) =>
     builder.addCase(getRecipeList.pending, (state) => {
         state.loading = true;
@@ -35,3 +42,4 @@ const recipeSlice = createSlice({
 });
 
 export default recipeSlice.reducer;
+export const { setPage } = recipeSlice.actions
