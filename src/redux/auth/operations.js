@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import {selectToken} from "./selectors"
 
 // axios.defaults.baseURL = "https://cavabanga-be.onrender.com/";
 axios.defaults.baseURL = "http://localhost:3000/";
@@ -43,7 +44,9 @@ export const login = createAsyncThunk("auth/login", async (values, thunkAPI) => 
 });
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
-    console.log("LogoutOp");
+    const state = thunkAPI.getState();
+    const token = selectToken(state);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
         await axios.post('/api/auth/logout');
         axios.defaults.headers.common["Authorization"] = "";
