@@ -1,74 +1,74 @@
 .darkButtonSvg {
-  background: var(--color-brown-500);
-  color: var(--color-white);
+  background: var(--light-brown);
+  color: var(--white);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .darkButtonSvg:hover {
-  background: var(--color-brown-700);
+  background: var(--darck-brown);
 }
 
 .darkButtonSvg:focus {
-  background: var(--color-brown-500);
+  background: var(--light-brown);
   box-shadow: 0 4px 10px #0000004d;
   outline: none;
 }
 
 .darkButtonSvg:disabled {
-  background: var(--color-brown-500);
+  background: var(--light-brown);
   box-shadow: 0 4px 10px #0000004d;
   cursor: not-allowed;
   opacity: 0.3;
 }
 
 .lightButtonSvg {
-  border: 1px solid var(--color-black);
-  color: var(--color-black);
+  border: 1px solid var(--black);
+  color: var(--black);
   background: transparent;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .lightButtonSvg:hover {
-  background: var(--color-brown-700);
-  border-color: var(--color-brown-700);
-  color: var(--color-white);
+  background: var(--darck-brown);
+  border-color: var(--darck-brown);
+  color: var(--white);
 }
 
 .lightButtonSvg:focus {
-  background: var(--color-brown-500);
-  color: var(--color-white);
-  border-color: var(--color-brown-700);
+  background: var(--light-brown);
+  color: var(--white);
+  border-color: var(--darck-brown);
   box-shadow: 0 4px 10px #0000004d;
   outline: none;
 }
 
 .lightButtonSvg:disabled {
-  background: var(--color-brown-500);
-  color: var(--color-white);
-  border-color: var(--color-brown-700);
+  background: var(--light-brown);
+  color: var(--white);
+  border-color: var(--darck-brown);
   box-shadow: 0 4px 10px #0000004d;
   cursor: not-allowed;
   opacity: 0.3;
 }
 
 .darkSvg {
-  stroke: var(--color-black);
+  stroke: var(--black);
   stroke-width: 1px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .darkSvg:hover,
 .darkSvg:focus {
-  stroke: var(--color-white);
+  stroke: var(--white);
 }
 
 .lightSvg {
   stroke-width: 1px;
-  stroke: var(--color-white);
+  stroke: var(--white);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .lightSvg:hover,
 .lightSvg:focus {
-  stroke: var(--color-black);
+  stroke: var(--black);
 }

@@ -26,16 +26,34 @@ export default function Filter() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [isModalOpen]);
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen(false);
+    }
+  };
+  const handleFiltersBtnClick = () => {
+    setIsModalOpen(true);
+  };
 
   const location = useLocation();
-  const page = location.pathname.includes("favorites")
-    ? "favorites"
-    : location.pathname.includes("own")
-    ? "own"
-    : "main";
 
-  const recipes = useSelector((state) => selectRecipes(state, page));
-  const recipesCount = recipes?.length || 0;
+  let page = "main";
+  if (location.pathname.includes("favorites")) page = "favorites";
+  if (location.pathname.includes("own")) page = "own";
+
+  const recipesCount = useSelector((state) => selectRecipes(state, page));
   const categories = useSelector(selectCategories);
   const ingredients = useSelector(selectIngredients);
   const category = useSelector(selectCategory);
@@ -46,140 +64,157 @@ export default function Filter() {
     dispatch(fetchIngredients());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!isModalOpen) return;
-    const handleEsc = (event) => {
-      if (event.key === "Escape") setIsModalOpen(false);
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [isModalOpen]);
-
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) setIsModalOpen(false);
-  };
-
   const handleResetClick = () => {
     dispatch(changeCategoryFilter(""));
     dispatch(changeIngredientFilter(""));
   };
-
   const handleCategoryChange = (e) => {
-    dispatch(changeCategoryFilter(e.target.value));
+    const filterValue = e.target.value;
+    dispatch(changeCategoryFilter(filterValue));
   };
-
   const handleIngredientChange = (e) => {
-    dispatch(changeIngredientFilter(e.target.value));
+    const filterValue = e.target.value;
+    dispatch(changeIngredientFilter(filterValue));
   };
-
-  const renderFiltersForm = (isModal = false) => (
-    <form className={isModal ? css.filtersModalForm : css.filtersForm}>
-      <label>
-        Category
-        <select
-          value={category}
-          onChange={handleCategoryChange}
-          className={
-            isModal ? css.filtersModalCategory : css.filtersInputCategory
-          }
-        >
-          <option value="" disabled>
-            {isModal ? "e.g. Soup" : "Category"}
-          </option>
-          <option value="">All</option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Ingredient
-        <select
-          value={ingredient}
-          onChange={handleIngredientChange}
-          className={
-            isModal
-              ? css.filtersModalInputIngredient
-              : css.filtersInputIngredient
-          }
-        >
-          <option value="" disabled>
-            {isModal ? "e.g. Broccoli" : "Ingredient"}
-          </option>
-          <option value="">All</option>
-          {ingredients.map((ing) => (
-            <option key={ing._id} value={ing._id}>
-              {ing.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        type="button"
-        onClick={handleResetClick}
-        className={isModal ? css.filtersModalResetBtn : css.filtersResetBtn}
-      >
-        Reset filters
-      </button>
-    </form>
-  );
 
   return (
     <>
-      <div className={css.filtersContainer}>
+      <div className={`${css.filtersContainer}`}>
         <div className={css.filtersRow}>
           <span className={css.filtersCount}>
-            {recipesCount} {recipesCount === 1 ? "recipe" : "recipes"}
+            {recipesCount}
+            {recipesCount === 1 ? " recipe" : " recipes"}
           </span>
-
-          {!isMobileOrTablet && renderFiltersForm()}
-
+          {!isMobileOrTablet && (
+            <div className="filtersInputsWrapper">
+              <form className={css.filtersForm}>
+                <button
+                  className={css.filtersResetBtn}
+                  type="button"
+                  onClick={handleResetClick}
+                >
+                  Reset filters
+                </button>
+                <select
+                  className={css.filtersInputCategory}
+                  name="category"
+                  value={category}
+                  onChange={handleCategoryChange}
+                >
+                  <option key="exp-categories" value="" disabled>
+                    Category
+                  </option>
+                  <option key="all-categories" value="">
+                    All
+                  </option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className={css.filtersInputIngredient}
+                  name="ingredient"
+                  value={ingredient}
+                  onChange={handleIngredientChange}
+                >
+                  <option key="exp-ingredients" value="" disabled>
+                    Ingredient
+                  </option>
+                  <option key="all-ingredients" value="">
+                    All
+                  </option>
+                  {ingredients.map((ingredient) => (
+                    <option key={ingredient._id} value={ingredient._id}>
+                      {ingredient.name}
+                    </option>
+                  ))}
+                </select>
+              </form>
+            </div>
+          )}
           {isMobileOrTablet && (
-            <>
-              <IconButton
-                className={css.filtersModalOpenBtn}
-                aria-label="Open filters"
-                onClick={() => setIsModalOpen(true)}
+            <IconButton
+              className={css.filtersModalOpenBtn}
+              aria-label="Open filters"
+              onClick={handleFiltersBtnClick}
+            >
+              <span className={css.filtersModalOpenBtnTxt}>Filters</span>
+              <svg
+                className={css.filtersModalOpenBtnSvg}
+                width="24"
+                height="24"
               >
-                <span className={css.filtersModalOpenBtnTxt}>Filters</span>
-                <svg
-                  className={css.filtersModalOpenBtnSvg}
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <use xlinkHref="/icons.svg#icon-filter-24px" />
-                </svg>
-              </IconButton>
-
-              {isModalOpen && (
-                <div
-                  className={css.filtersModalOverlay}
-                  onClick={handleOverlayClick}
-                  role="dialog"
-                  aria-modal="true"
-                >
-                  <div className={css.filtersModal}>
-                    <div className={css.filtersModalHeader}>
-                      <span>Filters</span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleResetClick();
-                          setIsModalOpen(false);
-                        }}
-                        className={css.filtersModalResetBtn}
-                      >
-                        Reset filters
-                      </button>
-                    </div>
-                    {renderFiltersForm(true)}
-                  </div>
+                <use xlinkHref="/sprite.svg#icon-filter-24px" />
+              </svg>
+            </IconButton>
+          )}
+          {isMobileOrTablet && isModalOpen && (
+            <div
+              className={css.filtersModalOverlay}
+              onClick={handleOverlayClick}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div className={css.filtersModal}>
+                <div className={css.filtersModalHeader}>
+                  <span>Filters</span>
+                  <button
+                    className={css.filtersModalResetBtn}
+                    type="button"
+                    onClick={() => {
+                      handleResetClick();
+                      setIsModalOpen(false);
+                    }}
+                  >
+                    Reset filters
+                  </button>
                 </div>
-              )}
-            </>
+                <form className={css.filtersModalForm}>
+                  <label>
+                    Category
+                    <select
+                      className="filtersModalCategory"
+                      value={category}
+                      onChange={handleCategoryChange}
+                    >
+                      <option key="modal-exp-categories" value="" disabled>
+                        e.g. Soup
+                      </option>
+                      <option key="modal-all-categories" value="">
+                        All
+                      </option>
+                      {categories.map((category) => (
+                        <option key={category._id} value={category.name}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Ingredient
+                    <select
+                      className="filtersModalInputIngredient"
+                      value={ingredient}
+                      onChange={handleIngredientChange}
+                    >
+                      <option key="modal-exp-ingredients" value="" disabled>
+                        e.g. Broccoli
+                      </option>
+                      <option key="modal-all-ingredients" value="">
+                        All
+                      </option>
+                      {ingredients.map((ingredient) => (
+                        <option key={ingredient._id} value={ingredient._id}>
+                          {ingredient.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </form>
+              </div>
+            </div>
           )}
         </div>
       </div>

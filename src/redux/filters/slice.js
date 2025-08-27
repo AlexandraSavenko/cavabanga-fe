@@ -22,9 +22,6 @@ const slice = createSlice({
     changeIngredientFilter: (state, action) => {
       state.ingredient = action.payload;
     },
-    changeSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-    },
     resetFilters: (state) => {
       state.recipe = "";
       state.category = "";
@@ -66,6 +63,5 @@ export const {
   changeFilter,
   changeCategoryFilter,
   changeIngredientFilter,
-  changeSearchQuery,
   resetFilters,
 } = slice.actions;

@@ -1,9 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "https://cavabanga-be.onrender.com/api",
-});
+import axios from "../../../axiosConfig.js";
 
 export const genericErrorMessage =
   "There was an error. Please try again a bit later.";
@@ -30,5 +26,3 @@ function generateThunk(name, requestFunc) {
     }
   });
 }
-
-export default instance;

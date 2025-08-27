@@ -1,7 +1,6 @@
-:root{
-    --font-family: "Montserrat", sans-serif;
-    --second-family: "DM Sans", sans-serif;
-
+:root {
+  --font-family: "Montserrat", sans-serif;
+  --second-family: "DM Sans", sans-serif;
 
   --black: #000;
   --white: #fff;
@@ -12,7 +11,9 @@
   --red: #c80000;
 }
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -20,28 +21,28 @@
   /* border: 1px solid red; */
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-ol, ul{
+ol,
+ul {
   list-style: none;
 }
 
-body{
+body {
   font-family: var(--font-family);
- background-color: var(--background); 
+  background-color: var(--background);
 }
 
-#root{
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-.container{
-margin: 0 auto;
+.container {
+  margin: 0 auto;
 }
-
 
 @media only screen and (min-width: 393px) {
   .container {

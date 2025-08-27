@@ -15,7 +15,7 @@
 }
 
 .filtersCount {
-  color: var(--color-black);
+  color: var(--black);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -30,15 +30,15 @@
   padding: 0px 0px 0px 4px;
   background: transparent;
   border: none;
-  color: var(--color-black);
-  stroke: var(--color-black);
+  color: var(--black);
+  stroke: var(--black);
   font-size: 1.4rem;
   font-weight: 700;
   cursor: pointer;
   transition: color 0.2s;
 }
 .filtersModalOpenBtn:focus {
-  outline: 2px solid var(--color-brown-500);
+  outline: 2px solid var(--light-brown);
   outline-offset: 2px;
 }
 .filtersModalOpenBtnTxt {
@@ -48,7 +48,7 @@
   line-height: normal;
 }
 .filtersModalOpenBtn svg {
-  stroke: var(--color-black);
+  stroke: var(--black);
   stroke-width: 2px;
   fill: none;
   display: block;
@@ -57,12 +57,12 @@
 
 .filtersModalOpenBtn:hover .filtersModalOpenBtnTxt,
 .filtersModalOpenBtn:focus .filtersModalOpenBtnTxt {
-  color: var(--color-brown-700);
+  color: var(--darck-brown);
 }
 
 .filtersModalOpenBtn:hover svg,
 .filtersModalOpenBtn:focus svg {
-  stroke: var(--color-brown-700);
+  stroke: var(--darck-brown);
 }
 
 .filtersModalOverlay {
@@ -85,7 +85,7 @@
   width: 289px;
   padding: 16px 12px;
   border-radius: 16px;
-  background: var(--Light-beige, #faf3e0);
+  background: #faf3e0;
   gap: 16px;
 }
 
@@ -96,7 +96,7 @@
   width: 100%;
 }
 .filtersModalHeader span {
-  color: var(--color-black);
+  color: var(--black);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -105,20 +105,20 @@
 
 .filtersModalResetBtn {
   padding: 0 0 4px 0;
-  color: var(--color-black);
+  color: var(--black);
   background: transparent;
   border: none;
   box-shadow: none;
   outline: none;
   font-size: 12px;
-  font-style: nortmal;
+  font-style: normal;
   font-weight: 600;
   line-height: normal;
   cursor: pointer;
 }
 .filtersModalForm label {
   width: 100%;
-  color: var(--color-black);
+  color: var(--black);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -132,11 +132,11 @@
   padding: 8px;
   margin-top: 4px;
   margin-bottom: 16px;
-  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
-  border: 1px solid var(--Light-gray, #d9d9d9);
-  background: var(--color-white);
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: var(--white);
   font-size: 14px;
-  color: var(--Gray, #595d62);
+  color: #595d62;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -148,7 +148,7 @@
   background-size: 32px;
 }
 .filtersModalForm option {
-  color: var(--color-black);
+  color: var(--black);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -157,8 +157,8 @@
   padding: 8px;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: var(--Interactive-border-radius---radius-i-md, 12px);
-  background: var(--color-white);
+  border-radius: 12px;
+  background: var(--white);
   box-shadow: 0px 8px 24px -6px rgba(0, 0, 0, 0.16),
     0px 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
@@ -173,25 +173,26 @@
   padding-bottom: 4px;
   justify-content: center;
   align-items: center;
-  gap: var(--gap-1, 4px);
-  border-bottom: 1px solid var(--color-black);
-  color: var(--color-black);
+  gap: 4px;
+  border-bottom: 1px solid var(--black);
+  color: var(--black);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  border: none;
 }
 
 .filtersForm select {
   display: flex;
-  padding: var(--py-1, 4px) var(--px-2, 8px);
+  padding: 4px 8px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  border-radius: var(--Interactive-border-radius---radius-i-xs, 4px);
-  border: 1px solid var(--Light-gray, #d9d9d9);
-  background: var(--color-white);
-  color: var(--Gray, #595d62);
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  background: var(--white);
+  color: #595d62;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
