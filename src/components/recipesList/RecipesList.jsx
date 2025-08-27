@@ -1,23 +1,10 @@
-import { useEffect, useState } from 'react';
 import RecipeCard from '../recipeCard/RecipeCard.jsx';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRecipeList } from '../../redux/recipes/operations.js';
-import { selectAllRecipes } from '../../redux/recipes/selectors.js';
+import Pagination from '../pagination/Pagination.jsx';
 
 
 
-const RecipesList = ({ recipeType }) => {
-  const dispatch = useDispatch()
-  const allRecipes = useSelector(selectAllRecipes)
-
-
-useEffect(() => {
-  dispatch(getRecipeList(2))
-}, [])
-  // const handleLoadMore = () => {
-  //   setVisibleCount(prev => prev + 16);
-  // };
+const RecipesList = ({allRecipes, recipeType }) => {
 
 
   // Якщо рецептів немає
@@ -32,15 +19,13 @@ useEffect(() => {
 
       <ul>
         {allRecipes.map(recipe => (
-          <li key={recipe.id}>
+          <li key={recipe._id}>
             <RecipeCard recipe={recipe} recipeType={recipeType} />
           </li>
         ))}
       </ul>
 
-      {/* {visibleCount < recipes.length && (
-        <LoadMoreBtn onClick={handleLoadMore} />
-      )} */}
+<Pagination />
     </div>
   );
 };

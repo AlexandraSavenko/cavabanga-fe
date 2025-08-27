@@ -1,18 +1,24 @@
 import React from "react";
-import styles from "./Pagination.module.css";
+import css from "./Pagination.module.css"
+import { useDispatch, useSelector } from "react-redux";
+import { selectPage, selectTotalPages } from "../../redux/recipes/selectors";
+import { setPage } from "../../redux/recipes/slice";
 
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
+export default function Pagination() {
+  const dispatch = useDispatch()
+  const currentPage = useSelector(selectPage);
+  const totalPages = useSelector(selectTotalPages)
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className={styles.pagination}>
+    <div className={css.pagination}>
       {}
       <button
-        className={styles.arrow}
-        onClick={() => onPageChange(currentPage - 1)}
+        className={css.arrow}
+        onClick={() => dispatch(setPage(currentPage - 1))}
         disabled={currentPage === 1}
       >
-        <svg className={styles.icon}>
+        <svg className={css.icon}>
           <use href="/icon.svg#icon-go-back-arrow"></use>
         </svg>
       </button>
@@ -21,10 +27,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       {pages.map((page) => (
         <button
           key={page}
-          className={`${styles.page} ${
-            currentPage === page ? styles.active : ""
+          className={`${css.page} ${
+            currentPage === page ? css.active : ""
           }`}
-          onClick={() => onPageChange(page)}
+          onClick={() => dispatch(setPage(page))}
         >
           {page}
         </button>
@@ -32,11 +38,11 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
       {}
       <button
-        className={styles.arrow}
-        onClick={() => onPageChange(currentPage + 1)}
+        className={css.arrow}
+        onClick={() => dispatch(setPage(currentPage + 1))}
         disabled={currentPage === totalPages}
       >
-        <svg className={styles.icon}>
+        <svg className={css.icon}>
           <use href="/icons.svg#icon-go-back-arrow"></use>
         </svg>
       </button>
