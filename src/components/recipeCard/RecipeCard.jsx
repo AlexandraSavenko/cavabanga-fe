@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import css from "./RecipeCard.module.css";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectFavRecipesIds } from "../../redux/recipes/selectors";
-import { deleteFromFavorite } from "../../redux/recipes/operations";
+import { toggleFavorites } from "../../redux/recipes/operations";
 
 const RecipeCard = ({ recipe, recipeType }) => {
   const dispatch = useDispatch();
@@ -16,21 +16,19 @@ const RecipeCard = ({ recipe, recipeType }) => {
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
     if (!isAuth) {
-      console.log("No");
+      navigate("/auth/login")
       return;
     }
-    console.log("this recipe", recipe._id)
-    console.log(userFavorites)
-    dispatch(deleteFromFavorite({ recipeId: recipe._id, toDo }));
+    dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
   return (
     <div className={css.card}>
       <img
-        src={recipe.thumb || "/placeholder.jpg"}
-        alt={recipe.title}
+        src={recipe.recipeImg || "/placeholder.jpg"}
+        alt={recipe.name}
         className={css.image}
       />
-      <h3 className={css.title}>{recipe.title}</h3>
+      <h3 className={css.title}>{recipe.name}</h3>
       {/* <p className={css.time}>⏱ {recipe.time || "-"}</p> */}
       <p className={css.desc}>{recipe.description}</p>
       {/* <p className={css.cals}> 
@@ -39,7 +37,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
 
       <button
         className={css.btn}
-        onClick={() => navigate(`/recipes/${recipe.id}`)}
+        onClick={() => navigate(`/recipes/${recipe._id}`)}
       >
         Learn more
       </button>

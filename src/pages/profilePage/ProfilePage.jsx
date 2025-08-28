@@ -8,26 +8,25 @@ import LoadMoreBtn from '../../components/loadMoreBtn/LoadMoreBtn.jsx';
 
 import styles from './ProfilePage.module.css';
 import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
-import { selectAllRecipes } from '../../redux/recipes/selectors.js';
+import { selectAllRecipes, selectUserFavourites } from '../../redux/recipes/selectors.js';
 
 
 const ProfilePage = () => {
     const { recipeType } = useParams();
     const dispatch = useDispatch();
     const recipes = useSelector(selectAllRecipes);
+    const favRecipes = useSelector(selectUserFavourites)
 
   useEffect(() => {
-dispatch(getRecipeList({type: "own", page: 1, perPage: 12}));
+    recipeType === "own" ? 
+dispatch(getRecipeList({type: recipeType, page: 1, perPage: 12})) :
 dispatch(getUserFavourites())
-  }, [dispatch])
-
+  }, [dispatch, recipeType])
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>My profile</h2>
             <ProfileNavigation />
-            <RecipesList allRecipes={recipes} recipeType={recipeType} />
-           
-            <p className={styles.subtitle}>Showing: {recipeType} </p>
+            <RecipesList allRecipes={recipeType === "own" ? recipes : favRecipes} recipeType={recipeType} />
         </div>
     );
 };

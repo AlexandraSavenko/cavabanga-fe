@@ -19,10 +19,9 @@ const MainPage = () => {
 }, [page, dispatch])
   return (
     <div className={css.wrap}>
-      this is where recipies list will be
       <SearchBox onSearch={() => {}} />
       <Filters />
-      <RecipesList allRecipes={allRecipes} recipeType={"own"} />
+      <RecipesList allRecipes={allRecipes} recipeType={"all"} />
     </div>
   );
 };
