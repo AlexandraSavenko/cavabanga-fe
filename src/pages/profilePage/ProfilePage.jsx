@@ -27,8 +27,6 @@ dispatch(getUserFavourites())
             <h2 className={styles.title}>My profile</h2>
             <ProfileNavigation />
             <RecipesList allRecipes={recipeType === "own" ? recipes : favRecipes} recipeType={recipeType} />
-           
-            <p className={styles.subtitle}>Showing: {recipeType} </p>
         </div>
     );
 };
