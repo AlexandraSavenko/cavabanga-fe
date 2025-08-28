@@ -51,7 +51,7 @@ export default function LoginForm() {
                             <ErrorMessage className={css.error} name="password" component="span" />
                             <button type="button" className={css.passToggleButton} onClick={togglePassVisibility}>
                                 <svg className={clsx(css.icon, errors.password && css.errorIcon)} width={24} height={24}>
-                                <use href={isPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-hide'}></use>
+                                <use href={isPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-show'}></use>
                                 </svg>
                             </button>
                         </div>

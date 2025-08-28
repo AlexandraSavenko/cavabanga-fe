@@ -70,7 +70,7 @@ export default function RegistrationForm() {
                         <ErrorMessage className={css.error} name="password" component="span" />
                             <button type="button" className={css.passToggleButton} onClick={togglePassVisibility}>
                             <svg className={clsx(css.icon, errors.password && css.errorIcon)} width={24} height={24}>
-                            <use href={isPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-hide'}></use>
+                            <use href={isPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-show'}></use>
                             </svg>
                         </button>
                     </div>
@@ -80,7 +80,7 @@ export default function RegistrationForm() {
                             <ErrorMessage className={css.error} name="confirmPassword" component="span" />
                             <button type="button" className={css.passToggleButton} onClick={toggleConfPassVisibility}>
                                 <svg className={clsx(css.icon, errors.confirmPassword && css.errorIcon)} width={24} height={24}>
-                            <use href={isConfPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-hide'}></use>
+                            <use href={isConfPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-show'}></use>
                             </svg>
                         </button>
                     </div>
