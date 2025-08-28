@@ -10,6 +10,15 @@ export default function Pagination() {
   const totalPages = useSelector(selectTotalPages)
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+
+
   return (
     <div className={css.pagination}>
       {}
