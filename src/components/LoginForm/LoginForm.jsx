@@ -1,15 +1,19 @@
 import css from "./LoginForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import clsx from "clsx";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isPassShown, setIsPassShown] = useState(false);
+        const togglePassVisibility = () => {
+            setIsPassShown(!isPassShown);
+        }
     const loginForm = {
         email: "",
         password: ""
@@ -43,8 +47,13 @@ export default function LoginForm() {
                         </div>
                         <div className={css.fieldWrapper}>
                             <label className={css.label} htmlFor="passwordId">Enter your password</label>
-                            <Field className={clsx(css.field, errors.password && css.errorField)} type="password" name="password" id="passwordId" placeholder="********" />
+                            <Field className={clsx(css.field, errors.password && css.errorField)} type={isPassShown ? "text" : "password"} name="password" id="passwordId" placeholder="********" />
                             <ErrorMessage className={css.error} name="password" component="span" />
+                            <button type="button" className={css.passToggleButton} onClick={togglePassVisibility}>
+                                <svg className={clsx(css.icon, errors.password && css.errorIcon)} width={24} height={24}>
+                                <use href={isPassShown ? '/icons.svg#icon-password-hide' : '/icons.svg#icon-password-hide'}></use>
+                                </svg>
+                            </button>
                         </div>
                         <button type="submit" className={css.btn}>Login</button>
                     </Form>
