@@ -8,6 +8,7 @@ import { selectFavRecipesIds } from "../../redux/recipes/selectors";
 import { toggleFavorites } from "../../redux/recipes/operations";
 import { useState } from "react";
 import ModalNotAutor from "../modalNotAutor/ModalNotAutor";
+import SaveButton from "../recipeDetails/SaveButton/SaveButton";
 
 const RecipeCard = ({ recipe, recipeType }) => {
   const dispatch = useDispatch();
@@ -46,11 +47,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
         Learn more
       </button>
 
-      {recipeType !== "own" && (
-        <button className={css.favoritesBtn} onClick={handleFavoriteClick}>
-          {isFavorite ? "❤️" : "🤍"}
-        </button>
-      )}
+      {recipeType !== "own" && <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />}
       {showModal && <ModalNotAutor modalOpen={setShowModal}/> }
     </div>
   );
