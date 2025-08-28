@@ -10,6 +10,19 @@ export default function Pagination() {
   const totalPages = useSelector(selectTotalPages)
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+  // універсальна функція скролу вгору
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handlePageChange = (page) => {
+    onPageChange(page);
+    scrollToTop();
+  };
+
   return (
     <div className={css.pagination}>
       {}
@@ -23,7 +36,7 @@ export default function Pagination() {
         </svg>
       </button>
 
-      {}
+      {/* номери сторінок */}
       {pages.map((page) => (
         <button
           key={page}
@@ -36,12 +49,13 @@ export default function Pagination() {
         </button>
       ))}
 
-      {}
+      {/* наступна сторінка */}
       <button
         className={css.arrow}
         onClick={() => dispatch(setPage(currentPage + 1))}
         disabled={currentPage === totalPages}
       >
+        <svg className={css.icon}>
         <svg className={css.icon}>
           <use href="/icons.svg#icon-go-back-arrow"></use>
         </svg>

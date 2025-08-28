@@ -1,14 +1,26 @@
 import RecipeCard from '../recipeCard/RecipeCard.jsx';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn.jsx';
-import Pagination from '../pagination/Pagination.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRecipeList } from '../../redux/recipes/operations.js';
+import { selectAllRecipes } from '../../redux/recipes/selectors.js';
 
+const RecipesList = ({ recipeType }) => {
+  const dispatch = useDispatch();
+  const allRecipes = useSelector(selectAllRecipes);
 
+  // Стан для кількості відображуваних рецептів
+  const [visibleCount, setVisibleCount] = useState(16);
 
-const RecipesList = ({allRecipes, recipeType }) => {
+  useEffect(() => {
+    dispatch(getRecipeList(2));
+  }, [dispatch]);
 
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 16);
+  };
 
   // Якщо рецептів немає
-  if (allRecipes.length === 0) {
+  if (!allRecipes || allRecipes.length === 0) {
     return <p>No recipes available</p>;
   }
 
@@ -18,14 +30,16 @@ const RecipesList = ({allRecipes, recipeType }) => {
       <p>{allRecipes.length} recipes</p>
 
       <ul>
-        {allRecipes.map(recipe => (
-          <li key={recipe._id}>
+        {allRecipes.slice(0, visibleCount).map(recipe => (
+          <li key={recipe.id}>
             <RecipeCard recipe={recipe} recipeType={recipeType} />
           </li>
         ))}
       </ul>
 
-<Pagination />
+      {visibleCount < allRecipes.length && (
+        <LoadMoreBtn onClick={handleLoadMore} />
+      )}
     </div>
   );
 };
