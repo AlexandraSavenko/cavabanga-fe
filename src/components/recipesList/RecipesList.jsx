@@ -1,8 +1,9 @@
-import RecipeCard from '../recipeCard/RecipeCard.jsx';
-import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRecipeList } from '../../redux/recipes/operations.js';
-import { selectAllRecipes } from '../../redux/recipes/selectors.js';
+import React, { useState, useEffect } from "react";
+import RecipeCard from "../recipeCard/RecipeCard.jsx";
+import LoadMoreBtn from "../loadMoreBtn/LoadMoreBtn.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipeList } from "../../redux/recipes/operations.js";
+import { selectAllRecipes } from "../../redux/recipes/selectors.js";
 
 const RecipesList = ({ recipeType }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const RecipesList = ({ recipeType }) => {
   }, [dispatch]);
 
   const handleLoadMore = () => {
-    setVisibleCount(prev => prev + 16);
+    setVisibleCount((prev) => prev + 16);
   };
 
   // Якщо рецептів немає
@@ -30,7 +31,7 @@ const RecipesList = ({ recipeType }) => {
       <p>{allRecipes.length} recipes</p>
 
       <ul>
-        {allRecipes.slice(0, visibleCount).map(recipe => (
+        {allRecipes.slice(0, visibleCount).map((recipe) => (
           <li key={recipe.id}>
             <RecipeCard recipe={recipe} recipeType={recipeType} />
           </li>
