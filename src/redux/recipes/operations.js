@@ -4,8 +4,10 @@ import axios from "axios";
 export const getRecipeList = createAsyncThunk("api/recires", async (params, thunkAPI) => {
     try {       
          const {type, page, perPage, filters, title} = params;
-        if(type === "favorite"){
-            const res = await axios.get("api/recipes/favorite");
+        if(type === "favorites"){
+            console.log("it's alive")
+            const res = await axios.get("/api/recipes/favorites");
+                     console.log(res)
                     return res.data.data
         }else{
 
@@ -17,7 +19,8 @@ export const getRecipeList = createAsyncThunk("api/recires", async (params, thun
 
         })
         const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`
-        const res = await axios.get(`${url}?${query}`);       
+        const res = await axios.get(`${url}?${query}`);  
+        console.log(res.data)     
          return res.data.data
         }
 
@@ -36,9 +39,21 @@ try {
 }
 })
 
-export const deleteFromFavorite = createAsyncThunk("recipes/deleteFromFavourite", async ({ recipeId }, thunkAPI) => {
+// export const deleteFromFavorite = createAsyncThunk("recipes/deleteFromFavourite", async ({ recipeId }, thunkAPI) => {
+//     try {
+//         const res = await axios.delete(`api/recipes/favorites/${recipeId}`);
+//        console.log(res.data)
+//         return { recipeId, data: res.data };
+//     } catch (error) {
+//                 return thunkAPI.rejectWithValue(error.message)
+
+//     }
+// })
+
+export const toggleFavorites = createAsyncThunk("recipes/toggleFavorites", async ({ recipeId, toDo }, thunkAPI) => {
     try {
-        const res = await axios.delete(`api/recipes/favorites/${recipeId}`);
+
+         const res = toDo === "add" ? await axios.post(`api/recipes/favorites/${recipeId}`) : await axios.delete(`api/recipes/favorites/${recipeId}`);
        console.log(res.data)
         return { recipeId, data: res.data };
     } catch (error) {
@@ -46,5 +61,4 @@ export const deleteFromFavorite = createAsyncThunk("recipes/deleteFromFavourite"
 
     }
 })
-
 

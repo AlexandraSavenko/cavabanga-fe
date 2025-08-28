@@ -5,7 +5,6 @@ import Pagination from '../pagination/Pagination.jsx';
 
 
 const RecipesList = ({allRecipes, recipeType }) => {
-console.log(recipeType)
 
 if(!allRecipes){
   return <p>Something went wrong</p>
