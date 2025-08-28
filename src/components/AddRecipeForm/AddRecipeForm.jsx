@@ -6,14 +6,14 @@ import axios from "axios";
 import css from "./AddRecipeForm.module.css"; 
 
 const AddRecipeForm = () => {
-  const [categories, setCategories] = useState([]);
-  const [ingredientsList, setIngredientsList] = useState([]);
+  const [categories, setCategories] = useState(["a"]);
+  const [ingredientsList, setIngredientsList] = useState(["b"]);
   const [previewImage, setPreviewImage] = useState(null);
 
-  useEffect(() => {
-    axios.get("/api/categories").then(res => setCategories(res.data));
-    axios.get("/api/ingredients").then(res => setIngredientsList(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get("/api/categories").then(res => setCategories(res.data));
+  //   axios.get("/api/ingredients").then(res => setIngredientsList(res.data));
+  // }, []);
 
   const initialValues = {
     name: "",
@@ -127,12 +127,12 @@ const AddRecipeForm = () => {
           
           <div className={css.fieldBlock}>
             <label className={css.label}>Category</label>
-            {/* <Field as="select" name="category" className={css.input}>
+            <Field as="select" name="category" className={css.input}>
               <option value="">Select a category</option>
               {categories.map(cat => (
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
               ))}
-            </Field> */}
+            </Field>
             <ErrorMessage name="category" component="div" className={css.error}/>
           </div>
 
@@ -140,12 +140,12 @@ const AddRecipeForm = () => {
   <label className={css.label}>Ingredients</label>
 
 
-  {/* <Field as="select" name="ingredient" className={css.input}>
+  <Field as="select" name="ingredient" className={css.input}>
     <option value="">Name</option>
     {ingredientsList.map(ing => (
       <option key={ing._id} value={ing._id}>{ing.name}</option>
     ))}
-  </Field> */}
+  </Field>
 
     <Field name="ingredientAmount" placeholder="Amount" className={css.input}/>
 
