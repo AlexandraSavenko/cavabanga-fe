@@ -20,7 +20,6 @@ const RecipeCard = ({ recipe, recipeType }) => {
       return;
     }
     console.log("this recipe", recipe._id)
-    console.log(userFavorites)
     dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
   return (

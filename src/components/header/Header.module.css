@@ -4,15 +4,20 @@
   position: relative;
   padding: 14px;
 }
+.wrap *{
+  color: var(--white);
+}
 .wrap button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
 }
 
 .nav {
@@ -20,6 +25,7 @@
   display: flex;
   align-items: center;
   transition: all 1s ease;
+
 }
 
 .burgerBtn {
