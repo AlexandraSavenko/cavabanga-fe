@@ -25,7 +25,7 @@ export const getRecipeList = createAsyncThunk("api/recires", async (params, thun
 export const getUserFavourites = createAsyncThunk("user/getFavourites", async (_, thunkAPI) => {
 try {
     const res = await axios.get("api/recipes/favorites");
-    return res.data.data;
+    return res.data.data.data;
 } catch (error) {
                     return thunkAPI.rejectWithValue(error.message)
 }
