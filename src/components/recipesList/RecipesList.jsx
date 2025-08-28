@@ -6,7 +6,9 @@ import Pagination from '../pagination/Pagination.jsx';
 
 const RecipesList = ({allRecipes, recipeType }) => {
 
-
+if(!allRecipes){
+  return <p>Something went wrong</p>
+}
   // Якщо рецептів немає
   if (allRecipes.length === 0) {
     return <p>No recipes available</p>;

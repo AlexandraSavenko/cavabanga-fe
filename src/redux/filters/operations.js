@@ -9,12 +9,12 @@ export const genericErrorMessage =
   "There was an error. Please try again a bit later.";
 
 export const fetchCategories = generateThunk("filters/fetchCategories", () => {
-  return axios.get("/categories");
+  return axios.get("/api/categories");
 });
 export const fetchIngredients = generateThunk(
   "filters/fetchIngredients",
   () => {
-    return axios.get("/ingredients");
+    return axios.get("/api/ingredients");
   }
 );
 

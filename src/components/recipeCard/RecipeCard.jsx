@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import css from "./RecipeCard.module.css";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectFavRecipesIds } from "../../redux/recipes/selectors";
-import { deleteFromFavorite } from "../../redux/recipes/operations";
+import { toggleFavorites } from "../../redux/recipes/operations";
 
 const RecipeCard = ({ recipe, recipeType }) => {
   const dispatch = useDispatch();
@@ -16,12 +16,11 @@ const RecipeCard = ({ recipe, recipeType }) => {
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
     if (!isAuth) {
-      console.log("No");
+      navigate("/auth/login")
       return;
     }
     console.log("this recipe", recipe._id)
-    console.log(userFavorites)
-    dispatch(deleteFromFavorite({ recipeId: recipe._id, toDo }));
+    dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
   return (
     <div className={css.card}>
@@ -39,7 +38,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
 
       <button
         className={css.btn}
-        onClick={() => navigate(`/recipes/${recipe.id}`)}
+        onClick={() => navigate(`/recipes/${recipe._id}`)}
       >
         Learn more
       </button>
