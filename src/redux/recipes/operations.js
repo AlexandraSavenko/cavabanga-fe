@@ -2,18 +2,26 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getRecipeList = createAsyncThunk("api/recires", async (params, thunkAPI) => {
-    try {
-        const {type, page, perPage, filters, title} = params;
+    try {       
+         const {type, page, perPage, filters, title} = params;
+        if(type === "favorite"){
+            const res = await axios.get("api/recipes/favorite");
+                    return res.data.data
+        }else{
+
         const query = new URLSearchParams({
             page: page.toString(),
             perPage: perPage.toString(),
-            ...(title ? {title} : {}),
-            ...filters ? filters : {}
+            ...(title && {title}),
+            ...(filters || {})
 
         })
-        const url = type === "all" ? "/api/recipes" : `/api/recipes/${type}/`
-        const res = await axios.get(`${url}?${query.toString()}`);
-        return res.data.data
+        const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`
+        const res = await axios.get(`${url}?${query}`);       
+         return res.data.data
+        }
+
+
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message)
     }

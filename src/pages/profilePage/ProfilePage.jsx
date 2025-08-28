@@ -13,13 +13,14 @@ import { selectAllRecipes } from '../../redux/recipes/selectors.js';
 
 const ProfilePage = () => {
     const { recipeType } = useParams();
+    console.log(recipeType)
     const dispatch = useDispatch();
     const recipes = useSelector(selectAllRecipes);
 
   useEffect(() => {
-dispatch(getRecipeList({type: "own", page: 1, perPage: 12}));
+dispatch(getRecipeList({type: recipeType, page: 1, perPage: 12}));
 dispatch(getUserFavourites())
-  }, [dispatch])
+  }, [dispatch, recipeType])
 
     return (
         <div className={styles.container}>

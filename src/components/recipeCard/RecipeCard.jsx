@@ -16,7 +16,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
     if (!isAuth) {
-      console.log("No");
+      navigate("/auth/login")
       return;
     }
     console.log("this recipe", recipe._id)
@@ -39,7 +39,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
 
       <button
         className={css.btn}
-        onClick={() => navigate(`/recipes/${recipe.id}`)}
+        onClick={() => navigate(`/recipes/${recipe._id}`)}
       >
         Learn more
       </button>
