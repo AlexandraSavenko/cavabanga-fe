@@ -4,13 +4,6 @@ import axios from "axios";
 export const getRecipeList = createAsyncThunk("api/recires", async (params, thunkAPI) => {
     try {       
          const {type, page, perPage, filters, title} = params;
-        if(type === "favorites"){
-            console.log("it's alive")
-            const res = await axios.get("/api/recipes/favorites");
-                     console.log(res)
-                    return res.data.data
-        }else{
-
         const query = new URLSearchParams({
             page: page.toString(),
             perPage: perPage.toString(),
@@ -19,10 +12,9 @@ export const getRecipeList = createAsyncThunk("api/recires", async (params, thun
 
         })
         const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`
-        const res = await axios.get(`${url}?${query}`);  
-        console.log(res.data)     
+        const res = await axios.get(`${url}?${query}`);      
          return res.data.data
-        }
+
 
 
     } catch (error) {

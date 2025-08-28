@@ -22,7 +22,6 @@ const ProfilePage = () => {
 dispatch(getRecipeList({type: recipeType, page: 1, perPage: 12})) :
 dispatch(getUserFavourites())
   }, [dispatch, recipeType])
-useEffect(()=> console.log(recipes), [recipes])
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>My profile</h2>
