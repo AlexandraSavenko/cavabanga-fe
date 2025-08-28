@@ -29,7 +29,7 @@ const Footer = () => {
           </ProtectedLink>
         </nav>
       </div>
-      {showModal && <ModalNotAutor closeModal={setShowModal}/> }
+      {showModal && <ModalNotAutor modalOpen={setShowModal}/> }
     </div>
   );
 };
