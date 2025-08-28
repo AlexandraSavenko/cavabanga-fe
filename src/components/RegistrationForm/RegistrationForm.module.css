@@ -27,6 +27,7 @@
   padding: 0;
 }
 .fieldWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -70,7 +71,27 @@
 .errorField::placeholder {
   color: var(--red);
 }
+.passToggleButton {
+  position: absolute;
+  top: 26px;
+  right: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--black);
+}
+.errorIcon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--red);
+}
 .btn {
   background-color: var(--light-brown);
   border-radius: 8px;
