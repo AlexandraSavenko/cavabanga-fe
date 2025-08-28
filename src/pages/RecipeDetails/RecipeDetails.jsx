@@ -12,17 +12,21 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../redux/recipes/favoritesSlice";
+import { selectAllRecipes } from "../../redux/recipes/selectors";
 
 export default function RecipeDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [recipe, setRecipe] = useState(null);
   const dispatch = useDispatch();
+  const recipeArr = useSelector(selectAllRecipes);
+  const existingRecipe = recipeArr.find((recipe) => recipe._id === id);
   const favorites = useSelector((state) => state.favorites.items);
   const isFavorite = favorites.includes(id);
+  const [recipe, setRecipe] = useState(existingRecipe || null);
 
   useEffect(() => {
     const fetchRecipe = async () => {
+      if (existingRecipe) return;
       try {
         const { data } = await axios.get(
           `http://localhost:3000/api/recipes/${id}`
@@ -38,7 +42,7 @@ export default function RecipeDetails() {
     };
 
     fetchRecipe();
-  }, [id, navigate]);
+  }, [id, navigate, existingRecipe]);
 
   if (!recipe) return <p>Loading...</p>;
 
@@ -55,8 +59,8 @@ export default function RecipeDetails() {
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
       <GeneralInfo
-        category={recipe.category}
-        cookingTime={recipe.cookiesTime}
+        category={recipe.category?.name || "Unknown"}
+        cookingTime={recipe.cookingTime}
         calories={recipe.cals}
       />
       <RecipeSection

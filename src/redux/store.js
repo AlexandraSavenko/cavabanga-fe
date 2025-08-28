@@ -8,17 +8,18 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/slice";
 import recipesReducer from "./recipes/slice";
 import filtersReducer from "./filters/slice";
+import favoritesSlice from "./recipes/favoritesSlice";
 
 const persistAuthConfig = {
   key: "auth",
   storage,
-  whitelist: ['token']
-}
+  whitelist: ["token"],
+};
 // const persistFiltersConfig = {
 //   key: "filters",
 //   storage
@@ -36,6 +37,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     filters: filtersReducer,
     recipes: recipesReducer,
+    favorites: favoritesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
