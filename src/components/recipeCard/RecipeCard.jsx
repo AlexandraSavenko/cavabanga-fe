@@ -6,17 +6,21 @@ import css from "./RecipeCard.module.css";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectFavRecipesIds } from "../../redux/recipes/selectors";
 import { toggleFavorites } from "../../redux/recipes/operations";
+import { useState } from "react";
+import ModalNotAutor from "../modalNotAutor/ModalNotAutor";
 
 const RecipeCard = ({ recipe, recipeType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector(selectIsLoggedIn);
   const userFavorites = useSelector(selectFavRecipesIds);
+    const [showModal, setShowModal] = useState(false);
+
   const isFavorite = userFavorites.includes(recipe._id);
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
     if (!isAuth) {
-      navigate("/auth/login")
+      setShowModal(true)
       return;
     }
     dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
@@ -47,6 +51,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
           {isFavorite ? "❤️" : "🤍"}
         </button>
       )}
+      {showModal && <ModalNotAutor modalOpen={setShowModal}/> }
     </div>
   );
 };
