@@ -1,7 +1,8 @@
+/* @media only screen and (min-width: 393px) {} */
 .container {
   border-radius: 32px;
   background-color: var(--light-beige);
-  padding: 32px 48px;
+  padding: 48px 32px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -46,7 +47,7 @@
   font-weight: 400;
   line-height: 155%;
   width: 100%;
-  background-color: var(--white);
+  background-color: var(--white) !important;
   border: 1px solid var(--light-gray);
   border-radius: 8px;
   padding: 8px;
@@ -130,4 +131,18 @@
   text-decoration-skip-ink: none;
   display: inline;
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 522px;
+    margin: 152px auto;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    width: 420px;
+    margin: 52px auto 34px auto;
+  }
 }
