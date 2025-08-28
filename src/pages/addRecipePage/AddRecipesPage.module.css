@@ -1,8 +1,14 @@
 .container {
-
+padding: 0px 16px;
+    width: 393px;
+    height: 1654px;
 }
 .title {
 color: #000;
+font-weight: 600;
+font-size: 40px;
+padding-bottom: 16px;
+   
 }
 
 .section {
@@ -10,4 +16,7 @@ color: #000;
 }
 .subtitle {
 color: #000;
+font-weight: 600;
+ font-size: 24px;
+   
 }

@@ -5,7 +5,6 @@ import RestrictedRoute from "./components/RestrictedRoute";
 
 
 
-
 const Loader = lazy(() => import('./components/loader/Loader'));
 const Layout = lazy(() => import('./components/layout/Layout'));
 const MainPage = lazy(() => import('./pages/mainPage/MainPage'));

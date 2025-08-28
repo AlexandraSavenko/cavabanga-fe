@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import css from "./AddRecipeForm.module.css"; 
 
+
+
 const AddRecipeForm = () => {
   const [categories, setCategories] = useState([]);
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -82,72 +84,90 @@ const AddRecipeForm = () => {
         <Form className={css.form}>
 
           
-          <div className={css.fieldBlock}>
+          <div className={css.photoboxWrapper}>
             <label className={css.label}>Upload Photo</label>
+             <div className={css.photobox}>
             <input
               type="file"
               onChange={(e) => {
                 setFieldValue("photo", e.currentTarget.files[0]);
                 setPreviewImage(URL.createObjectURL(e.currentTarget.files[0]));
               }}
-              className={css.input}
+              className={css.inputPhoto}
             />
-            {previewImage && <img src={previewImage} alt="preview" className={css.imagePreview} />}
-            <ErrorMessage name="photo" component="div" className={css.error}/>
-          </div>
+            {!previewImage && (
+           <svg className={css.icon}>
+    <use href="/public/icons.svg#icon-camera" />
+  </svg>
+  )}
+              {previewImage && (
+                
+      <img
+       src={previewImage}
+       alt="preview"
+       className={css.imagePreview}
+     />
+  )}
+    </div>      
+            
+    <ErrorMessage name="photo" component="div" className={css.error}/>
+    </div>
 
-          
+          <section className={css.section}>General Information
           <div className={css.fieldBlock}>
-            <label className={css.label}>Recipe Title</label>
-            <Field name="name" className={css.input}/>
+            <label className={css.labels}>Recipe Title</label>
+            <Field name="name" className={css.textarea} placeholder="Enter the name of your recipe"/>
             <ErrorMessage name="name" component="div" className={css.error}/>
           </div>
 
          
           <div className={css.fieldBlock}>
-            <label className={css.label}>Recipe Description</label>
-            <Field as="textarea" name="decr" className={css.textarea}/>
+            <label className={css.labels}>Recipe Description</label>
+            <Field as="textarea" name="decr" className={css.textarea} placeholder="Enter a brief description of your recipe"/>
             <ErrorMessage name="decr" component="div" className={css.error}/>
           </div>
 
           
           <div className={css.fieldBlock}>
-            <label className={css.label}>Cooking time in minutes(min)</label>
-            <Field type="number" name="cookiesTime" className={css.input}/>
+            <label className={css.labels}>Cooking time in minutes(min)</label>
+            <Field type="number" name="cookiesTime" className={css.input} placeholder="10"/>
             <ErrorMessage name="cookiesTime" component="div" className={css.error}/>
           </div>
 
-         
+         <div className={css.twoColumns}>
           <div className={css.fieldBlock}>
-            <label className={css.label}>Calories</label>
-            <Field type="number" name="cals" className={css.input}/>
+            <label className={css.labels}>Calories</label>
+            <Field type="number" name="cals" className={css.input} placeholder="150 cals"/>
             <ErrorMessage name="cals" component="div" className={css.error}/>
           </div>
 
           
           <div className={css.fieldBlock}>
-            <label className={css.label}>Category</label>
-            <Field as="select" name="category" className={css.input}>
-              <option value="">Select a category</option>
+            <label className={css.labels}>Category</label>
+            <Field as="select" name="category" className={css.input} placeholder="Soup">
               {categories.map(cat => (
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
               ))}
-            </Field>
-            <ErrorMessage name="category" component="div" className={css.error}/>
-          </div>
+                </Field>
+               <ErrorMessage name="category" component="div" className={css.error}/>
+              </div>
+              </div>
+          </section>
 
-         <div className={css.fieldBlock}>
-  <label className={css.label}>Ingredients</label>
 
-
-  <Field as="select" name="ingredient" className={css.input}>
-    <option value="">Name</option>
+  <section className={css.section}>Ingredients
+            <div className={css.fieldBlock}>
+              
+  <label className={css.labels}>Name</label>
+   
+  <Field as="select" name="ingredient" className={css.input} placeholder="Broccoli">
+    <option value=""></option>
     {ingredientsList.map(ing => (
       <option key={ing._id} value={ing._id}>{ing.name}</option>
     ))}
   </Field>
-
-    <Field name="ingredientAmount" placeholder="Amount" className={css.input}/>
+   <label className={css.labels}>Amount</label>
+    <Field name="ingredientAmount" placeholder="100g" className={css.input} />
 
     <button
     type="button"
@@ -190,15 +210,20 @@ const AddRecipeForm = () => {
   )}
     <ErrorMessage name="ingredients" component="div" className={css.error}/>
    </div>
+          </section>
 
+          <section className={css.section}>
           <div className={css.fieldBlock}>
-            <label className={css.label}>Instructions</label>
-            <Field as="textarea" name="instructions" className={css.textarea}/>
+              <label className={css.label}>Instructions</label>
+                <Field as="textarea"name="instructions"className={css.textarea} placeholder="Enter a text"/>
+               
+                 
+          
             <ErrorMessage name="instructions" component="div" className={css.error}/>
           </div>
-
+</section>
           
-          <button type="submit" disabled={isSubmitting} className={css.submitButton}>
+          <button type="submit" disabled={isSubmitting} className={css.button}>
             Publish Recipe
           </button>
 
