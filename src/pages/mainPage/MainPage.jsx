@@ -33,6 +33,7 @@ const MainPage = () => {
   return (
     <div className={css.wrap}>
       <SearchBox />
+      <h2>Recepies</h2>
       <ModalFailSearch/>
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />

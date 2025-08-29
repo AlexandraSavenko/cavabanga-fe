@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeCategoryFilter,
@@ -15,12 +15,13 @@ import {
   selectCategory,
   selectIngredient,
 } from "../../redux/filters/selectors";
-import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
+// import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
 import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
 import ToastInfo from "../ToastInfo/ToastInfo.jsx";
 
 import css from "./Filters.module.css";
+import { selectTotalItems } from "../../redux/recipes/selectors.js";
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -47,13 +48,14 @@ export default function Filter() {
     setIsModalOpen(true);
   };
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  let page = "main";
-  if (location.pathname.includes("favorites")) page = "favorites";
-  if (location.pathname.includes("own")) page = "own";
+  // let page = "main";
+  // if (location.pathname.includes("favorites")) page = "favorites";
+  // if (location.pathname.includes("own")) page = "own";
 
-  const recipesCount = useSelector((state) => selectRecipes(state, page));
+  const recipesCount = useSelector(selectTotalItems);
+    // const recipesCount = useSelector((state) => selectRecipes(state, page));
   const categories = useSelector(selectCategories);
   const ingredients = useSelector(selectIngredients);
   const category = useSelector(selectCategory);
@@ -146,7 +148,7 @@ export default function Filter() {
                 width="24"
                 height="24"
               >
-                <use xlinkHref="/sprite.svg#icon-filter-24px" />
+                <use href={`/icons.svg#icon-filter`} />
               </svg>
             </IconButton>
           )}
