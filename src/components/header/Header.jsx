@@ -2,21 +2,30 @@ import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/auth/operations";
+import {
+  // useDispatch,
+  useSelector
+} from "react-redux";
+// import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
+import CommonModal from "../ModalErrorCommon/ModalErrorCommon"
 
 const Header = () => {
   const user = useSelector(selectUser)
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [mobileNav, setMobileNav] = useState(false);
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
   const handleLogout = () => {
-    dispatch(logout());
+    // dispatch(logout());
+    setConfirmModalOpen(true);
     toggleModalNav()
+  };
+  const handleLogoutConfirmClosing = () => {
+    setConfirmModalOpen(false);
   };
   return (
     <div className={css.wrap}>
@@ -107,6 +116,16 @@ const Header = () => {
           </svg>
         </button>
       </div>
+      <CommonModal isopen={isConfirmModalOpen} onClose={handleLogoutConfirmClosing}>
+        <p className={css.modalTitle}>Are you shure?</p>
+        <p className={css.modalText}>
+          We will miss you!
+        </p>
+        <div className={ css.modalBtnWrapper}>
+          <button className={css.modalBtnCancel} type="button">Cancel</button>
+          <button className={css.modalBtnLogout} type="button">Log out</button>
+        </div>
+      </CommonModal>
     </div>
   );
 };
