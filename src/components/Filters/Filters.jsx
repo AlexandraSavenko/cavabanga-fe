@@ -55,7 +55,7 @@ export default function Filter() {
   // if (location.pathname.includes("own")) page = "own";
 
   const recipesCount = useSelector(selectTotalItems);
-    // const recipesCount = useSelector((state) => selectRecipes(state, page));
+  // const recipesCount = useSelector((state) => selectRecipes(state, page));
   const categories = useSelector(selectCategories);
   const ingredients = useSelector(selectIngredients);
   const category = useSelector(selectCategory);
