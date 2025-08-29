@@ -8,24 +8,33 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../../redux/recipes/favoritesSlice";
+// import {
+//   addToFavorites,
+//   removeFromFavorites,
+// } from "../../redux/recipes/favoritesSlice";
+import { selectAllRecipes, selectFavRecipesIds } from "../../redux/recipes/selectors";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { toggleFavorites } from "../../redux/recipes/operations";
+import ModalNotAutor from "../../components/modalNotAutor/ModalNotAutor";
 
 export default function RecipeDetails() {
+      const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [recipe, setRecipe] = useState(null);
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites.items);
+    const isAuth = useSelector(selectIsLoggedIn);
+  const recipeArr = useSelector(selectAllRecipes);
+  const existingRecipe = recipeArr.find((recipe) => recipe._id === id);
+  const favorites = useSelector(selectFavRecipesIds);
   const isFavorite = favorites.includes(id);
-
+  const [recipe, setRecipe] = useState(existingRecipe || null);
+  const toDo = !isFavorite ? "add" : "delete";
   useEffect(() => {
     const fetchRecipe = async () => {
+      if (existingRecipe) return;
       try {
         const { data } = await axios.get(
-          `http://localhost:3000/api/recipes/${id}`
+          `/api/recipes/${id}`
         );
         setRecipe(data.data); // бек повертає { data: recipe }
       } catch (error) {
@@ -38,25 +47,32 @@ export default function RecipeDetails() {
     };
 
     fetchRecipe();
-  }, [id, navigate]);
+  }, [id, navigate, existingRecipe]);
 
   if (!recipe) return <p>Loading...</p>;
 
-  const handleFavorite = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites(id));
-    } else {
-      dispatch(addToFavorites(id));
-    }
-  };
+  // const handleFavorite = () => {
+  //   if (isFavorite) {
+  //     dispatch(removeFromFavorites(id));
+  //   } else {
+  //     dispatch(addToFavorites(id));
+  //   }
+  // };
+   const handleFavoriteClick = () => {
+      if (!isAuth) {
+        setShowModal(true)
+        return;
+      }
+      dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
+    };
 
   return (
     <div className={css.recipeDetails}>
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
       <GeneralInfo
-        category={recipe.category}
-        cookingTime={recipe.cookiesTime}
+        category={recipe.category?.name || "Unknown"}
+        cookingTime={recipe.cookingTime}
         calories={recipe.cals}
       />
       <RecipeSection
@@ -64,7 +80,8 @@ export default function RecipeDetails() {
         ingredients={recipe.ingredient}
         instructions={recipe.instruction}
       />
-      <SaveButton onClick={handleFavorite} isFavorite={isFavorite} />
+      <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
+            {showModal && <ModalNotAutor modalOpen={setShowModal}/> }
     </div>
   );
 }

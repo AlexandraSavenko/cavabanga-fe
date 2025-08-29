@@ -13,7 +13,7 @@ export default function RecipeSection({ about, ingredients, instructions }) {
         <ul>
           {ingredients?.map((ing, i) => (
             <li key={i} className={css.sectionText}>
-              {ing}
+              {typeof ing === "object" ? ing.name : ing}
             </li>
           ))}
         </ul>
