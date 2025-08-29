@@ -33,7 +33,7 @@ export default function RecipeDetails() {
       if (existingRecipe) return;
       try {
         const { data } = await axios.get(
-          `http://localhost:3000/api/recipes/${id}`
+          `/api/recipes/${id}`
         );
         setRecipe(data.data); // бек повертає { data: recipe }
       } catch (error) {
