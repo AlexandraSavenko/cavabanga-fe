@@ -9,7 +9,7 @@ export default function SaveButton({ onClick, isFavorite }) {
         width="24"
         height="24"
       >
-        <use href="../../../../public/icons.svg#icon-save-to-fav" />
+        <use href="/icons.svg#icon-save-to-fav" />
       </svg>
     </button>
   );

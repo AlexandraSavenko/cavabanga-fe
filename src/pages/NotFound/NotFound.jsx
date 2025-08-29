@@ -13,7 +13,7 @@ export default function NotFound() {
       <h2 className={css.notFoundSubtitle}>Recipe not found</h2>
       <Link to="/" className={css.notFoundLink}>
         <svg className={css.icon} width="20" height="20">
-          <use href="#icon-go-back-arrow" />
+          <use href="/icons.svg#icon-go-back-arrow" />
         </svg>
         Back to Home
       </Link>
