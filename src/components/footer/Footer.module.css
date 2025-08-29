@@ -3,7 +3,9 @@
     width: 100%;
     padding: 24px;
 }
-
+.wrap *{
+    color: var(--white);
+}
 .footer {
   display: flex;
   align-items: center;

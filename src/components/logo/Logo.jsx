@@ -7,7 +7,7 @@ const Logo = () => {
     <NavLink className={css.wrap} to={"/"}>
       <svg className={css.icon}>
           <use
-            href={`./icons.svg#icon-cook-book`}
+            href={`/icons.svg#icon-cook-book`}
           ></use>
         </svg>
         <span className={css.text}>tasteorama</span>

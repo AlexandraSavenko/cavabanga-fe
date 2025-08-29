@@ -6,37 +6,27 @@ import ProfileNavigation from '../../components/profileNavigation/ProfileNavigat
 import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import LoadMoreBtn from '../../components/loadMoreBtn/LoadMoreBtn.jsx';
 
-import { fetchRecipes, clearRecipes } from '../../redux/recipes/recipesSlice.js';
-import { selectRecipes, selectHasMore, selectLoading} from '../../redux/recipes/recipesSelectors.js';
-
 import styles from './ProfilePage.module.css';
+import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
+import { selectAllRecipes, selectUserFavourites } from '../../redux/recipes/selectors.js';
+
 
 const ProfilePage = () => {
     const { recipeType } = useParams();
     const dispatch = useDispatch();
-    const recipes = useSelector(selectRecipes);
-    const hasMore = useSelector(selectHasMore);
-    const loading = useSelector(selectLoading);
+    const recipes = useSelector(selectAllRecipes);
+    const favRecipes = useSelector(selectUserFavourites)
 
-    useEffect(() => {
-        dispatch(clearRecipes());
-        dispatch(fetchRecipes({ type: recipeType}));
-    }, [dispatch, recipeType]);
-
-   const handleLoadMore = () => {
-    dispatch(fetchRecipes({ type: recipeType, page: recipes.length / 16 + 1}));
-   };
-
+  useEffect(() => {
+    recipeType === "own" ? 
+dispatch(getRecipeList({type: recipeType, page: 1, perPage: 12})) :
+dispatch(getUserFavourites())
+  }, [dispatch, recipeType])
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>My profile</h2>
             <ProfileNavigation />
-            {loading && <p>Loading...</p>}
-            <RecipesList recipes={recipes} recipeType={recipeType} />
-            {hasMore && (
-                 <LoadMoreBtn onClick={handleLoadMore} />
-            )}
-            <p className={styles.subtitle}>Showing: {recipeType} </p>
+            <RecipesList allRecipes={recipeType === "own" ? recipes : favRecipes} recipeType={recipeType} />
         </div>
     );
 };

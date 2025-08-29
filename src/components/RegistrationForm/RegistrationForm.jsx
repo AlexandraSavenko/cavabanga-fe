@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
+import clsx from "clsx";
 
 export default function RegistrationForm() {
     const dispatch = useDispatch();
@@ -14,14 +15,14 @@ export default function RegistrationForm() {
         name: "",
         password: "",
         confirmPassword: "",
-        terms: false
+        // terms: false
     };
     const RegValidSchema = Yup.object().shape({
         email: Yup.string().email("Must be a valid email").max(128, "Email must not exceed 128 characters.").required("Email is a required field"),
         name: Yup.string().max(16, "Name must not exceed 16 characters.").required("Name is a required field."),
         password: Yup.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must not exceed 128 characters.").required("Password is required"),
         confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "The passwords must match.").required("Please, confirm the password."),
-        terms: Yup.boolean().oneOf([true], "You must agree to the Terms of Service and Privacy Policy.")
+        // terms: Yup.boolean().oneOf([true], "You must agree to the Terms of Service and Privacy Policy.")
     });
 
     const handleSubmit = async (values, actions) => {
@@ -29,10 +30,9 @@ export default function RegistrationForm() {
         const payload = { name, email, password };
         const res = await dispatch(register(payload));
         if (register.fulfilled.match(res)) {
-            // console.log("WORKING!")
+            actions.resetForm();
             navigate('/');
         }
-        actions.resetForm();
     };
 
     return (
@@ -44,27 +44,39 @@ export default function RegistrationForm() {
                 validationSchema={RegValidSchema}
                 onSubmit={handleSubmit}
             >
+            {({ errors }) => (
                 <Form className={css.form}>
-                    <label className={css.label} htmlFor="emailId">Enter your email address</label>
-                    < Field className={css.field} type="email" name="email" id="emailId" placeholder="email@gmail.com"/>
-                    <ErrorMessage className={css.error} name="email" component="span" />
-                    <label className={css.label} htmlFor="nameId">Enter your name</label>
-                    < Field className={css.field} type="text" name="name" id="nameId" placeholder="Max"/>
-                    <ErrorMessage className={css.error} name="name" component="span" />
-                    <label className={css.label} htmlFor="passwordId">Create a strong password</label>
-                    < Field className={css.field} type="password" name="password" id="passwordId" placeholder="********"/>
-                    <ErrorMessage className={css.error} name="password" component="span" />
-                    <label className={css.label} htmlFor="confirmPasId">Repeat your password</label>
-                    < Field className={css.field} type="password" name="confirmPassword" id="confirmPasId" placeholder="********"/>
-                    <ErrorMessage className={css.error} name="confirmPassword" component="span" />
-                    <label className={css.label} htmlFor="termsId">I agree to the Terms of Service and Privacy Policy</label>
+                    <div className={css.fieldWrapper}>
+                        <label className={css.label} htmlFor="emailId">Enter your email address</label>
+                        < Field className={clsx(css.field, errors.email && css.errorField)} type="email" name="email" id="emailId" placeholder="email@gmail.com" />
+                        <ErrorMessage className={css.error} name="email" component="span" />
+                    </div>
+                    <div className={css.fieldWrapper}>
+                        <label className={css.label} htmlFor="nameId">Enter your name</label>
+                        < Field className={clsx(css.field, errors.name && css.errorField)} type="text" name="name" id="nameId" placeholder="Max"/>    
+                        <ErrorMessage className={css.error} name="name" component="span" />
+                    </div>
+                    <div className={css.fieldWrapper}>
+                        <label className={css.label} htmlFor="passwordId">Create a strong password</label>
+                        < Field className={clsx(css.field, errors.password && css.errorField)} type="password" name="password" id="passwordId" placeholder="********"/>
+                        <ErrorMessage className={css.error} name="password" component="span" />
+                    </div>
+                    <div className={css.fieldWrapper}>
+                        <label className={css.label} htmlFor="confirmPasId">Repeat your password</label>
+                        < Field className={clsx(css.field, errors.confirmPassword && css.errorField)} type="password" name="confirmPassword" id="confirmPasId" placeholder="********"/>
+                        <ErrorMessage className={css.error} name="confirmPassword" component="span" />
+                    </div>
+                    {/* <label className={css.label} htmlFor="termsId">I agree to the Terms of Service and Privacy Policy</label>
                     <Field className={css.field} type="checkbox" name="terms" id="termsId" />
-                    <ErrorMessage className={css.error} name="terms" component="span"/>
+                    <ErrorMessage className={css.error} name="terms" component="span"/> */}
                     <button className={css.btn} type="submit">Create account</button>
                 </Form>
+            )}
             </Formik >
-            <p className={css.alt}>Already have an account?</p>
-            <Link className={css.link} to='/auth/login'>Log in</Link>
+            <div className={css.linkWrapper}>
+                <p className={css.alt}>Already have an account? </p>
+                <Link className={css.link} to='/auth/login'>Log in</Link>
+            </div>
         </div>
     )
 };

@@ -29,7 +29,7 @@ const Header = () => {
               <Logo />
               <button onClick={toggleModalNav} className={css.closeModalNav}>
                 <svg>
-                  <use href="./icons.svg#icon-close"></use>
+                  <use href="/icons.svg#icon-close"></use>
                 </svg>
               </button>
             </div>
@@ -46,7 +46,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) => (isActive ? css.active : "")}
                 onClick={() => setMobileNav(false)}
-                to={"/profile/favorites "}
+                to={"/profile/own "}
               >
                 My profile
               </NavLink>
@@ -90,7 +90,7 @@ const Header = () => {
                 <div className={css.br}></div>
                 <button onClick={handleLogout}>
                   <svg className={css.icon}>
-                    <use href={`./icons.svg#icon-log-out`}></use>
+                    <use href={`/icons.svg#icon-log-out`}></use>
                   </svg>
                 </button>{" "}
               </div>
@@ -102,7 +102,7 @@ const Header = () => {
           className={`${mobileNav ? css.burgerHidden : css.burgerBtn}`}
         >
           <svg className={css.icon}>
-            <use href={`./icons.svg#icon-burger-menu`}></use>
+            <use href={`/icons.svg#icon-burger-menu`}></use>
           </svg>
         </button>
       </div>

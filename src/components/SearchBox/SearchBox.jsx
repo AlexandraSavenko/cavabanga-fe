@@ -1,0 +1,66 @@
+import { useDispatch, useSelector } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import { changeSearchQuery as setSearchQuery } from "../../redux/filters/slice";
+import { selectSearchQuery } from "../../redux/filters/selectors";
+
+import css from "./SearchBox.module.css";
+
+const validationSchema = Yup.object({
+  searchQuery: Yup.string().trim().max(64, "Maximum 64 characters allowed"),
+});
+
+export default function SearchBox() {
+  const dispatch = useDispatch();
+
+  const searchQuery = useSelector(selectSearchQuery) || "";
+
+  const handleSubmit = async (values, { resetForm }) => {
+    const trimmedQuery = values.searchQuery.trim();
+    dispatch(setSearchQuery(trimmedQuery));
+    resetForm({ values: { searchQuery: "" } });
+  };
+
+  return (
+    <div>
+      <div className={css.wrapper}>
+        <div className={`${css.container} container`}>
+          <h1 className={css.text}>Plan, Cook, and Share Your Flavors</h1>
+
+          <Formik
+            initialValues={{ searchQuery }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            validateOnBlur={false}
+            validateOnChange={false}
+            enableReinitialize
+          >
+            {({ errors, touched }) => (
+              <Form className={css.containerInput}>
+                <Field
+                  type="text"
+                  name="searchQuery"
+                  placeholder="Search recipes"
+                  className={`${css.input} ${
+                    errors.searchQuery && touched.searchQuery
+                      ? css.inputError
+                      : ""
+                  }`}
+                />
+
+                <ErrorMessage name="searchQuery">
+                  {(msg) => <div className={css.error}>{msg}</div>}
+                </ErrorMessage>
+
+                <button type="submit" className={css.btn}>
+                  Search
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </div>
+    </div>
+  );
+}
