@@ -16,6 +16,7 @@ const Header = () => {
   };
   const handleLogout = () => {
     dispatch(logout());
+    toggleModalNav()
   };
   return (
     <div className={css.wrap}>

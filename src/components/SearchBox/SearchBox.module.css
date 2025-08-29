@@ -1,21 +1,31 @@
 .wrapper {
-  background-image: url("../../../public/Banner-mobile-1x.jpg");
+  background-image: url("/Banner-mobile-1x.jpg");
   min-width: 320px;
   height: 513px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
+  box-sizing: border-box;
+  display: block;
+  unicode-bidi: isolate;
 }
 
 .container {
-  padding-left: 26px;
-  padding-right: 26px;
+  display: block;
+  unicode-bidi: isolate;
+  min-width: 320px;
+  max-width: 380px;
+  /* padding-left: 26px;
+  padding-right: 26px; */
+  box-sizing: border-box;
+  line-height: 1.15;
+  tab-size: 4;
 }
 
 .text {
   font-weight: 600;
   font-size: 40px;
-  color: var(--color-white);
+  color: var(--white);
   padding-top: 138px;
   margin-bottom: 24px;
 }
@@ -41,7 +51,8 @@
 .input:focus,
 .input:hover {
   box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
-  background: var(--color-white);
+  background: var(--white);
+
   outline: none;
 }
 
@@ -59,36 +70,37 @@
   line-height: 1.4;
   font-weight: 600;
   font-size: 16px;
-  color: var(--color-white);
-  background: var(--color-brown-500);
+  color: var(--white);
+  background: var(--light-brown);
   border: 0px;
   transition: transform 0.2s ease, background-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .btn:hover {
-  background-color: var(--color-brown-700);
+  background-color: #6d554b;
 }
 
 .btn:focus {
-  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--color-white);
-  background-color: var(--color-brown-500);
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px var(--white);
+  background-color: var(--light-brown);
 }
 
 @media screen and (min-resolution: 192dpi) and (max-width: 767px) {
   .wrapper {
-    background-image: url("../../../public/Banner-mobile-2x.jpg");
+    background-image: url("/Banner-mobile-2x.jpg");
   }
 }
 
 @media screen and (min-width: 768px) {
   .container {
+    max-width: 1440px;
     padding-left: 15px;
     padding-right: 15px;
   }
 
   .wrapper {
-    background-image: url("../../../public/Banner-tablet-1x.jpg");
+    background-image: url("/Banner-tablet-1x.jpg");
     min-width: 768px;
     height: 443px;
   }
@@ -97,7 +109,7 @@
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
-    color: var(--color-white);
+    color: var(--white);
     padding-top: 128px;
     width: 493px;
   }
@@ -131,13 +143,13 @@
 
 @media screen and (min-resolution: 192dpi) and (min-width: 768px) {
   .wrapper {
-    background-image: url("../../../public/Banner-tablet-2x.jpg");
+    background-image: url("/Banner-tablet-2x.jpg");
   }
 }
 
 @media screen and (min-width: 1440px) {
   .wrapper {
-    background-image: url("../../../public/Banner-desktop-1x.jpg");
+    background-image: url("/Banner-desktop-1x.jpg");
     min-width: 1440px;
   }
 
@@ -152,6 +164,6 @@
 
 @media screen and (min-width: 1440px) and (min-resolution: 192dpi) {
   .wrapper {
-    background-image: url("../../../public/Banner-desktop-2x.jpg");
+    background-image: url("/Banner-desktop-2x.jpg");
   }
 }

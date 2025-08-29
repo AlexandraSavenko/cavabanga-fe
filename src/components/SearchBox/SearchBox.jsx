@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import { changeSearchQuery as setSearchQuery } from "../../redux/filters/slice";
-import { selectSearchQuery } from "../../redux/filters/selectors";
-
+import { changeFilter } from "../../redux/filters/slice";
+import Button from "../Button/Button";
 import css from "./SearchBox.module.css";
 
 const validationSchema = Yup.object({
@@ -14,12 +12,11 @@ const validationSchema = Yup.object({
 export default function SearchBox() {
   const dispatch = useDispatch();
 
-  const searchQuery = useSelector(selectSearchQuery) || "";
-
   const handleSubmit = async (values, { resetForm }) => {
     const trimmedQuery = values.searchQuery.trim();
-    dispatch(setSearchQuery(trimmedQuery));
-    resetForm({ values: { searchQuery: "" } });
+
+    dispatch(changeFilter(trimmedQuery));
+    resetForm();
   };
 
   return (
@@ -29,12 +26,11 @@ export default function SearchBox() {
           <h1 className={css.text}>Plan, Cook, and Share Your Flavors</h1>
 
           <Formik
-            initialValues={{ searchQuery }}
+            initialValues={{ searchQuery: "" }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             validateOnBlur={false}
             validateOnChange={false}
-            enableReinitialize
           >
             {({ errors, touched }) => (
               <Form className={css.containerInput}>
@@ -48,14 +44,13 @@ export default function SearchBox() {
                       : ""
                   }`}
                 />
-
                 <ErrorMessage name="searchQuery">
                   {(msg) => <div className={css.error}>{msg}</div>}
                 </ErrorMessage>
 
-                <button type="submit" className={css.btn}>
+                <Button type="submit" className={css.btn}>
                   Search
-                </button>
+                </Button>
               </Form>
             )}
           </Formik>
