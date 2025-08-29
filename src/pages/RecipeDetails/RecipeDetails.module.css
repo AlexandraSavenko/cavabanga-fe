@@ -1,0 +1,15 @@
+.recipeDetails {
+  margin-top: 48px;
+  /* display: flex;
+  flex-direction: column; */
+}
+.textInfoWrap {
+}
+.generalButtonWrap {
+  gap: 24px;
+}
+.infoContainer {
+  display: flex;
+  gap: 24px;
+  margin: 24px 0 48px 0;
+}
