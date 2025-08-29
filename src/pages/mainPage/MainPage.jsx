@@ -12,6 +12,7 @@ import { getRecipeList } from "../../redux/recipes/operations";
 
 import { selectCategory } from "../../redux/filters/selectors";
 import { resetFilters } from "../../redux/filters/slice";
+import ModalFailSearch from "../../components/modalFailSearch/modalFailSearch";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const MainPage = () => {
   return (
     <div className={css.wrap}>
       <SearchBox />
+      <ModalFailSearch/>
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
     </div>
