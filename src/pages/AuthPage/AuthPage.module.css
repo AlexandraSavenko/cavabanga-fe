@@ -1,14 +1,6 @@
-.title {
-  font-weight: 600;
-  font-size: 32px;
-  text-align: center;
-  color: black;
-}
-
-.text {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 155%;
-  text-align: center;
-  color: black;
+.container {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

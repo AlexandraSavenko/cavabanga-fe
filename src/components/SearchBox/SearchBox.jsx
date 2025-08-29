@@ -20,7 +20,7 @@ export default function SearchBox() {
   };
 
   return (
-    <div>
+    <>
       <div className={css.wrapper}>
         <div className={`${css.container} container`}>
           <h1 className={css.text}>Plan, Cook, and Share Your Flavors</h1>
@@ -56,6 +56,6 @@ export default function SearchBox() {
           </Formik>
         </div>
       </div>
-    </div>
+    </>
   );
 }
