@@ -16,7 +16,6 @@ const RecipeCard = ({ recipe, recipeType }) => {
   const isAuth = useSelector(selectIsLoggedIn);
   const userFavorites = useSelector(selectFavRecipesIds);
     const [showModal, setShowModal] = useState(false);
-
   const isFavorite = userFavorites.includes(recipe._id);
   const toDo = !isFavorite ? "add" : "delete";
   const handleFavoriteClick = () => {
