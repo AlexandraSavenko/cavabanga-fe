@@ -1,39 +1,40 @@
-.container {
-  margin: 0 auto;
-}
-
-@media only screen and (min-width: 393px) {
-  .container {
-    padding: 16px;
-    max-width: 393px;
-  }
-}
-
+/* Стилі для мобільної версії */
 .card {
   display: flex;
-  width: 361px;
-  padding: 12px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  border-radius: 16px;
-  background: var(--Light-beige, #faf3e0);
+  justify-content: space-between;
 }
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
 
+  margin-bottom: 16px;
+}
 .image {
-  width: 100%;
   border-radius: 8px;
 }
-
 .title {
   flex: 1 0 0;
   color: var(--Black, #000);
   font-size: 24px;
   font-weight: 700;
-  line-height: normal;
 }
-
+.timeWrapper {
+  display: flex;
+  padding: 2px 8px 2px var(--pl-1, 4px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-1, 4px);
+  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
+  background: var(--White, #fff);
+}
 .desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  align-self: stretch;
   overflow: hidden;
   color: var(--Black, #000);
   text-overflow: ellipsis;
@@ -43,27 +44,28 @@
   font-weight: 400;
   line-height: 155%;
 }
-
 .cals {
-  font-size: 13px;
-  color: #999;
-  margin: 6px 0;
+  align-self: stretch;
+  color: var(--Black, #000);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 155%; /* 24.8px */
 }
-
 .btn {
-  width: 273px;
-  height: 24px;
   display: flex;
   padding: 8px;
   justify-content: center;
   align-items: center;
   gap: var(--gap-2, 8px);
-  flex: 1 0 0;
   align-self: stretch;
   border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
   border: 1px solid var(--Black, #000);
+  width: 337px;
+  height: 36px;
+  margin: 0 auto;
 }
-
 .btn:hover {
   border: 1px solid var(--Light-gray, #d9d9d9);
   background: var(--Light-gray, #d9d9d9);
@@ -79,23 +81,6 @@
   gap: 8px;
   align-self: stretch;
 }
-
-.time {
-  display: flex;
-  padding: 2px 8px 2px var(--pl-1, 4px);
-  justify-content: center;
-  align-items: center;
-  gap: var(--gap-1, 4px);
-  align-self: stretch;
-  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
-  display: flex;
-  width: 53px;
-  padding-top: 2px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
-
 .icon {
   fill: var(--White, #fff);
   stroke-width: 0.5px;
@@ -104,39 +89,27 @@
   height: 24px;
 }
 
-.wrt {
-  display: flex;
-  padding: 2px 8px 2px var(--pl-1, 4px);
-  justify-content: center;
-  align-items: center;
-  gap: var(--gap-1, 4px);
-  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
-  background: var(--White, #fff);
-}
+/* Стилі для Tablet */
 
 @media only screen and (min-width: 768px) {
-  .container {
-    padding: 0 32px;
-    max-width: 768px;
-  }
-  .card {
-    width: 339px;
-    justify-content: space-between;
-  }
   .btn {
-    width: 251px;
+    width: 299px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .container {
-    padding: 0 107px;
-    max-width: 1440px;
-  }
-  .card {
-    width: 288px;
+  .image {
+    width: 264px;
   }
   .btn {
-    width: 200px;
+    width: 264px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 16px;
   }
 }
