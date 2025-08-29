@@ -12,9 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 //   addToFavorites,
 //   removeFromFavorites,
 // } from "../../redux/recipes/favoritesSlice";
-import { selectAllRecipes } from "../../redux/recipes/selectors";
+import { selectAllRecipes, selectFavRecipesIds } from "../../redux/recipes/selectors";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { toggleFavorites } from "../../redux/recipes/operations";
+import ModalNotAutor from "../../components/modalNotAutor/ModalNotAutor";
 
 export default function RecipeDetails() {
       const [showModal, setShowModal] = useState(false);
@@ -24,7 +25,7 @@ export default function RecipeDetails() {
     const isAuth = useSelector(selectIsLoggedIn);
   const recipeArr = useSelector(selectAllRecipes);
   const existingRecipe = recipeArr.find((recipe) => recipe._id === id);
-  const favorites = useSelector((state) => state.favorites.items);
+  const favorites = useSelector(selectFavRecipesIds);
   const isFavorite = favorites.includes(id);
   const [recipe, setRecipe] = useState(existingRecipe || null);
   const toDo = !isFavorite ? "add" : "delete";
