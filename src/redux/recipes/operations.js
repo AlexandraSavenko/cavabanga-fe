@@ -43,6 +43,7 @@ try {
 // })
 
 export const toggleFavorites = createAsyncThunk("recipes/toggleFavorites", async ({ recipeId, toDo }, thunkAPI) => {
+    console.log("operation", recipeId, toDo)
     try {
 
          const res = toDo === "add" ? await axios.post(`api/recipes/favorites/${recipeId}`) : await axios.delete(`api/recipes/favorites/${recipeId}`);

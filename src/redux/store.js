@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/slice";
 import recipesReducer from "./recipes/slice";
 import filtersReducer from "./filters/slice";
-import favoritesSlice from "./recipes/favoritesSlice";
+// import favoritesSlice from "./recipes/favoritesSlice";
 
 const persistAuthConfig = {
   key: "auth",
@@ -37,7 +37,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     filters: filtersReducer,
     recipes: recipesReducer,
-    favorites: favoritesSlice,
+    // favorites: favoritesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
