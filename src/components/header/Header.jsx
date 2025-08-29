@@ -18,10 +18,12 @@ const Header = () => {
   };
     const handleLogout = () => {
       setIsConfirmModalOpen(false);
+      setMobileNav(false);
       dispatch(logout());
   };
   const confirmLogout = () => {
     setIsConfirmModalOpen(true);
+    setMobileNav(false)
   };
   const handleLogoutConfirmClosing = () => {
     setIsConfirmModalOpen(false);
