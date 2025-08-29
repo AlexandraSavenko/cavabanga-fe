@@ -2,30 +2,29 @@ import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink } from "react-router-dom";
-import {
-  // useDispatch,
-  useSelector
-} from "react-redux";
-// import { logout } from "../../redux/auth/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import CommonModal from "../ModalErrorCommon/ModalErrorCommon"
 
 const Header = () => {
   const user = useSelector(selectUser)
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [mobileNav, setMobileNav] = useState(false);
-  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
-  const handleLogout = () => {
-    // dispatch(logout());
-    setConfirmModalOpen(true);
-    toggleModalNav()
+    const handleLogout = () => {
+      setIsConfirmModalOpen(false);
+      dispatch(logout());
+  };
+  const confirmLogout = () => {
+    setIsConfirmModalOpen(true);
   };
   const handleLogoutConfirmClosing = () => {
-    setConfirmModalOpen(false);
+    setIsConfirmModalOpen(false);
   };
   return (
     <div className={css.wrap}>
@@ -98,7 +97,7 @@ const Header = () => {
                   <span className={css.userIcon}>{user.name[0].toUpperCase()}</span> <p>{user.name}</p>
                 </div>{" "}
                 <div className={css.br}></div>
-                <button onClick={handleLogout}>
+                <button onClick={confirmLogout}>
                   <svg className={css.icon}>
                     <use href={`/icons.svg#icon-log-out`}></use>
                   </svg>
@@ -122,8 +121,8 @@ const Header = () => {
           We will miss you!
         </p>
         <div className={ css.modalBtnWrapper}>
-          <button className={css.modalBtnCancel} type="button">Cancel</button>
-          <button className={css.modalBtnLogout} type="button">Log out</button>
+          <button className={css.modalBtnCancel} type="button" onClick={handleLogoutConfirmClosing}>Cancel</button>
+          <button className={css.modalBtnLogout} type="button" onClick={handleLogout}>Log out</button>
         </div>
       </CommonModal>
     </div>
