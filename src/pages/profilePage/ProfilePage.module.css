@@ -1,11 +1,29 @@
+.container {
+  margin: 0 auto;
+  padding: 16px;
+  max-width: 393px;
+}
+
 .title {
-  font-size: 28px;
-  font-weight: bold;
+  color: var(--Black, #000);
+  font-family: Montserrat;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
   margin-bottom: 16px;
 }
 
-.subtitle {
-  color: #666;
-  margin-bottom: 24px;
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+    max-width: 768px;
+  }
 }
 
+@media only screen and (min-width: 1440px) {
+  .container {
+    padding: 0 107px;
+    max-width: 1440px;
+  }
+}
