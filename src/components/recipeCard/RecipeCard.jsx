@@ -39,13 +39,13 @@ const RecipeCard = ({ recipe, recipeType }) => {
             <svg className={css.icon}>
               <use href="/icons.svg#icon-time-clock" />
             </svg>
-            <p className={css.time}>{recipe.time || "-"}</p>
+            <p className={css.time}>{recipe.cookiesTime || "-"}</p>
           </div>
         </div>
-        <p className={css.desc}>{recipe.description}</p>
+        <p className={css.desc}>{recipe.decr}</p>
 
-        <p className={css.cals}>{recipe.cals ? `~${recipe.cals} cals` : "-"}</p>
-
+        <p className={css.cals}>{recipe.cals ? `~${recipe.cals} cals` : "N/A"}</p>
+<div className={css.btnWrap}>
         <button
           className={css.btn}
           onClick={() => navigate(`/recipes/${recipe._id}`)}
@@ -54,6 +54,7 @@ const RecipeCard = ({ recipe, recipeType }) => {
         </button>
 
         {recipeType !== "own" && <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />}
+        </div>
         {showModal && <ModalNotAutor modalOpen={setShowModal} />}
       </div>
     </div>
