@@ -148,7 +148,7 @@ export default function Filter() {
                 width="24"
                 height="24"
               >
-                <use xlinkHref="/sprite.svg#icon-filter-24px" />
+                <use href={`/icons.svg#icon-filter`} />
               </svg>
             </IconButton>
           )}

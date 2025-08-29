@@ -15,8 +15,6 @@ const RecipesList = ({ allRecipes, recipeType }) => {
   }
   return (
     <div className={style.container}>
-      <h2 className={style.title}>Recipes</h2>
-      <p>{allRecipes.length} recipes</p>
       <ul className={style.list}>
         {allRecipes.map(recipe => {
           return <li key={recipe._id}>

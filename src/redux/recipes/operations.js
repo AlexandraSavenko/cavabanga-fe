@@ -6,6 +6,7 @@ export const getRecipeList = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const { type, page, perPage, filters, title } = params;
+      console.log(type)
       const query = new URLSearchParams({
         page: page.toString(),
         perPage: perPage.toString(),
