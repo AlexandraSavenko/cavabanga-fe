@@ -9,14 +9,14 @@
 }
 .wrap {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   transform: translate(-50%, -50%);
   background: var(--light-beige);
   border-radius: 32px;
-  padding: 56px 32px;
-  width: 420px;
-  height: 277px;
+  padding: 56px 24px 32px 24px;
+  width: 362px;
+  /* height: 316px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,8 @@
 .closeButton {
   position: absolute;
   top: 16px;
-  right: 32px;
+  right: 16px;
+  /* right: 32px; */
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -38,4 +39,21 @@
   width: 24px;
   height: 24px;
   stroke: var(--black);
+}
+
+@media only screen and (min-width: 768px) {
+  .wrap {
+    width: 420px;
+    padding: 56px 32px 32px;
+    /* height: 236px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 1111111;
+  }
+  .closeButton {
+    right: 32px;
+  }
 }

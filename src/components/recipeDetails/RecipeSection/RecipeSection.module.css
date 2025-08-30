@@ -15,3 +15,7 @@
   line-height: 1.55;
   color: #000;
 }
+.sectionList {
+  list-style-type: disc;
+  padding-left: 20px;
+}

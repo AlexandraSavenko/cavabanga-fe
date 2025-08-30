@@ -1,5 +1,13 @@
 .recipeImage {
-  max-width: 100%;
+  min-width: 622px;
   height: auto;
+}
+.recipeImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32 px;
+  width: 100%;
+  background-color: #2b2d30;
   border-radius: 8px;
 }

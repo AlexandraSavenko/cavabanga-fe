@@ -1,6 +1,5 @@
 .container {
   margin: 0 auto;
-  padding: 16px;
   max-width: 393px;
 }
 
@@ -12,18 +11,17 @@
   font-weight: 600;
   line-height: normal;
   margin-bottom: 16px;
+  text-align: start;
 }
 
 @media only screen and (min-width: 768px) {
   .container {
-    padding: 0 32px;
     max-width: 768px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .container {
-    padding: 0 107px;
     max-width: 1440px;
   }
 }

@@ -4,12 +4,14 @@
   line-height: 1.1;
   text-align: center;
   color: #000;
+  margin-bottom: 16px;
 }
 .notFoundSubtitle {
   font-weight: 400;
   font-size: 24px;
   text-align: center;
   color: #000;
+  margin-bottom: 32px;
 }
 .notFoundLink {
   background: #9b6c43;
@@ -17,4 +19,24 @@
   padding: 16px;
   width: 288px;
   height: 56px;
+  margin: 0 auto;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notFoundWrapper {
+  margin: 32px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.notFoundImg {
+  max-width: 600px;
+  height: auto;
+  margin-bottom: 32px;
+}
+.icon {
+  fill: #fff;
 }

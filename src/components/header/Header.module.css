@@ -4,20 +4,18 @@
   position: relative;
   padding: 14px;
 }
-.wrap *{
+.wrap * {
   color: var(--white);
 }
 .wrap button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
 .nav {
@@ -25,7 +23,6 @@
   display: flex;
   align-items: center;
   transition: all 1s ease;
-
 }
 
 .burgerBtn {
@@ -74,7 +71,7 @@
 }
 .userIcon {
   background-color: var(--light-brown);
-  width:32px;
+  width: 32px;
   height: 32px;
   text-align: center;
   padding: 8px;
@@ -97,7 +94,53 @@
 .active {
   text-decoration: underline;
 }
+.modalTitle {
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  color: var(--black);
+}
 
+.modalText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  text-align: center;
+  color: var(--black);
+}
+.modalBtnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* .modalBtn {
+  width: 314px !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+} */
+.modalBtnCancel {
+  border: 1px solid var(--black) !important;
+  font-family: var(--font-family);
+  border-radius: 8px;
+  width: 314px;
+  background-color: transparent;
+  color: var(--black);
+  padding: 16px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.modalBtnLogout {
+  background-color: var(--red) !important;
+  color: var(--white);
+  font-family: var(--font-family);
+  border-radius: 8px;
+  width: 314px;
+  padding: 16px;
+  font-weight: 600;
+  font-size: 18px;
+}
 @media (max-width: 767px) {
   .header a:first-child {
     flex-grow: 1;
@@ -111,11 +154,11 @@
     left: 0;
     width: 100%;
   }
-.navOpen {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+  .navOpen {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
   .navClosed {
     transform: translateY(-200%);
   }

@@ -1,55 +1,50 @@
-.container {
-  margin: 0 auto;
+.recipesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 24px;
 }
-
-@media only screen and (min-width: 393px) {
-  .container {
-    padding: 16px;
-    max-width: 393px;
-  }
+.item {
+  display: flex;
+  flex-direction: column;
+  background: var(--Light-beige, #faf3e0);
+  padding: 12px;
+  border-radius: 16px;
+  gap: 16px;
 }
-
-.title {
-  /* display: flex
-; */
-  /* flex-direction: column; */
-  /* align-items: flex-start; */
-  /* gap: 16px; */
-  /* align-self: stretch; */
-  /* color: var(--Black, #000); */
-  /* font-family: Montserrat; */
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 600;
-  /* line-height: normal; */
-  margin-bottom: 16px;
-}
-
-.list {
-  display: grid;
-  gap: 24px; /* відстань між картками */
-  grid-template-columns: repeat(1, 361px); /* мобілка — 1 картка */
-  justify-content: center;
+.item:last-child {
+  margin-bottom: 24px;
 }
 
 @media only screen and (min-width: 768px) {
-  .container {
-    padding: 0 32px;
-    max-width: 768px;
+  .recipesList {
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 24px;
+    align-items: stretch;
   }
 
-  .list {
-    grid-template-columns: repeat(2, 339px); /* планшет — 2 картки */
+  .item {
+    width: calc((100% - 48px) / 2);
+    flex-grow: 1;
+    gap: 24px;
+  }
+
+  .item:last-child {
+    margin-bottom: 0;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .container {
-    padding: 0 107px;
-    max-width: 1440px;
+  .recipesList {
+    flex-wrap: wrap;
+    row-gap: 28px;
+    column-gap: 24px;
+    flex-direction: row;
   }
 
-  .list {
-    grid-template-columns: repeat(4, 288px); /* десктоп — 4 картки */
+  .item {
+    width: calc((100% - 96px) / 4);
   }
 }
