@@ -14,36 +14,37 @@ import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
 import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
+// import {toast, Toaster} from "react-hot-toast"
+// import ToastInfo from "../../components/ToastInfo/ToastInfo"
 
 export default function AuthPage() {
     const { authType } = useParams()
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("in useEffect");
         dispatch(clearAuthError())
     }, [dispatch]);
  
     const error = useSelector(selectAuthError);
     const isLoading = useSelector(selectIsLoading);
-    if (error) {
-        console.log("if(error) => error: ", error)
+    
+    const handleCloseModal = () => {
+        dispatch(clearAuthError())
     };
-
-  const handleCloseModal = () => {
-    dispatch(clearAuthError())
-  };
+   
     return (
         <div className={css.container}>
             <ModalErrorCommon isopen={error} onClose={handleCloseModal}>
-            <p className={css.title}>{`${error}`}</p>
-            <p className={css.text}>
-                We couldn't process your request. Make sure your information is correct, or try again later.
+                <p className={css.title}>{`${error}`}</p>
+                <p className={css.text}>
+                    We couldn't process your request. Make sure your information is correct, or try again later.
                 </p>
             </ModalErrorCommon>
             {authType === "register" && <RegistrationForm />}
             {authType === "login" && <LoginForm />}
             {isLoading && <Loader />}
+            {/* {error && toast.error(error)} */}
+            {/* <Toaster position="top-right" /> */}
         </div>
     )
 };
