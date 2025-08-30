@@ -10,7 +10,7 @@ export default function RecipeSection({ about, ingredients, instructions }) {
 
       <div>
         <h2 className={css.sectionTitle}>Ingredients</h2>
-        <ul>
+        <ul className={css.sectionList}>
           {ingredients?.map((ing, i) => (
             <li key={i} className={css.sectionText}>
               {typeof ing === "object" ? ing.name : ing}
