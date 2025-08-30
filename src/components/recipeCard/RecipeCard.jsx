@@ -26,38 +26,52 @@ const RecipeCard = ({ recipe, recipeType }) => {
     dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
   return (
-    <div className={css.container}>
-      <div className={css.card}>
-        <img
-          src={recipe.recipeImg || "/placeholder.jpg"}
-          alt={recipe.name}
-          className={css.image}
-        />
+    <div className={css.card}>
+
+      <img
+        src={recipe.recipeImg || "/placeholder.jpg"}
+        alt={recipe.name}
+        className={css.image}
+      />
+
+      <div className={css.cardContent}>
+
         <div className={css.wrapper}>
           <h3 className={css.title}>{recipe.name}</h3>
-          <div className={css.wrt}>
+          <div className={css.timeWrapper}>
             <svg className={css.icon}>
               <use href="/icons.svg#icon-time-clock" />
             </svg>
-            <p className={css.time}>{recipe.cookiesTime || "-"}</p>
+            <p>{recipe.cookiesTime || "-"}</p>
           </div>
         </div>
         <p className={css.desc}>{recipe.decr}</p>
 
         <p className={css.cals}>{recipe.cals ? `~${recipe.cals} cals` : "N/A"}</p>
-<div className={css.btnWrap}>
+
+
+      </div>
+
+
+      <div className={css.btnWrap}>
         <button
           className={css.btn}
           onClick={() => navigate(`/recipes/${recipe._id}`)}
         >
           Learn more
         </button>
-
         {recipeType !== "own" && <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />}
-        </div>
-        {showModal && <ModalNotAutor modalOpen={setShowModal} />}
       </div>
+
+      {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+
+
     </div>
+
+
+
+
+
 
   );
 };
