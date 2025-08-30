@@ -1,6 +1,33 @@
 .saveButton {
   background: #9b6c43;
   border-radius: 8px;
+  border: none;
   padding: 16px;
-  height: 56px;
+  display: flex;
+  gap: 16px;
+  padding: 17px, auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 24px;
+}
+.icon {
+  fill: none;
+  stroke: #fff;
+  border: none;
+}
+.saveButton:hover:focus {
+  background: #6d554b;
+}
+.saveButton:active {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+}
+.saveButton:disabled {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+  opacity: 0.3;
+  cursor: not-allowed;
 }
