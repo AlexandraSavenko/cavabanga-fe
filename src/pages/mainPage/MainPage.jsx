@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import css from "./MainPage.module.css";
 
+import css from "./MainPage.module.css";
+import Loader from "../../components/loader/Loader";
 import Logo from "../../components/logo/Logo";
 import RecipesList from "../../components/recipesList/RecipesList";
 
@@ -17,10 +18,8 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector(selectAllRecipes);
   const page = useSelector(selectPage);
-
-  // const searchValue = useSelector(selectFilter);
-  // const ingredient = useSelector(selectIngredient);
   const category = useSelector(selectCategory);
+  const isLoading = useSelector((state) => state.recipes.loading); // ДОДАНО
 
   useEffect(() => {
     dispatch(
@@ -32,9 +31,13 @@ const MainPage = () => {
   return (
     <div className={css.wrap}>
       <SearchBox />
-      <h2>Recepies</h2>
+      <h2>Рецепти</h2> {/* УКР. */}
       <Filters />
-      <RecipesList allRecipes={allRecipes} recipeType={"all"} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <RecipesList allRecipes={allRecipes} recipeType={"all"} />
+      )}
     </div>
   );
 };

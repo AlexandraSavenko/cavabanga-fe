@@ -1,210 +1,195 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { FieldArray } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import css from "./AddRecipeForm.module.css"; 
+import Loader from "../loader/Loader";
+import css from "./AddRecipeForm.module.css";
 
 const AddRecipeForm = () => {
-  const [categories, setCategories] = useState(["a"]);
-  const [ingredientsList, setIngredientsList] = useState(["b"]);
+  const [categories, setCategories] = useState([]);
+  const [ingredientsList, setIngredientsList] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
 
-  // useEffect(() => {
-  //   axios.get("/api/categories").then(res => setCategories(res.data));
-  //   axios.get("/api/ingredients").then(res => setIngredientsList(res.data));
-  // }, []);
+  useEffect(() => {
+    // підвантажуємо категорії/інгредієнти (за бажанням)
+    let mounted = true;
+    (async () => {
+      try {
+        const [catRes, ingRes] = await Promise.all([
+          axios.get("/api/categories"),
+          axios.get("/api/ingredients"),
+        ]);
+        if (!mounted) return;
+        setCategories(catRes.data || []);
+        setIngredientsList(ingRes.data || []);
+      } catch (err) {
+        // не критично — лишаємо пусті списки
+        console.error("Error loading categories/ingredients", err);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const initialValues = {
     name: "",
     decr: "",
-    cookiesTime: "",
+    cookingTime: "",
     cals: "",
     category: "",
-    ingredient: "",
-    ingredientAmount: "",
-    ingredients: [],
+    ingredients: [{ ingredient: "", ingredientAmount: "" }],
     instructions: "",
     photo: null,
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Enter the name of your recipe"),
-    decr: Yup.string().required("Enter a brief description of your recipe"),
-    cookiesTime: Yup.number().required("Cooking time in minute").positive().integer(),
-    cals: Yup.number().positive().integer(),
-    category: Yup.string().required("Select a category"),
+    name: Yup.string().required("Введіть назву рецепту"),
+    decr: Yup.string().required("Дайте короткий опис рецепту"),
+    cookingTime: Yup.number().required("Час приготування у хвилинах").positive().integer(),
+    cals: Yup.number().positive().integer().nullable(),
+    category: Yup.string().required("Оберіть категорію"),
     ingredients: Yup.array()
       .of(
         Yup.object({
-          ingredient: Yup.string().required("Select an ingredient"),
-          ingredientAmount: Yup.string().required("Specify the Amount"),
+          ingredient: Yup.string().required("Оберіть інгредієнт"),
+          ingredientAmount: Yup.string().required("Вкажіть кількість"),
         })
       )
-      .min(1, "Add at least one ingredient"),
-    instructions: Yup.string().required("Enter a text"),
-    photo: Yup.mixed().required("Add a photo of the recipe"),
+      .min(1, "Додайте хоча б один інгредієнт"),
+    instructions: Yup.string().required("Введіть інструкцію"),
+    photo: Yup.mixed().required("Додайте фото рецепту"),
   });
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitting(true);
     try {
+      // приклад відправки — адаптуй під бек
       const formData = new FormData();
-      Object.keys(values).forEach(key => {
-        if (key === "ingredients") {
-          formData.append(key, JSON.stringify(values[key]));
-        } else if (key === "photo") {
-          formData.append("photo", values.photo);
-        } else {
-          formData.append(key, values[key]);
-        }
-      });
+      formData.append("name", values.name);
+      formData.append("decr", values.decr);
+      formData.append("cookingTime", values.cookingTime);
+      formData.append("cals", values.cals || "");
+      formData.append("category", values.category);
+      formData.append("instructions", values.instructions);
+      if (values.photo) formData.append("photo", values.photo);
+      formData.append("ingredients", JSON.stringify(values.ingredients));
 
       await axios.post("/api/recipes", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
-      alert("Recipe successfully added!");
-      window.location.href = "/recipes";
+      resetForm();
+      setPreviewImage(null);
+      // можна додати навігацію або повідомлення
     } catch (error) {
-      alert("Error adding recipe:" + error.message);
+      console.error("Помилка при створенні рецепту", error);
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ values, setFieldValue, isSubmitting }) => (
-        <Form className={css.form}>
+    <div className={css.formWrap}>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        {({ values, setFieldValue, isSubmitting }) => (
+          <>
+            {isSubmitting && <Loader />} {/* показ лоадера під час сабміту */}
+            <Form className={css.form}>
+              <label>
+                Назва
+                <Field name="name" placeholder="Назва рецепту" />
+              </label>
 
-          
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Upload Photo</label>
-            <input
-              type="file"
-              onChange={(e) => {
-                setFieldValue("photo", e.currentTarget.files[0]);
-                setPreviewImage(URL.createObjectURL(e.currentTarget.files[0]));
-              }}
-              className={css.input}
-            />
-            {previewImage && <img src={previewImage} alt="preview" className={css.imagePreview} />}
-            <ErrorMessage name="photo" component="div" className={css.error}/>
-          </div>
+              <label>
+                Короткий опис
+                <Field name="decr" as="textarea" placeholder="Короткий опис" />
+              </label>
 
-          
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Recipe Title</label>
-            <Field name="name" className={css.input}/>
-            <ErrorMessage name="name" component="div" className={css.error}/>
-          </div>
+              <label>
+                Час приготування (хв)
+                <Field name="cookingTime" type="number" />
+              </label>
 
-         
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Recipe Description</label>
-            <Field as="textarea" name="decr" className={css.textarea}/>
-            <ErrorMessage name="decr" component="div" className={css.error}/>
-          </div>
+              <label>
+                Калорії
+                <Field name="cals" type="number" />
+              </label>
 
-          
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Cooking time in minutes(min)</label>
-            <Field type="number" name="cookiesTime" className={css.input}/>
-            <ErrorMessage name="cookiesTime" component="div" className={css.error}/>
-          </div>
+              <label>
+                Категорія
+                <Field name="category" as="select">
+                  <option value="">Оберіть категорію</option>
+                  {categories.map((c) => (
+                    <option key={c._id || c.id || c} value={c._id || c.id || c}>
+                      {c.name || c}
+                    </option>
+                  ))}
+                </Field>
+              </label>
 
-         
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Calories</label>
-            <Field type="number" name="cals" className={css.input}/>
-            <ErrorMessage name="cals" component="div" className={css.error}/>
-          </div>
+              <FieldArray name="ingredients">
+                {({ remove, push }) => (
+                  <div>
+                    <h4>Інгредієнти</h4>
+                    {values.ingredients &&
+                      values.ingredients.map((_, index) => (
+                        <div key={index} className={css.ingredientRow}>
+                          <Field name={`ingredients.${index}.ingredient`} as="select">
+                            <option value="">Оберіть інгредієнт</option>
+                            {ingredientsList.map((ing) => (
+                              <option key={ing._id || ing.id || ing} value={ing._id || ing.id || ing}>
+                                {ing.name || ing}
+                              </option>
+                            ))}
+                          </Field>
+                          <Field name={`ingredients.${index}.ingredientAmount`} placeholder="Кількість" />
+                          <button type="button" onClick={() => remove(index)}>
+                            Видалити
+                          </button>
+                        </div>
+                      ))}
+                    <button type="button" onClick={() => push({ ingredient: "", ingredientAmount: "" })}>
+                      Додати інгредієнт
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
 
-          
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Category</label>
-            <Field as="select" name="category" className={css.input}>
-              <option value="">Select a category</option>
-              {categories.map(cat => (
-                <option key={cat._id} value={cat._id}>{cat.name}</option>
-              ))}
-            </Field>
-            <ErrorMessage name="category" component="div" className={css.error}/>
-          </div>
+              <label>
+                Інструкції
+                <Field name="instructions" as="textarea" />
+              </label>
 
-         <div className={css.fieldBlock}>
-  <label className={css.label}>Ingredients</label>
+              <label>
+                Фото
+                <input
+                  name="photo"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.currentTarget.files[0];
+                    setFieldValue("photo", file);
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = () => setPreviewImage(reader.result);
+                      reader.readAsDataURL(file);
+                    } else {
+                      setPreviewImage(null);
+                    }
+                  }}
+                />
+              </label>
 
+              {previewImage && <img src={previewImage} alt="preview" className={css.preview} />}
 
-  <Field as="select" name="ingredient" className={css.input}>
-    <option value="">Name</option>
-    {ingredientsList.map(ing => (
-      <option key={ing._id} value={ing._id}>{ing.name}</option>
-    ))}
-  </Field>
-
-    <Field name="ingredientAmount" placeholder="Amount" className={css.input}/>
-
-    <button
-    type="button"
-    onClick={() => {
-      if (values.ingredient && values.ingredientAmount) {
-        setFieldValue("ingredients", [
-          ...values.ingredients,
-          { ingredient: values.ingredient, ingredientAmount: values.ingredientAmount }
-        ]);
-        setFieldValue("ingredient", "");
-        setFieldValue("ingredientAmount", "");
-      }
-    }}
-    className={css.button}
-  >
-    Add new ingredient
-  </button>
-
-    {values.ingredients.length > 0 && (
-    <div className={css.selectedIngredients}>
-      {values.ingredients.map((ing, index) => {
-        const ingredientName = ingredientsList.find(i => i._id === ing.ingredient)?.name || "Unknown";
-        return (
-          <div key={index} className={css.ingredientItem}>
-            <span>{ingredientName} - {ing.ingredientAmount}г</span>
-            <button
-              type="button"
-              onClick={() => {
-                const newIngredients = values.ingredients.filter((_, i) => i !== index);
-                setFieldValue("ingredients", newIngredients);
-              }}
-              className={css.deleteButton}
-            >
-              ✕
-            </button>
-          </div>
-        );
-      })}
+              <button type="submit" disabled={isSubmitting}>
+                Додати рецепт
+              </button>
+            </Form>
+          </>
+        )}
+      </Formik>
     </div>
-  )}
-    <ErrorMessage name="ingredients" component="div" className={css.error}/>
-   </div>
-
-          <div className={css.fieldBlock}>
-            <label className={css.label}>Instructions</label>
-            <Field as="textarea" name="instructions" className={css.textarea}/>
-            <ErrorMessage name="instructions" component="div" className={css.error}/>
-          </div>
-
-          
-          <button type="submit" disabled={isSubmitting} className={css.submitButton}>
-            Publish Recipe
-          </button>
-
-        </Form>
-      )}
-    </Formik>
   );
 };
 

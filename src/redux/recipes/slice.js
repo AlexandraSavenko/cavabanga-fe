@@ -19,6 +19,7 @@ const recipesState = {
   loading: false,
   error: null,
 };
+
 const recipeSlice = createSlice({
   name: "recipes",
   initialState: recipesState,
@@ -50,7 +51,12 @@ const recipeSlice = createSlice({
         state.loading = true;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
+        state.loading = false; // Зупиняємо лоадер після отримання фаворитів
         state.favoriteRecipes = action.payload;
+      })
+      .addCase(getUserFavourites.rejected, (state) => {
+        state.loading = false; // Гарантія вимкнення лоадера при помилці
+        state.error = true;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
         const { recipeId } = action.payload;
