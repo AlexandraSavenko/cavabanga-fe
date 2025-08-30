@@ -14,16 +14,19 @@ import {
   selectIngredients,
   selectCategory,
   selectIngredient,
+  selectFiltError,
 } from "../../redux/filters/selectors";
 // import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
 import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
-import ToastInfo from "../ToastInfo/ToastInfo.jsx";
+// import ToastInfo from "../ToastInfo/ToastInfo.jsx";
 
 import css from "./Filters.module.css";
 import { selectTotalItems } from "../../redux/recipes/selectors.js";
+import toast from "react-hot-toast";
 
 export default function Filter() {
+  const error = useSelector(selectFiltError)
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
@@ -78,7 +81,10 @@ export default function Filter() {
     const filterValue = e.target.value;
     dispatch(changeIngredientFilter(filterValue));
   };
-
+  
+  if (error) {
+    toast.error(error);
+    }
   return (
     <>
       <div className={`${css.filtersContainer}`}>
@@ -220,7 +226,6 @@ export default function Filter() {
           )}
         </div>
       </div>
-      <ToastInfo />
     </>
   );
 }

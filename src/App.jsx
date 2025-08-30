@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { lazy, Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 
 import RestrictedRoute from "./components/RestrictedRoute";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
@@ -47,6 +48,10 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        duration="3000" />
     </>
   );
 }

@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
       };
       return payload;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.data.message || "Something went wrong. Please try again later.");
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
@@ -41,7 +41,7 @@ export const login = createAsyncThunk(
       };
       return payload;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.data.message || "Something went wrong. Please try again later.");
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
@@ -54,6 +54,6 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await axios.post("/api/auth/logout");
     axios.defaults.headers.common["Authorization"] = "";
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response?.data?.data.message || "Something went wrong. Please try again later.");
+    return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
   }
 });

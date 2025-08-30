@@ -14,8 +14,7 @@ import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
 import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
-// import {toast, Toaster} from "react-hot-toast"
-// import ToastInfo from "../../components/ToastInfo/ToastInfo"
+// import toast from "react-hot-toast"
 
 export default function AuthPage() {
     const { authType } = useParams()
@@ -31,6 +30,11 @@ export default function AuthPage() {
     const handleCloseModal = () => {
         dispatch(clearAuthError())
     };
+
+    // if (error) {
+    //     toast.error(error)
+    // }
+
    
     return (
         <div className={css.container}>
@@ -43,8 +47,6 @@ export default function AuthPage() {
             {authType === "register" && <RegistrationForm />}
             {authType === "login" && <LoginForm />}
             {isLoading && <Loader />}
-            {/* {error && toast.error(error)} */}
-            {/* <Toaster position="top-right" /> */}
         </div>
     )
 };
