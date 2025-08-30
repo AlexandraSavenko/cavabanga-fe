@@ -2,6 +2,22 @@
   margin: 0 auto;
 }
 
+.scrollBtn {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4); /* напівпрозорий */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.2s;
+}
+
+.scrollBtn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
 @media only screen and (min-width: 393px) {
   .container {
     padding: 16px;
