@@ -26,45 +26,48 @@ const RecipeCard = ({ recipe, recipeType }) => {
     dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
   return (
-    <div>
-      <div className={css.card}>
-        <div className={css.cardContent}>
-          <img
-            src={recipe.recipeImg || "/placeholder.jpg"}
-            alt={recipe.name}
-            className={css.image}
-          />
+    <div className={css.card}>
 
-          <div className={css.wrapper}>
-            <h3 className={css.title}>{recipe.name}</h3>
-            <div className={css.timeWrapper}>
-              <svg className={css.icon}>
-                <use href="/icons.svg#icon-time-clock" />
-              </svg>
-              <p>{recipe.cookiesTime || "-"}</p>
-            </div>
+      <img
+        src={recipe.recipeImg || "/placeholder.jpg"}
+        alt={recipe.name}
+        className={css.image}
+      />
+
+      <div className={css.cardContent}>
+
+        <div className={css.wrapper}>
+          <h3 className={css.title}>{recipe.name}</h3>
+          <div className={css.timeWrapper}>
+            <svg className={css.icon}>
+              <use href="/icons.svg#icon-time-clock" />
+            </svg>
+            <p>{recipe.cookiesTime || "-"}</p>
           </div>
-          <p className={css.desc}>{recipe.decr}</p>
-
-          <p className={css.cals}>{recipe.cals ? `~${recipe.cals} cals` : "N/A"}</p>
-
         </div>
+        <p className={css.desc}>{recipe.decr}</p>
 
-        <div className={css.btnWrap}>
-          <button
-            className={css.btn}
-            onClick={() => navigate(`/recipes/${recipe._id}`)}
-          >
-            Learn more
-          </button>
-        </div>
+        <p className={css.cals}>{recipe.cals ? `~${recipe.cals} cals` : "N/A"}</p>
 
 
-        {recipeType !== "own" && <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />}
-
-        {showModal && <ModalNotAutor modalOpen={setShowModal} />}
       </div>
+
+
+      <div className={css.btnWrap}>
+        <button
+          className={css.btn}
+          onClick={() => navigate(`/recipes/${recipe._id}`)}
+        >
+          Learn more
+        </button>
+        {recipeType !== "own" && <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />}
+      </div>
+
+      {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+
+
     </div>
+
 
 
 
