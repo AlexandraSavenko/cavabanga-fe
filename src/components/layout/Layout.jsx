@@ -1,18 +1,17 @@
 import React, { Suspense } from "react";
 import Footer from "../footer/Footer";
 import Header from "../header/Header";
-import { Outlet } from "react-router-dom";
 import css from "./Layout.module.css"
-import Home from "../../pages/home/Home";
+import SearchBox from "../SearchBox/SearchBox"
 
-const Layout = () => {
+
+const Layout = ({children}) => {
   return (
     <div id="root">
       <Header />
+      { <SearchBox /> }
       <div className={`${css.contentWrap} container`}>
-        <Suspense>
-          <Outlet />
-        </Suspense>
+          {children}
       </div>
       <Footer />
     </div>
