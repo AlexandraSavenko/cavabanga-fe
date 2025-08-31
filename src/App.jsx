@@ -26,7 +26,7 @@ function App() {
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
-<Route
+   <Route
             path="/add-recipe"
             element={
               <RestrictedRoute
@@ -35,6 +35,7 @@ function App() {
               />
             }
           />
+          
 
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
