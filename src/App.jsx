@@ -19,20 +19,10 @@ const AddRecipesPage = lazy(() =>
 
 function App() {
   return (
-    <>
+    <Layout>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route
-            path="/add-recipe"
-            element={
-              <RestrictedRoute
-                component={<AddRecipesPage />}
-                redirectTo="/auth/login"
-              />
-            }
-          />
-          <Route path="/" element={<Layout />}>
-            <Route index element={<MainPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route
               path="/profile/:recipeType"
               element={
@@ -44,15 +34,22 @@ function App() {
             />
             <Route path="/auth/:authType" element={<AuthPage />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route
+              path="/add-recipe"
+              element={
+                <RestrictedRoute
+                  component={<AddRecipesPage />}
+                  redirectTo="/auth/login"
+                />
+              }
+            />
+
             <Route path="*" element={<NotFound />} />
-          </Route>
+
         </Routes>
       </Suspense>
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        duration="3000" />
-    </>
+      <Toaster position="top-right" reverseOrder={false} duration="3000" />
+    </Layout>
   );
 }
 

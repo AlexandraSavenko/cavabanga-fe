@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeCategoryFilter,
   changeIngredientFilter,
+  resetFilters,
 } from "../../redux/filters/slice";
 import {
   fetchCategories,
@@ -20,6 +21,7 @@ import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
 import css from "./Filters.module.css";
 import { selectTotalItems } from "../../redux/recipes/selectors.js";
+import FilterCount from "../filterCount/FilterCount.jsx";
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -66,8 +68,9 @@ export default function Filter() {
   }, [dispatch]);
 
   const handleResetClick = () => {
-    dispatch(changeCategoryFilter(""));
-    dispatch(changeIngredientFilter(""));
+    // dispatch(changeCategoryFilter(""));
+    // dispatch(changeIngredientFilter(""));
+    dispatch(resetFilters())
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;
@@ -84,10 +87,11 @@ export default function Filter() {
     <>
       <div className={`${css.filtersContainer}`}>
         <div className={css.filtersRow}>
-          <span className={css.filtersCount}>
+          {/* <span className={css.filtersCount}>
             {recipesCount}
             {recipesCount === 1 ? " recipe" : " recipes"}
-          </span>
+          </span> */}
+          <FilterCount recipeNumber={recipesCount} />
           {!isMobileOrTablet && (
             <div className="filtersInputsWrapper">
               <form className={css.filtersForm}>

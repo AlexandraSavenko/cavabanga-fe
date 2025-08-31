@@ -46,6 +46,7 @@ export const login = createAsyncThunk(
   }
 );
 
+
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
   const token = selectToken(state);

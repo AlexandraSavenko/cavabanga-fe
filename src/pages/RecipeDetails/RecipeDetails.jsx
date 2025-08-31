@@ -64,6 +64,7 @@ export default function RecipeDetails() {
       setShowModal(true);
       return;
     }
+
     dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
   };
 
@@ -71,14 +72,7 @@ export default function RecipeDetails() {
     <div className={css.recipeDetails}>
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
-      <div className={css.infoContainer}>
-        <div className={css.textInfoWrap}>
-          <RecipeSection
-            about={recipe.decr}
-            ingredients={recipe.ingredient}
-            instructions={recipe.instruction}
-          />
-        </div>
+      <div className={css.DesctopWrap}>
         <div className={css.generalButtonWrap}>
           <GeneralInfo
             category={recipe.category?.name || "Unknown"}
@@ -87,6 +81,15 @@ export default function RecipeDetails() {
           />
           <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
           {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+        </div>
+        <div className={css.infoContainer}>
+          <div className={css.textInfoWrap}>
+            <RecipeSection
+              about={recipe.decr}
+              ingredients={recipe.ingredient}
+              instructions={recipe.instruction}
+            />
+          </div>
         </div>
       </div>
     </div>
