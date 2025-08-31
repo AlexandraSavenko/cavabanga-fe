@@ -1,3 +1,7 @@
+.container {
+  position: relative; /* додаємо, щоб кнопки скролу були відносно контейнера */
+}
+
 .recipesList {
   display: flex;
   flex-wrap: wrap;
