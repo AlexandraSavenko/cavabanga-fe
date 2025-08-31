@@ -70,3 +70,19 @@ export const toggleFavorites = createAsyncThunk(
     }
   }
 );
+export const addRecipe = createAsyncThunk(
+  "recipes/addRecipe",
+  async (values, thunkAPI) => {
+    try {
+      const res = await axios.post("api/recipes", values)
+      console.log(res)
+      
+    }
+    catch (error) {
+      console.log(error)
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+
+  
+)
