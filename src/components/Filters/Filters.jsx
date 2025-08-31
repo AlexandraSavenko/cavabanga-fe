@@ -18,8 +18,6 @@ import {
 // import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
 import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
-import ToastInfo from "../ToastInfo/ToastInfo.jsx";
-
 import css from "./Filters.module.css";
 import { selectTotalItems } from "../../redux/recipes/selectors.js";
 
@@ -27,6 +25,7 @@ export default function Filter() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
+
   useEffect(() => {
     if (!isModalOpen) return;
     const handleEsc = (event) => {
@@ -72,13 +71,15 @@ export default function Filter() {
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;
+    // console.log("in handleCategoryChange => filterValue: ",filterValue)
     dispatch(changeCategoryFilter(filterValue));
   };
   const handleIngredientChange = (e) => {
     const filterValue = e.target.value;
+    // console.log("in handleIngredientChange => filterValue: ",filterValue)
     dispatch(changeIngredientFilter(filterValue));
   };
-
+  
   return (
     <>
       <div className={`${css.filtersContainer}`}>
@@ -220,7 +221,6 @@ export default function Filter() {
           )}
         </div>
       </div>
-      <ToastInfo />
     </>
   );
 }
