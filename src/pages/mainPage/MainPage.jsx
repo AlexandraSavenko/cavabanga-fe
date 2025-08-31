@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllRecipes, selectPage } from "../../redux/recipes/selectors";
 import { getRecipeList } from "../../redux/recipes/operations";
 
-import { selectCategory } from "../../redux/filters/selectors";
-import { resetFilters } from "../../redux/filters/slice";
+import { selectCategory, selectIngredient } from "../../redux/filters/selectors";
+// import { resetFilters } from "../../redux/filters/slice";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,6 @@ const MainPage = () => {
   // const searchValue = useSelector(selectFilter);
   // const ingredient = useSelector(selectIngredient);
   const category = useSelector(selectCategory);
-
    // Може, винести ресет фільтрів окремо і скидати їх лише один раз при першому рендері?
    // Чи взагалі прибрати, бо це скидання, здається, робить біду (Аня)
   //     useEffect(() => {
@@ -29,9 +28,9 @@ const MainPage = () => {
   // }, [dispatch]);
   useEffect(() => {
     dispatch(
-      getRecipeList({ type: "all", page, perPage: 12, filter: category })
+      getRecipeList({ type: "all", page, perPage: 12, category })
     );
-    dispatch(resetFilters());
+    // dispatch(resetFilters());
   }, [page, category, dispatch]);
 
   return (
