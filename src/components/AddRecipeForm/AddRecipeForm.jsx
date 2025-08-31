@@ -48,8 +48,8 @@ const AddRecipeForm = () => {
           ingredientAmount: Yup.string()
             .max(60)
             .required("Specify the amount")
-          .min(2, "Add at least 2 ingredients")
-      .max(16)
+            .min(2, "Add at least 2 ingredients")
+            .max(16)
         })
       )
     
@@ -62,14 +62,21 @@ const AddRecipeForm = () => {
     console.log(values)
     dispatch(addRecipe())
   }
-//  try {
-//     const formData = new FormData();
+
+
+  //  try {
+  //     const formData = new FormData();
+
   //     formData.append("name", values.name);
   //     formData.append("decr", values.decr);
   //     formData.append("cookiesTime", values.cookiesTime);
   //     if (values.cals) formData.append("cals", values.cals);
   //     formData.append("category", values.category);
   //     formData.append("instruction", values.instruction);
+
+
+
+  //     // правильно називаємо поле для бекенду
 
   //     formData.append("ingredient", JSON.stringify(values.ingredients));
   //     console.log("Ingredients array:", values.ingredients);
@@ -134,9 +141,9 @@ const AddRecipeForm = () => {
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
             </div>
 
-            <div className={css.formContent}>
+               <div className={css.formContent}>
               {/* General Information */}
-              <section className={css.section}>
+           <section className={css.section}>
                 General Information
                 <div className={css.fieldBlock}>
                   <label className={css.labels}>Recipe Title</label>
@@ -194,7 +201,7 @@ const AddRecipeForm = () => {
                   <div className={css.fieldGroup}>
                     <label className={css.labels}>Name</label>
                     <Field as="select" name="id" className={css.input1}>
-                      <option value="">Select ingredient</option>
+ <option value="">Select ingredient</option>
                       {ingredientsList.map((ing) => (
                         <option key={ing._id} value={ing._id}>
                           {ing.name}
@@ -207,7 +214,11 @@ const AddRecipeForm = () => {
                     <div className={css.fieldGroup}>
                       <label className={css.labels}>Amount</label>
                       <Field
+
                         name="ingredientAmount"
+
+                       
+
                         placeholder="100g"
                         className={css.input2}
                       />
@@ -217,6 +228,7 @@ const AddRecipeForm = () => {
                       className={css.buttonNew}
                       type="button"
                       onClick={() => {
+
                         if (values.id && values.ingredientAmount) {
                           setFieldValue("ingredients", [
                             ...values.ingredients,
@@ -227,6 +239,7 @@ const AddRecipeForm = () => {
                           ]);
                           setFieldValue("id", "");
                           setFieldValue("ingredientAmount", "");
+
                         }
                       }}
                     >
