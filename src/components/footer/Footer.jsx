@@ -12,7 +12,7 @@ const Footer = () => {
   const handleModalClose = () => {
     setShowModal(false);
   };
-  const user = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <div className={css.wrap}>
       <div className={`${css.footer} container`}>
@@ -25,9 +25,15 @@ const Footer = () => {
           >
             Recipes
           </NavLink>
+          {/* <NavLink
+            className={({ isActive }) => isActive ? css.active : ""}
+            to={"/profile/own"}
+          >
+            Account
+          </NavLink> */}
           <ProtectedLink
             to="/profile/own"
-            isLoggedIn={user}
+            isLoggedIn={isLoggedIn}
             openLoginModal={() => setShowModal(true)}
           >
             Account

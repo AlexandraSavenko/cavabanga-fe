@@ -7,7 +7,6 @@ import { login } from "../../redux/auth/operations";
 import { useState } from "react";
 import clsx from "clsx";
 import { getUserFavourites } from "../../redux/recipes/operations";
-import { getUserData } from "../../redux/auth/operations";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
@@ -27,7 +26,6 @@ export default function LoginForm() {
     const handleSubmit = async(values, actions) => {
         const res = await dispatch(login(values));
         if (login.fulfilled.match(res)) {
-            dispatch(getUserData())
             dispatch(getUserFavourites())
             actions.resetForm();
             navigate('/');
