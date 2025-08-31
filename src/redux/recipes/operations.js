@@ -5,13 +5,13 @@ export const getRecipeList = createAsyncThunk(
   "api/recires",
   async (params, thunkAPI) => {
     try {
-      const { type, page, perPage, filters, title } = params;
-      console.log(type)
+      const { type, page, perPage, ingredient, category, title } = params;
       const query = new URLSearchParams({
         page: page.toString(),
         perPage: perPage.toString(),
         ...(title && { title }),
-        ...(filters || {}),
+        ...(ingredient && {ingredient}),
+        ...(category && {category}),
       });
       const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`;
       const res = await axios.get(`${url}?${query}`);
