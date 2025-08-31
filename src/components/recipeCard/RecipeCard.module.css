@@ -63,9 +63,17 @@
 }
 
 .btnWrap {
-  margin-top: auto;
-}
+  display: flex;
+  gap: 8px;
+  max-height: 40px;
+  width: 100%;
+  /* margin-top: auto; */
 
+}
+.btnWrap button:first-child{
+  flex-grow: 1;
+  height: 100%;
+}
 .btn {
   display: flex;
   padding: 8px;
