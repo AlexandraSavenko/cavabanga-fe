@@ -1,7 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const genericErrorMessage = "There was an error. Please try again a bit later.";
+const showIngredErToast = (message) => {
+  toast.error(message,
+    { id: "ingredToast" });
+}
+const showCategErToast = (message) => {
+  toast.error(message,
+    { id: "categToast" });
+}
 
 export const fetchCategories = createAsyncThunk(
   "filters/fetchCategories",
@@ -10,6 +19,8 @@ export const fetchCategories = createAsyncThunk(
     const res = await axios.get("/api/categories");
     return res.data.data;
   } catch (error) {
+    showCategErToast("Failed to load categories");
+    //  toast.error("Failed to load categories");
     return thunkAPI.rejectWithValue(error.response?.data?.data?.message || error.message || genericErrorMessage)
   }
   })
@@ -21,6 +32,8 @@ export const fetchIngredients = createAsyncThunk(
     const res = await axios.get("/api/ingredients");
     return res.data.data;
   } catch (error) {
+    showIngredErToast("Failed to load ingredients");
+    // toast.error("Failed to load ingredients");
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || genericErrorMessage)
   }
   })

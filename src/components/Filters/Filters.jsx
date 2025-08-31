@@ -14,22 +14,18 @@ import {
   selectIngredients,
   selectCategory,
   selectIngredient,
-  selectFiltError,
 } from "../../redux/filters/selectors";
 // import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
 import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
-// import ToastInfo from "../ToastInfo/ToastInfo.jsx";
-
 import css from "./Filters.module.css";
 import { selectTotalItems } from "../../redux/recipes/selectors.js";
-import toast from "react-hot-toast";
 
 export default function Filter() {
-  const error = useSelector(selectFiltError)
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
+
   useEffect(() => {
     if (!isModalOpen) return;
     const handleEsc = (event) => {
@@ -75,18 +71,15 @@ export default function Filter() {
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;
-    console.log("in handleCategoryChange => filterValue: ",filterValue)
+    // console.log("in handleCategoryChange => filterValue: ",filterValue)
     dispatch(changeCategoryFilter(filterValue));
   };
   const handleIngredientChange = (e) => {
     const filterValue = e.target.value;
-    console.log("in handleIngredientChange => filterValue: ",filterValue)
+    // console.log("in handleIngredientChange => filterValue: ",filterValue)
     dispatch(changeIngredientFilter(filterValue));
   };
   
-  if (error) {
-    toast.error(error);
-    }
   return (
     <>
       <div className={`${css.filtersContainer}`}>
