@@ -7,7 +7,7 @@ import RecipesList from "../../components/recipesList/RecipesList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Filters from "../../components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllRecipes, selectPage } from "../../redux/recipes/selectors";
+import { selectAllRecipes, selectLoading, selectPage } from "../../redux/recipes/selectors";
 import { getRecipeList } from "../../redux/recipes/operations";
 
 import { selectCategory, selectFilter, selectIngredient } from "../../redux/filters/selectors";
@@ -17,6 +17,8 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector(selectAllRecipes);
   const page = useSelector(selectPage);
+  const loading = useSelector(selectLoading)
+
 
   const name = useSelector(selectFilter);
   // const ingredient = useSelector(selectIngredient);
@@ -33,6 +35,9 @@ const MainPage = () => {
     // dispatch(resetFilters());
   }, [page, category, name, dispatch]);
 
+  if(loading){
+    return <p>Loading...</p>
+  }
   return (
     <div className={css.wrap}>
       <SearchBox />

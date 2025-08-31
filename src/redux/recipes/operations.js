@@ -15,9 +15,10 @@ export const getRecipeList = createAsyncThunk(
       });
       const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`;
       const res = await axios.get(`${url}?${query}`);
+
       return res.data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
