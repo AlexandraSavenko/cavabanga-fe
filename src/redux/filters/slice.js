@@ -4,6 +4,7 @@ import { fetchCategories, fetchIngredients } from "./operations";
 const slice = createSlice({
   name: "filters",
   initialState: {
+    searchQuery: "",
     recipe: "",
     category: "",
     ingredient: "",
@@ -40,10 +41,11 @@ const slice = createSlice({
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.loading = false;
         state.categories = action.payload;
+        state.error = null;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
       .addCase(fetchIngredients.pending, (state) => {
         state.loading = true;
@@ -52,10 +54,11 @@ const slice = createSlice({
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.loading = false;
         state.ingredients = action.payload;
+        state.error = null;
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
