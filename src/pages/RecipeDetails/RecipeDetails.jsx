@@ -72,22 +72,24 @@ export default function RecipeDetails() {
     <div className={css.recipeDetails}>
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
-      <div className={css.generalButtonWrap}>
-        <GeneralInfo
-          category={recipe.category?.name || "Unknown"}
-          cookingTime={recipe.cookingTime}
-          calories={recipe.cals}
-        />
-        <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
-        {showModal && <ModalNotAutor modalOpen={setShowModal} />}
-      </div>
-      <div className={css.infoContainer}>
-        <div className={css.textInfoWrap}>
-          <RecipeSection
-            about={recipe.decr}
-            ingredients={recipe.ingredient}
-            instructions={recipe.instruction}
+      <div className={css.DesctopWrap}>
+        <div className={css.generalButtonWrap}>
+          <GeneralInfo
+            category={recipe.category?.name || "Unknown"}
+            cookingTime={recipe.cookingTime}
+            calories={recipe.cals}
           />
+          <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
+          {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+        </div>
+        <div className={css.infoContainer}>
+          <div className={css.textInfoWrap}>
+            <RecipeSection
+              about={recipe.decr}
+              ingredients={recipe.ingredient}
+              instructions={recipe.instruction}
+            />
+          </div>
         </div>
       </div>
     </div>
