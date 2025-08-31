@@ -21,6 +21,7 @@ const slice = createSlice({
       state.category = action.payload;
     },
     changeIngredientFilter: (state, action) => {
+      console.log(action.payload)
       state.ingredient = action.payload;
     },
     changeSearchQuery: (state, action) => {

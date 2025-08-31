@@ -21,7 +21,7 @@ const MainPage = () => {
 
 
   const name = useSelector(selectSearchQuery);
-  // const ingredient = useSelector(selectIngredient);
+  const ingredient = useSelector(selectIngredient);
   const category = useSelector(selectCategory);
    // Може, винести ресет фільтрів окремо і скидати їх лише один раз при першому рендері?
    // Чи взагалі прибрати, бо це скидання, здається, робить біду (Аня)
@@ -30,10 +30,10 @@ const MainPage = () => {
   // }, [dispatch]);
   useEffect(() => {
     dispatch(
-      getRecipeList({ type: "all", page, perPage: 12, category, name })
+      getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient })
     );
     // dispatch(resetFilters());
-  }, [page, category, name, dispatch]);
+  }, [page, category, name, ingredient, dispatch]);
 
   if(loading){
     return <p>Loading...</p>
