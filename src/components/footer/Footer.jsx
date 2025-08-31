@@ -25,12 +25,6 @@ const Footer = () => {
           >
             Recipes
           </NavLink>
-          {/* <NavLink
-            className={({ isActive }) => isActive ? css.active : ""}
-            to={"/profile/own"}
-          >
-            Account
-          </NavLink> */}
           <ProtectedLink
             to="/profile/own"
             isLoggedIn={isLoggedIn}
@@ -45,20 +39,20 @@ const Footer = () => {
           You need to log in to have access ot your account.
         </p>
         <div className={css.linkWrap}>
-          <a
+          <NavLink
             className={css.login}
             onClick={handleModalClose}
             to={"/auth/login"}
           >
             Log in
-          </a>
-          <a
+          </NavLink>
+          <NavLink
             className={css.register}
             onClick={handleModalClose}
             to={"/auth/register"}
           >
             Register
-          </a>
+          </NavLink>
         </div>
       </ModalErrorCommon>
     </div>
