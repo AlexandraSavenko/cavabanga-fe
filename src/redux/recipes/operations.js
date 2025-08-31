@@ -5,11 +5,11 @@ export const getRecipeList = createAsyncThunk(
   "api/recires",
   async (params, thunkAPI) => {
     try {
-      const { type, page, perPage, ingredient, category, title } = params;
+      const { type, page, perPage, ingredient, category, name } = params;
       const query = new URLSearchParams({
         page: page.toString(),
         perPage: perPage.toString(),
-        ...(title && { title }),
+        ...(name && { name }),
         ...(ingredient && {ingredient}),
         ...(category && {category}),
       });
