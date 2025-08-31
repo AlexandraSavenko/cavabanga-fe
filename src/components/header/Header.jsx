@@ -57,7 +57,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) => (isActive ? css.active : "")}
                 onClick={() => setMobileNav(false)}
-                to={"/profile/own "}
+                to={"/profile/own"}
               >
                 My profile
               </NavLink>
