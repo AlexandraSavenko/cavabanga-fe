@@ -54,6 +54,10 @@ export const getUserData = createAsyncThunk(
             const res = await axios.get("/api/users");
       return res.data.data;
     } catch (error) {
+      if(error.response?.status === 401){
+        thunkAPI.dispatch(logout());
+        localStorage.removeItem("token");
+      }
             return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
 
     }

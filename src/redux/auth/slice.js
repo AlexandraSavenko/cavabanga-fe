@@ -74,6 +74,7 @@ const authSlice = createSlice({
         state.user.email = null;
         state.user.savedRecipes = [];
         state.isLoading = false;
+        localStorage.removeItem("token")
       })
       .addCase(login.rejected, handleError)
 });

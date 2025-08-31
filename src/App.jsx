@@ -1,10 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
 import RestrictedRoute from "./components/RestrictedRoute";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken } from "./redux/auth/selectors";
+import { getUserData } from "./redux/auth/operations";
 
 const Loader = lazy(() => import("./components/loader/Loader"));
 const Layout = lazy(() => import("./components/layout/Layout"));
@@ -18,6 +21,13 @@ const AddRecipesPage = lazy(() =>
 // const RecipeDetails = lazy(() => import("./pages/recipeDetails/RecipeDetails"));
 
 function App() {
+  const token = useSelector(selectToken)
+  const dispatch = useDispatch()
+
+  useEffect(() => {if(token){
+    dispatch(getUserData())
+  }}, [dispatch, token])
+  
   return (
     <>
       <Suspense fallback={<Loader />}>
