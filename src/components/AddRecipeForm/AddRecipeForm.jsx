@@ -7,13 +7,19 @@ import css from "./AddRecipeForm.module.css";
 import { selectCategories, selectIngredients } from "../../redux/filters/selectors";
 import { fetchCategories, fetchIngredients } from "../../redux/filters/operations";
 import { addRecipe } from "../../redux/recipes/operations";
+import IngredientForm from "../ingredientForm/IngredientForm";
+import IngredientTable from "../ingredientTable/ingredientTable";
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const ingredientsList = useSelector(selectIngredients);
   const [previewImage, setPreviewImage] = useState(null);
+  const [newIngredientsArr, setNewIngredientsArr] = useState([])
 
+  useEffect(() => {
+console.log(newIngredientsArr)
+  }, [newIngredientsArr])
   useEffect(() => {
     if (!categories.length) dispatch(fetchCategories());
     if (!ingredientsList.length) dispatch(fetchIngredients());
@@ -27,7 +33,7 @@ const AddRecipeForm = () => {
     category: "",
     // currentIngredientId: "",
     // currentIngredientAmount: "",
-    ingredients: [],
+    ingredients: newIngredientsArr,
     instruction: "",
     recipeImg: null,
   };
@@ -60,7 +66,7 @@ const AddRecipeForm = () => {
 
   const handleSubmit = async (values) => {
     console.log(values)
-    dispatch(addRecipe())
+    dispatch(addRecipe(values))
   }
 
   return (
@@ -149,7 +155,7 @@ const AddRecipeForm = () => {
                 </div>
               </section>
 
-              {/* Ingredients */}
+              Ingredients
               <section className={css.section}>
                 Ingredients
                 <div className={css.blocks}>
@@ -245,6 +251,9 @@ const AddRecipeForm = () => {
                   <ErrorMessage name="ingredients" component="div" className={css.error} />
                 </div>
               </section>
+
+<IngredientForm setList={setNewIngredientsArr} />
+<IngredientTable list={newIngredientsArr}/>
 
               {/* Instructions */}
               <section className={css.section}>
