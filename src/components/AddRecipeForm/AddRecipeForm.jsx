@@ -25,8 +25,8 @@ const AddRecipeForm = () => {
     cookiesTime: "",
     cals: "",
     category: "",
-    currentIngredientId: "",
-    currentIngredientAmount: "",
+    // currentIngredientId: "",
+    // currentIngredientAmount: "",
     ingredients: [],
     instruction: "",
     recipeImg: null,
@@ -62,45 +62,6 @@ const AddRecipeForm = () => {
     console.log(values)
     dispatch(addRecipe())
   }
-  //  try {
-  //     const formData = new FormData();
-  //     formData.append("name", values.name);
-  //     formData.append("decr", values.decr);
-  //     formData.append("cookiesTime", values.cookiesTime);
-  //     if (values.cals) formData.append("cals", values.cals);
-  //     formData.append("category", values.category);
-  //     formData.append("instruction", values.instruction);
-
-  //     // правильно називаємо поле для бекенду
-  //     formData.append("ingredient", JSON.stringify(values.ingredients));
-  //     console.log("Ingredients array:", values.ingredients);
-  //     console.log("FormData contents:", [...formData.entries()]);
-
-
-  //     if (values.recipeImg) {
-  //       formData.append("recipeImg", values.recipeImg);
-  //     }
-
-  //     console.log("Submitting recipe values:", values);
-  //     console.log("Submitting FormData:", [...formData.entries()]);
-     
-
-
-  //     await axios.post("/api/recipes", formData, {
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     });
-
-  //     alert("Recipe successfully added!");
-  //     window.location.href = "/recipes";
-  //   } catch (error) {
-  //     console.error("Submit error:", error.response?.data || error.message);
-  //     alert(
-  //       "Error adding recipe: " + (error.response?.data?.message || error.message)
-  //     );
-  //   } finally {
-  //     setSubmitting(false);
-  //   }//
-  
 
   return (
     <Formik
@@ -251,6 +212,7 @@ const AddRecipeForm = () => {
                           </div>
 
                           {values.ingredients.map((ing, index) => {
+                            console.log(ing)
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
                             return (
