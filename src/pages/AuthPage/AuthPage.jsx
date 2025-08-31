@@ -19,23 +19,24 @@ import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon
 export default function AuthPage() {
     const { authType } = useParams()
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(clearAuthError())
-    }, [dispatch]);
- 
     const error = useSelector(selectAuthError);
     const isLoading = useSelector(selectIsLoading);
     
+    useEffect(() => {
+        dispatch(clearAuthError())
+    }, [dispatch]);
+
     const handleCloseModal = () => {
         dispatch(clearAuthError())
     };
+    // To prevent DOUBLE render of the toast (if using):
+    // useEffect(() => {
+    //    if (error) {
+    //      toast.error(error);
+    //      dispatch(clearAuthError())
+    //     }
+    //  }, [dispatch, error]);
 
-    // if (error) {
-    //     toast.error(error)
-    // }
-
-   
     return (
         <div className={css.container}>
             <ModalErrorCommon isopen={error} onClose={handleCloseModal}>
