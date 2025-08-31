@@ -11,6 +11,7 @@ import { selectAllRecipes, selectLoading, selectPage } from "../../redux/recipes
 import { getRecipeList } from "../../redux/recipes/operations";
 
 import { selectCategory, selectSearchQuery, selectIngredient } from "../../redux/filters/selectors";
+import { getUserData } from "../../redux/auth/operations";
 // import { resetFilters } from "../../redux/filters/slice";
 
 const MainPage = () => {
@@ -28,6 +29,10 @@ const MainPage = () => {
   //     useEffect(() => {
   //   dispatch(resetFilters());
   // }, [dispatch]);
+
+  const handleGetUserData = () => {
+    dispatch(getUserData())
+  }
   useEffect(() => {
     dispatch(
       getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient })

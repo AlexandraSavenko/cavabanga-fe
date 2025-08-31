@@ -34,17 +34,31 @@ export const login = createAsyncThunk(
       const auth = await axios.post("/api/auth/login", values);
       const token = auth.data.data.accessToken;
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      const res = await axios.get("/api/users");
-      const payload = {
-        user: res.data.data,
-        token,
-      };
-      return payload;
+      // const res = await axios.get("/api/users");
+      // const payload = {
+      //   user: res.data.data,
+      //   token,
+      // };
+      // return payload;
+      return token;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
+
+export const getUserData = createAsyncThunk(
+  "auth/getUserData",
+  async (_, thunkAPI) => {
+    try {
+            const res = await axios.get("/api/users");
+      return res.data.data;
+    } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
+
+    }
+  }
+)
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
