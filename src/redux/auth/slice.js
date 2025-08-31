@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, logout } from "./operations";
+import { register, login, logout, getUserData } from "./operations";
 
 const handlePending = (state) => {
     state.isLoading = true;
@@ -45,11 +45,21 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, handleError)
       .addCase(login.fulfilled, (state, action) => {
-        state.user.id = action.payload.user._id;
-        state.user.name = action.payload.user.name;
-        state.user.email = action.payload.user.email;
-        state.user.savedRecipes = action.payload.user.savedRecipes;
-        state.token = action.payload.token;
+        state.token = action.payload;
+        // state.user.id = action.payload.user._id;
+        // state.user.name = action.payload.user.name;
+        // state.user.email = action.payload.user.email;
+        // state.user.savedRecipes = action.payload.user.savedRecipes;
+        // state.token = action.payload.token;
+        // state.isLoggedIn = true;
+        // state.authError = null;
+        // state.isLoading = false;
+      }).addCase(getUserData.fulfilled, (state, action) => {
+        console.log(action.payload)
+        state.user.id = action.payload._id;
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.savedRecipes = action.payload.savedRecipes;
         state.isLoggedIn = true;
         state.authError = null;
         state.isLoading = false;
@@ -64,6 +74,7 @@ const authSlice = createSlice({
         state.user.email = null;
         state.user.savedRecipes = [];
         state.isLoading = false;
+        localStorage.removeItem("token")
       })
       .addCase(login.rejected, handleError)
 });
