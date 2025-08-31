@@ -12,6 +12,7 @@
   color: white;
   cursor: pointer;
   margin-top: 24px;
+  font-size: 18px;
 }
 .icon {
   fill: none;
@@ -20,6 +21,9 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
+}
+.active {
+  fill: #fff;
 }
 .saveButton:hover:focus {
   background: #6d554b;
@@ -39,4 +43,25 @@
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
   background: #9b6c43;
   outline: none;
+}
+
+/* Стилі для мобільного */
+@media only screen and (max-width: 767px) {
+  .saveButton {
+    font-size: 16px;
+  }
+}
+/* Стилі для планшету */
+@media only screen and (min-width: 768px) {
+  .saveButton {
+    max-width: 249px;
+    height: 56px;
+    margin: 0;
+  }
+}
+
+.miniBtn{
+  height: auto;
+  flex-grow: 0;
+  width: auto;
 }
