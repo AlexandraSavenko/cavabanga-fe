@@ -27,15 +27,7 @@ function App() {
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
-   <Route
-            path="/add-recipe"
-            element={
-              <RestrictedRoute
-                component={<AddRecipesPage />}
-                redirectTo="/auth/login"
-              />
-            }
-          />
+   
           
 
           <Route path="/" element={<Layout />}>
@@ -51,6 +43,16 @@ function App() {
             />
             <Route path="/auth/:authType" element={<AuthPage />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
+<Route
+            path="/add-recipe"
+            element={
+              <RestrictedRoute
+                component={<AddRecipesPage />}
+                redirectTo="/auth/login"
+              />
+            }
+          />
+
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
