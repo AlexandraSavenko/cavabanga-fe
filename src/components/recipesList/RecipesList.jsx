@@ -6,6 +6,7 @@ import Pagination from '../pagination/Pagination.jsx';
 import Scroll from '../Scroll/Scroll.jsx';
 
 import style from './RecipesList.module.css';
+import NoMatchFound from '../NoMatchFound/NoMatchFound.jsx';
 
 const RecipesList = ({ allRecipes, recipeType }) => {
   const listRef = useRef(null); // посилання на контейнер для скролу
@@ -14,9 +15,9 @@ const RecipesList = ({ allRecipes, recipeType }) => {
     return <p>Something went wrong</p>;
   }
   // Якщо рецептів немає
-  if (allRecipes.length === 0) {
-    return <p>No recipes available</p>;
-  }
+  // if (allRecipes.length === 0) {
+  //   return <p>No recipes available</p>;
+  // }
 
   return (
     <div ref={listRef} className={style.container}>
@@ -30,6 +31,7 @@ const RecipesList = ({ allRecipes, recipeType }) => {
         })}
       </ul>
       <Pagination />
+      {allRecipes.length === 0 && <NoMatchFound/>}
       <Scroll containerRef={listRef} />
     </div>
   );

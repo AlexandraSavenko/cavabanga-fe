@@ -5,7 +5,7 @@ import {resetFilters} from '../../redux/filters/slice.js'
 export default function NoMatchFound() {
     const dispatch = useDispatch();
     const handleResetClick = () => {
-        dispatch(resetFilters);
+        dispatch(resetFilters());
     }
     return (
         <div className={css.container}>
