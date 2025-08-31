@@ -44,6 +44,7 @@
   background: #9b6c43;
   outline: none;
 }
+
 /* Стилі для мобільного */
 @media only screen and (max-width: 767px) {
   .saveButton {
@@ -57,4 +58,10 @@
     height: 56px;
     margin: 0;
   }
+}
+
+.miniBtn{
+  height: auto;
+  flex-grow: 0;
+  width: auto;
 }

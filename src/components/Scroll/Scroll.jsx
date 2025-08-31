@@ -55,14 +55,18 @@ const Scroll = ({ containerRef }) => {
         onClick={scrollToTop}
         style={{ top: '70%' }}
       >
-        ⬆
+        <svg className={style.iconUp}>
+                            <use href={`/icons.svg#icon-pagination-backwards`}></use>
+                          </svg>
       </button>
       <button
         className={style.scrollBtn}
         onClick={scrollToBottom}
         style={{ top: '80%' }}
       >
-        ⬇
+       <svg className={style.iconDown}>
+                            <use href={`/icons.svg#icon-pagination-backwards`}></use>
+                          </svg>
       </button>
     </>
   );
