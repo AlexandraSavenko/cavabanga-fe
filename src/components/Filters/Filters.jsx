@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeCategoryFilter,
   changeIngredientFilter,
+  resetFilters,
 } from "../../redux/filters/slice";
 import {
   fetchCategories,
@@ -18,15 +19,15 @@ import {
 // import { selectRecipes } from "../../redux/recipes/recipesSelectors.js";
 import IconButton from "../IconButton/IconButton";
 import { useIsMobileOrTablet } from "./useIsMobileOrTablet";
-import ToastInfo from "../ToastInfo/ToastInfo.jsx";
-
 import css from "./Filters.module.css";
 import { selectTotalItems } from "../../redux/recipes/selectors.js";
+import FilterCount from "../filterCount/FilterCount.jsx";
 
 export default function Filter() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobileOrTablet = useIsMobileOrTablet();
+
   useEffect(() => {
     if (!isModalOpen) return;
     const handleEsc = (event) => {
@@ -55,7 +56,7 @@ export default function Filter() {
   // if (location.pathname.includes("own")) page = "own";
 
   const recipesCount = useSelector(selectTotalItems);
-    // const recipesCount = useSelector((state) => selectRecipes(state, page));
+  // const recipesCount = useSelector((state) => selectRecipes(state, page));
   const categories = useSelector(selectCategories);
   const ingredients = useSelector(selectIngredients);
   const category = useSelector(selectCategory);
@@ -67,26 +68,30 @@ export default function Filter() {
   }, [dispatch]);
 
   const handleResetClick = () => {
-    dispatch(changeCategoryFilter(""));
-    dispatch(changeIngredientFilter(""));
+    // dispatch(changeCategoryFilter(""));
+    // dispatch(changeIngredientFilter(""));
+    dispatch(resetFilters())
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;
+    // console.log("in handleCategoryChange => filterValue: ",filterValue)
     dispatch(changeCategoryFilter(filterValue));
   };
   const handleIngredientChange = (e) => {
     const filterValue = e.target.value;
+    // console.log("in handleIngredientChange => filterValue: ",filterValue)
     dispatch(changeIngredientFilter(filterValue));
   };
-
+  
   return (
     <>
       <div className={`${css.filtersContainer}`}>
         <div className={css.filtersRow}>
-          <span className={css.filtersCount}>
+          {/* <span className={css.filtersCount}>
             {recipesCount}
             {recipesCount === 1 ? " recipe" : " recipes"}
-          </span>
+          </span> */}
+          <FilterCount recipeNumber={recipesCount} />
           {!isMobileOrTablet && (
             <div className="filtersInputsWrapper">
               <form className={css.filtersForm}>
@@ -220,7 +225,6 @@ export default function Filter() {
           )}
         </div>
       </div>
-      <ToastInfo />
     </>
   );
 }

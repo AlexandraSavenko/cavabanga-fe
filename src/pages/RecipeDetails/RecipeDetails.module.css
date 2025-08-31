@@ -1,0 +1,43 @@
+.recipeDetails {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+}
+.textInfoWrap {
+}
+.generalButtonWrap {
+  gap: 24px;
+}
+.infoContainer {
+  display: flex;
+  gap: 24px;
+  margin: 24px 0 48px 0;
+}
+/* Стилі для Tablet */
+
+@media only screen and (min-width: 768px) {
+  .recipeImg {
+    width: 100%;
+    height: auto;
+  }
+}
+/* Стилі для мобільного */
+
+@media only screen and (max-width: 767px) {
+  .recipeImg {
+    width: 100%;
+    height: auto;
+  }
+  .infoContainer {
+    flex-direction: column;
+  }
+  .recipeDetails {
+    flex-direction: column;
+  }
+  .generalButtonWrap {
+    order: 3;
+  }
+  .infoContainer {
+    order: 4;
+  }
+}

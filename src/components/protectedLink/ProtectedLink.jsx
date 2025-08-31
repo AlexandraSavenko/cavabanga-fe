@@ -1,6 +1,9 @@
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import { getRecipeList } from "../../redux/recipes/operations";
 
 const ProtectedLink = ({ to, children, isLoggedIn, openLoginModal }) => {
+  // const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const handleClick = (e) => {
@@ -8,7 +11,8 @@ const ProtectedLink = ({ to, children, isLoggedIn, openLoginModal }) => {
       e.preventDefault(); 
       openLoginModal();   
     } else {
-      navigate(to);       
+      navigate(to);  
+      // dispatch(getRecipeList())     
     }
   };
 

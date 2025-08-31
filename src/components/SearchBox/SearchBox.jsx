@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { changeFilter } from "../../redux/filters/slice";
+import { changeSearchQuery } from "../../redux/filters/slice";
 import Button from "../Button/Button";
 import css from "./SearchBox.module.css";
 
@@ -14,13 +14,13 @@ export default function SearchBox() {
 
   const handleSubmit = async (values, { resetForm }) => {
     const trimmedQuery = values.searchQuery.trim();
-
-    dispatch(changeFilter(trimmedQuery));
+dispatch(changeSearchQuery(trimmedQuery));
+    // dispatch(changeFilter(trimmedQuery));
     resetForm();
   };
 
   return (
-    <div>
+    <>
       <div className={css.wrapper}>
         <div className={`${css.container} container`}>
           <h1 className={css.text}>Plan, Cook, and Share Your Flavors</h1>
@@ -56,6 +56,6 @@ export default function SearchBox() {
           </Formik>
         </div>
       </div>
-    </div>
+    </>
   );
 }

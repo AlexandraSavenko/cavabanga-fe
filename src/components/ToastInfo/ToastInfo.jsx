@@ -1,5 +1,5 @@
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 
-export default function ToastInfo() {
-  return <Toaster position="top-right" />;
-}
+// export default function ToastInfo() {
+//   return <Toaster position="top-right" />;
+// }

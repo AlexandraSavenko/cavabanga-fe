@@ -15,9 +15,9 @@ const RecipesList = ({ allRecipes, recipeType }) => {
   }
   return (
     <div className={style.container}>
-      <ul className={style.list}>
+      <ul className={style.recipesList}>
         {allRecipes.map(recipe => {
-          return <li key={recipe._id}>
+          return <li className={style.item} key={recipe._id}>
             <RecipeCard recipe={recipe} recipeType={recipeType} />
           </li>
         }

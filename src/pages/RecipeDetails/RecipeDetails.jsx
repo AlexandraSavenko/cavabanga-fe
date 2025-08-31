@@ -12,17 +12,20 @@ import { useDispatch, useSelector } from "react-redux";
 //   addToFavorites,
 //   removeFromFavorites,
 // } from "../../redux/recipes/favoritesSlice";
-import { selectAllRecipes, selectFavRecipesIds } from "../../redux/recipes/selectors";
+import {
+  selectAllRecipes,
+  selectFavRecipesIds,
+} from "../../redux/recipes/selectors";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { toggleFavorites } from "../../redux/recipes/operations";
 import ModalNotAutor from "../../components/modalNotAutor/ModalNotAutor";
 
 export default function RecipeDetails() {
-      const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-    const isAuth = useSelector(selectIsLoggedIn);
+  const isAuth = useSelector(selectIsLoggedIn);
   const recipeArr = useSelector(selectAllRecipes);
   const existingRecipe = recipeArr.find((recipe) => recipe._id === id);
   const favorites = useSelector(selectFavRecipesIds);
@@ -33,9 +36,7 @@ export default function RecipeDetails() {
     const fetchRecipe = async () => {
       if (existingRecipe) return;
       try {
-        const { data } = await axios.get(
-          `/api/recipes/${id}`
-        );
+        const { data } = await axios.get(`/api/recipes/${id}`);
         setRecipe(data.data); // бек повертає { data: recipe }
       } catch (error) {
         if (error.response && error.response.status === 404) {
@@ -58,30 +59,37 @@ export default function RecipeDetails() {
   //     dispatch(addToFavorites(id));
   //   }
   // };
-   const handleFavoriteClick = () => {
-      if (!isAuth) {
-        setShowModal(true)
-        return;
-      }
-      dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
-    };
+  const handleFavoriteClick = () => {
+    if (!isAuth) {
+      setShowModal(true);
+      return;
+    }
+
+    dispatch(toggleFavorites({ recipeId: recipe._id, toDo }));
+  };
 
   return (
     <div className={css.recipeDetails}>
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
-      <GeneralInfo
-        category={recipe.category?.name || "Unknown"}
-        cookingTime={recipe.cookingTime}
-        calories={recipe.cals}
-      />
-      <RecipeSection
-        about={recipe.decr}
-        ingredients={recipe.ingredient}
-        instructions={recipe.instruction}
-      />
-      <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
-            {showModal && <ModalNotAutor modalOpen={setShowModal}/> }
+      <div className={css.generalButtonWrap}>
+        <GeneralInfo
+          category={recipe.category?.name || "Unknown"}
+          cookingTime={recipe.cookingTime}
+          calories={recipe.cals}
+        />
+        <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
+        {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+      </div>
+      <div className={css.infoContainer}>
+        <div className={css.textInfoWrap}>
+          <RecipeSection
+            about={recipe.decr}
+            ingredients={recipe.ingredient}
+            instructions={recipe.instruction}
+          />
+        </div>
+      </div>
     </div>
   );
 }

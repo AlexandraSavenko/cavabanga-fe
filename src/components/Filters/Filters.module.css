@@ -14,13 +14,13 @@
   width: 100%;
 }
 
-.filtersCount {
+/* .filtersCount {
   color: var(--black);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
+} */
 
 .filtersModalOpenBtn {
   display: flex;
@@ -168,6 +168,7 @@
   gap: 24px;
 }
 .filtersResetBtn {
+  cursor: pointer;
   display: flex;
   background: transparent;
   padding-bottom: 4px;

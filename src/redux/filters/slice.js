@@ -4,7 +4,8 @@ import { fetchCategories, fetchIngredients } from "./operations";
 const slice = createSlice({
   name: "filters",
   initialState: {
-    recipe: "",
+    searchQuery: "",
+    // recipe: "",
     category: "",
     ingredient: "",
     categories: [],
@@ -13,20 +14,21 @@ const slice = createSlice({
     error: null,
   },
   reducers: {
-    changeFilter: (state, action) => {
-      state.recipe = action.payload;
-    },
+    // changeFilter: (state, action) => {
+    //   state.recipe = action.payload;
+    // },
     changeCategoryFilter: (state, action) => {
       state.category = action.payload;
     },
     changeIngredientFilter: (state, action) => {
+      console.log(action.payload)
       state.ingredient = action.payload;
     },
     changeSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
     resetFilters: (state) => {
-      state.recipe = "";
+      state.searchQuery = "";
       state.category = "";
       state.ingredient = "";
     },
@@ -40,10 +42,11 @@ const slice = createSlice({
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.loading = false;
         state.categories = action.payload;
+        state.error = null;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
       .addCase(fetchIngredients.pending, (state) => {
         state.loading = true;
@@ -52,10 +55,11 @@ const slice = createSlice({
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.loading = false;
         state.ingredients = action.payload;
+        state.error = null;
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
@@ -63,7 +67,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const {
-  changeFilter,
+  // changeFilter,
   changeCategoryFilter,
   changeIngredientFilter,
   changeSearchQuery,
