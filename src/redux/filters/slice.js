@@ -19,6 +19,7 @@ const slice = createSlice({
     },
     changeCategoryFilter: (state, action) => {
       state.category = action.payload;
+
     },
     changeIngredientFilter: (state, action) => {
       state.ingredient = action.payload;
