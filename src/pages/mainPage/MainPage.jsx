@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import css from "./MainPage.module.css";
-
-import Logo from "../../components/logo/Logo";
+import { ClockLoader } from 'react-spinners'
 import RecipesList from "../../components/recipesList/RecipesList";
 
 // import SearchBox from "../../components/SearchBox/SearchBox";
@@ -36,7 +35,7 @@ const MainPage = () => {
   }, [page, category, name, ingredient, dispatch]);
 
   if(loading){
-    return <p>Loading...</p>
+    return <ClockLoader size={100} color='#3d2218' />
   }
   return (
     <div className={css.wrap}>
