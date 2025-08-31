@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeCategoryFilter,
   changeIngredientFilter,
+  resetFilters,
 } from "../../redux/filters/slice";
 import {
   fetchCategories,
@@ -66,8 +67,9 @@ export default function Filter() {
   }, [dispatch]);
 
   const handleResetClick = () => {
-    dispatch(changeCategoryFilter(""));
-    dispatch(changeIngredientFilter(""));
+    // dispatch(changeCategoryFilter(""));
+    // dispatch(changeIngredientFilter(""));
+    dispatch(resetFilters())
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;

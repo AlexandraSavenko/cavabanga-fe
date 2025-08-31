@@ -5,7 +5,7 @@ const slice = createSlice({
   name: "filters",
   initialState: {
     searchQuery: "",
-    recipe: "",
+    // recipe: "",
     category: "",
     ingredient: "",
     categories: [],
@@ -14,12 +14,11 @@ const slice = createSlice({
     error: null,
   },
   reducers: {
-    changeFilter: (state, action) => {
-      state.recipe = action.payload;
-    },
+    // changeFilter: (state, action) => {
+    //   state.recipe = action.payload;
+    // },
     changeCategoryFilter: (state, action) => {
       state.category = action.payload;
-
     },
     changeIngredientFilter: (state, action) => {
       state.ingredient = action.payload;
@@ -28,7 +27,7 @@ const slice = createSlice({
       state.searchQuery = action.payload;
     },
     resetFilters: (state) => {
-      state.recipe = "";
+      state.searchQuery = "";
       state.category = "";
       state.ingredient = "";
     },
@@ -67,7 +66,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const {
-  changeFilter,
+  // changeFilter,
   changeCategoryFilter,
   changeIngredientFilter,
   changeSearchQuery,

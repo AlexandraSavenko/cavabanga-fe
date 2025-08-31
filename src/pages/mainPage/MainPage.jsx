@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAllRecipes, selectLoading, selectPage } from "../../redux/recipes/selectors";
 import { getRecipeList } from "../../redux/recipes/operations";
 
-import { selectCategory, selectFilter, selectIngredient } from "../../redux/filters/selectors";
+import { selectCategory, selectSearchQuery, selectIngredient } from "../../redux/filters/selectors";
 // import { resetFilters } from "../../redux/filters/slice";
 
 const MainPage = () => {
@@ -20,7 +20,7 @@ const MainPage = () => {
   const loading = useSelector(selectLoading)
 
 
-  const name = useSelector(selectFilter);
+  const name = useSelector(selectSearchQuery);
   // const ingredient = useSelector(selectIngredient);
   const category = useSelector(selectCategory);
    // Може, винести ресет фільтрів окремо і скидати їх лише один раз при першому рендері?
@@ -41,7 +41,7 @@ const MainPage = () => {
   return (
     <div className={css.wrap}>
       <SearchBox />
-      <h2>Recepies</h2>
+      {name ? <h2>{`Search Results for “${name}”`}</h2> : <h2>Recepies</h2>}
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
     </div>

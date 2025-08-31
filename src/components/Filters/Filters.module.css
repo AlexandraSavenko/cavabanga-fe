@@ -168,6 +168,7 @@
   gap: 24px;
 }
 .filtersResetBtn {
+  cursor: pointer;
   display: flex;
   background: transparent;
   padding-bottom: 4px;
