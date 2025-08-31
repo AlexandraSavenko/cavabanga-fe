@@ -13,10 +13,10 @@ const Footer = () => {
       <div className={`${css.footer} container`}>
         <Logo />
         <p>© 2025 CookingCompanion. All rights reserved.</p>
-        <nav>
+        <nav className={css.footerNav}>
           <NavLink
             className={({ isActive }) => isActive && css.active}
-            to={"#"}
+            to={"/"}
           >
             Recipes
           </NavLink>

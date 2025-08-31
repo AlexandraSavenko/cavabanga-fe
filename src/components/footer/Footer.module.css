@@ -3,22 +3,27 @@
     width: 100%;
     padding: 24px;
 }
-.wrap *{
-    color: var(--white);
-}
+
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .footer p{
+    color: var(--white);
     font-weight: 400;
 font-size: 12px;
 }
 
-nav{
+.footerNav{
+
     display: flex;
     gap: 32px;
+}
+
+.footerNav * {
+        color: var(--white);
+
 }
 
 .active{
@@ -33,7 +38,7 @@ nav{
 }
 
 @media (max-width: 393px) {
-    nav {
+    .footerNav {
         flex-direction: column;
         gap: 40px;
     }
