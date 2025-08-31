@@ -35,24 +35,24 @@ const Footer = () => {
         </nav>
       </div>
       <ModalErrorCommon isopen={showModal} onClose={handleModalClose}>
-        <p className={css.text}>
+        <p className={css.modalText}>
           You need to log in to have access ot your account.
         </p>
         <div className={css.linkWrap}>
-          <Link
+          <a
             className={css.login}
             onClick={handleModalClose}
             to={"/auth/login"}
           >
             Log in
-          </Link>
-          <Link
+          </a>
+          <a
             className={css.register}
             onClick={handleModalClose}
             to={"/auth/register"}
           >
             Register
-          </Link>
+          </a>
         </div>
       </ModalErrorCommon>
     </div>
