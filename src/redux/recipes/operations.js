@@ -56,6 +56,9 @@ export const getUserFavourites = createAsyncThunk(
 export const toggleFavorites = createAsyncThunk(
   "recipes/toggleFavorites",
   async ({ recipeId, toDo }, thunkAPI) => {
+        const state = thunkAPI.getState();
+  const token = selectToken(state);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
       const res =
         toDo === "add"

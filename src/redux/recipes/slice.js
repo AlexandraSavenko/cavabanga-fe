@@ -7,7 +7,7 @@ import {
 
 const recipesState = {
   allRecipes: [],
-  listOfFavorites: [],
+  // listOfFavorites: [],
   favoriteRecipes: [],
   page: 1,
   perPage: 12,
