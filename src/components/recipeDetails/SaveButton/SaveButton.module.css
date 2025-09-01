@@ -1,5 +1,5 @@
 .saveButton {
-  background: #9b6c43;
+  background: #faf3e0;
   border-radius: 8px;
   border: none;
   padding: 16px;
@@ -13,17 +13,19 @@
   cursor: pointer;
   margin-top: 24px;
   font-size: 18px;
+  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
+  border: 1px solid var(--Black, #000);
 }
 .icon {
   fill: none;
-  stroke: #fff;
+  stroke: #000;
   border: none;
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 .active {
-  fill: #fff;
+  stroke: #000;
 }
 .saveButton:hover:focus {
   background: #6d554b;
@@ -60,8 +62,9 @@
   }
 }
 
-.miniBtn{
+.miniBtn {
   height: auto;
   flex-grow: 0;
   width: auto;
+  margin-top: 0;
 }
