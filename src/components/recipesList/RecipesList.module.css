@@ -12,9 +12,9 @@
 .item {
   display: flex;
   flex-direction: column;
-  background: var(--Light-beige, #faf3e0);
+  /* background: var(--Light-beige, #faf3e0);
   padding: 12px;
-  border-radius: 16px;
+  border-radius: 16px; */
   gap: 16px;
 }
 .item:last-child {
