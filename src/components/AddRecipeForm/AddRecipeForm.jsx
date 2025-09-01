@@ -11,7 +11,7 @@ const AddRecipeForm = () => {
   const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
-    // підвантажуємо категорії/інгредієнти (за бажанням)
+    // Підвантажуємо категорії та інгредієнти для селектів (не критично)
     let mounted = true;
     (async () => {
       try {
@@ -23,7 +23,6 @@ const AddRecipeForm = () => {
         setCategories(catRes.data || []);
         setIngredientsList(ingRes.data || []);
       } catch (err) {
-        // не критично — лишаємо пусті списки
         console.error("Error loading categories/ingredients", err);
       }
     })();
@@ -64,7 +63,7 @@ const AddRecipeForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
     try {
-      // приклад відправки — адаптуй під бек
+      // Формуємо FormData та відправляємо на бек (адаптуй шлях при потребі)
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("decr", values.decr);
@@ -78,9 +77,10 @@ const AddRecipeForm = () => {
       await axios.post("/api/recipes", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
       resetForm();
       setPreviewImage(null);
-      // можна додати навігацію або повідомлення
+      // Можна додати навігацію або повідомлення про успіх
     } catch (error) {
       console.error("Помилка при створенні рецепту", error);
     } finally {
@@ -93,7 +93,7 @@ const AddRecipeForm = () => {
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         {({ values, setFieldValue, isSubmitting }) => (
           <>
-            {isSubmitting && <Loader />} {/* показ лоадера під час сабміту */}
+            {isSubmitting && <Loader />} {/* Показ лоадера під час сабміту */}
             <Form className={css.form}>
               <label>
                 Назва

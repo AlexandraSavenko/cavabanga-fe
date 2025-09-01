@@ -1,23 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { selectToken } from "../auth/selectors";
 
 export const getRecipeList = createAsyncThunk(
   "api/recires",
   async (params, thunkAPI) => {
+    const state = thunkAPI.getState();
+  const token = selectToken(state);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
-      const { type, page, perPage, filters, title } = params;
-      console.log(type)
+      const { type, page, perPage, ingredient, category, name } = params;
       const query = new URLSearchParams({
         page: page.toString(),
         perPage: perPage.toString(),
-        ...(title && { title }),
-        ...(filters || {}),
+        ...(name && { name }),
+        ...(ingredient && {ingredient}),
+        ...(category && {category}),
       });
       const url = type === "all" ? "/api/recipes" : `/api/recipes/own/`;
       const res = await axios.get(`${url}?${query}`);
+
       return res.data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
@@ -25,6 +30,9 @@ export const getRecipeList = createAsyncThunk(
 export const getUserFavourites = createAsyncThunk(
   "user/getFavourites",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+  const token = selectToken(state);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
       const res = await axios.get("api/recipes/favorites");
       return res.data.data.data;
@@ -48,6 +56,9 @@ export const getUserFavourites = createAsyncThunk(
 export const toggleFavorites = createAsyncThunk(
   "recipes/toggleFavorites",
   async ({ recipeId, toDo }, thunkAPI) => {
+        const state = thunkAPI.getState();
+  const token = selectToken(state);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
       const res =
         toDo === "add"
@@ -59,3 +70,19 @@ export const toggleFavorites = createAsyncThunk(
     }
   }
 );
+export const addRecipe = createAsyncThunk(
+  "recipes/addRecipe",
+  async (values, thunkAPI) => {
+    try {
+      const res = await axios.post("api/recipes", values)
+      console.log(res)
+      
+    }
+    catch (error) {
+      console.log(error)
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+
+  
+)

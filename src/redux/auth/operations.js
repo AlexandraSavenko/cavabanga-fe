@@ -9,7 +9,6 @@ export const register = createAsyncThunk(
   "auth/register",
   async (values, thunkAPI) => {
     try {
-      console.log("LogIntOp");
       const res = await axios.post("/api/auth/register", values);
       const user = res.data.data;
       const { email, password } = values;
@@ -23,7 +22,7 @@ export const register = createAsyncThunk(
       };
       return payload;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
@@ -33,22 +32,20 @@ export const login = createAsyncThunk(
   async (values, thunkAPI) => {
     try {
       const auth = await axios.post("/api/auth/login", values);
-      console.log("auth", auth);
       const token = auth.data.data.accessToken;
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       const res = await axios.get("/api/users");
-      console.log("res.data", res.data);
       const payload = {
         user: res.data.data,
         token,
       };
       return payload;
     } catch (error) {
-      console.log(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
     }
   }
 );
+
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
@@ -58,7 +55,6 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await axios.post("/api/auth/logout");
     axios.defaults.headers.common["Authorization"] = "";
   } catch (error) {
-    console.log(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
   }
 });

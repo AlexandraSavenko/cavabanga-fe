@@ -26,11 +26,11 @@ export default function RecipeDetails() {
   const recipeArr = useSelector(selectAllRecipes);
   const existingRecipe = recipeArr.find((recipe) => recipe._id === id);
 
-  const favorites = useSelector(selectFavRecipesIds) || []; // захист від undefined
+  const favorites = useSelector(selectFavRecipesIds) || []; // Захист від undefined
   const isFavorite = favorites.includes(id);
 
   const [recipe, setRecipe] = useState(existingRecipe || null);
-  const [isLoading, setIsLoading] = useState(false); // локальний лоадер при завантаженні одного рецепта
+  const [isLoading, setIsLoading] = useState(false); // Локальний лоадер при завантаженні одного рецепта
 
   const toDo = !isFavorite ? "add" : "delete";
 
@@ -40,7 +40,7 @@ export default function RecipeDetails() {
       setIsLoading(true);
       try {
         const { data } = await axios.get(`/api/recipes/${id}`);
-        setRecipe(data.data || data); // підстраховка під формат відповіді
+        setRecipe(data.data || data); // Підстраховка під формат відповіді
       } catch (error) {
         if (error.response && error.response.status === 404) {
           navigate("*");
@@ -55,7 +55,7 @@ export default function RecipeDetails() {
     fetchRecipe();
   }, [id, navigate, existingRecipe]);
 
-  if (isLoading || !recipe) return <Loader />; // показуємо лоадер поки нема даних
+  if (isLoading || !recipe) return <Loader />; // Показуємо лоадер поки нема даних
 
   const handleFavoriteClick = () => {
     if (!isAuth) {

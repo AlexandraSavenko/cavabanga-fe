@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const isLoading = useSelector((state) => state.recipes.loading); // Додаємо перевірку завантаження
 
   useEffect(() => {
+    // Запит власних рецептів або фаворитів при зміні вкладки
     if (recipeType === "own") {
       dispatch(getRecipeList({ type: recipeType, page: 1, perPage: 12 }));
     } else {
@@ -27,7 +28,7 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Мій профіль</h2> {/* УКР */}
+      <h2 className={styles.title}>Мій профіль</h2> {/* українською */}
       <ProfileNavigation />
       {isLoading ? (
         <Loader /> /* показуємо лоадер під час завантаження own або favourites */

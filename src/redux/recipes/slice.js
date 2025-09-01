@@ -7,7 +7,7 @@ import {
 
 const recipesState = {
   allRecipes: [],
-  listOfFavorites: [],
+  // listOfFavorites: [],
   favoriteRecipes: [],
   page: 1,
   perPage: 12,
@@ -43,9 +43,10 @@ const recipeSlice = createSlice({
         state.totalItems = action.payload.totalItems;
         state.totalPages = action.payload.totalPages;
       })
-      .addCase(getRecipeList.rejected, (state) => {
+      .addCase(getRecipeList.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = action.payload || "Something went wrong";
+        state.allRecipes = [];
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;

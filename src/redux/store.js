@@ -17,25 +17,26 @@ import filtersReducer from "./filters/slice";
 
 const persistAuthConfig = {
   key: "auth",
-  storage
+  storage,
 };
-// const persistFiltersConfig = {
-//   key: "filters",
-//   storage
-// }
-// const persistRecipesConfig = {
-//   key: "recipes",
-//   storage
-// }
+const persistFiltersConfig = {
+  key: "filters",
+  storage
+}
+const persistRecipesConfig = {
+  key: "recipes",
+  storage, 
+      whitelist: ["favoriteRecipes"],
+}
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
-// const persistedFiltersReducer = persistReducer(persistFiltersConfig, filtersReducer);
-// const persistedRecipesReducer = persistReducer(persistRecipesConfig, recipesReducer);
+const persistedFiltersReducer = persistReducer(persistFiltersConfig, filtersReducer);
+const persistedRecipesReducer = persistReducer(persistRecipesConfig, recipesReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    filters: filtersReducer,
-    recipes: recipesReducer,
+    filters: persistedFiltersReducer,
+    recipes: persistedRecipesReducer,
     // favorites: favoritesSlice,
   },
   middleware: (getDefaultMiddleware) =>

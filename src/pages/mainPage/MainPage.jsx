@@ -1,45 +1,77 @@
-import React, { useEffect } from "react";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  getRecipeList,
+  getUserFavourites,
+  toggleFavorites,
+} from "./operations";
 
-import css from "./MainPage.module.css";
-import Loader from "../../components/loader/Loader";
-import Logo from "../../components/logo/Logo";
-import RecipesList from "../../components/recipesList/RecipesList";
-
-import SearchBox from "../../components/SearchBox/SearchBox";
-import Filters from "../../components/Filters/Filters";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAllRecipes, selectPage } from "../../redux/recipes/selectors";
-import { getRecipeList } from "../../redux/recipes/operations";
-
-import { selectCategory } from "../../redux/filters/selectors";
-import { resetFilters } from "../../redux/filters/slice";
-
-const MainPage = () => {
-  const dispatch = useDispatch();
-  const allRecipes = useSelector(selectAllRecipes);
-  const page = useSelector(selectPage);
-  const category = useSelector(selectCategory);
-  const isLoading = useSelector((state) => state.recipes.loading); // ДОДАНО
-
-  useEffect(() => {
-    dispatch(
-      getRecipeList({ type: "all", page, perPage: 12, filter: category })
-    );
-    dispatch(resetFilters());
-  }, [page, category, dispatch]);
-
-  return (
-    <div className={css.wrap}>
-      <SearchBox />
-      <h2>Рецепти</h2> {/* УКР. */}
-      <Filters />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <RecipesList allRecipes={allRecipes} recipeType={"all"} />
-      )}
-    </div>
-  );
+const recipesState = {
+  allRecipes: [],
+  listOfFavorites: [],
+  favoriteRecipes: [],
+  page: 1,
+  perPage: 12,
+  totalItems: 0,
+  totalPages: 0,
+  currentView: "",
+  filters: {},
+  title: "",
+  loading: false,
+  error: null,
 };
 
-export default MainPage;
+const recipeSlice = createSlice({
+  name: "recipes",
+  initialState: recipesState,
+  reducers: {
+    setPage: (state, action) => {
+      const newPage = action.payload;
+      if (newPage >= 1 && newPage <= state.totalPages) {
+        state.page = newPage;
+      }
+    },
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getRecipeList.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getRecipeList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allRecipes = action.payload.data || [];
+        state.page = action.payload.page || state.page;
+        state.totalItems = action.payload.totalItems || 0;
+        state.totalPages = action.payload.totalPages || 0;
+      })
+      .addCase(getRecipeList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error || true;
+      })
+      .addCase(getUserFavourites.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserFavourites.fulfilled, (state, action) => {
+        state.loading = false; // зупиняємо лоадер після успіху
+        state.favoriteRecipes = action.payload || [];
+      })
+      .addCase(getUserFavourites.rejected, (state, action) => {
+        state.loading = false; // гарантируем выключение лоадера при ошибке
+        state.error = action.error || true;
+      })
+      .addCase(toggleFavorites.fulfilled, (state, action) => {
+        // обновляем список favoriteRecipes по ответу бекенда или по id
+        const payload = action.payload || {};
+        const recipeId = payload.recipeId || payload.id || null;
+        if (!recipeId) return;
+        if (state.favoriteRecipes.some((r) => r._id === recipeId || r.id === recipeId)) {
+          state.favoriteRecipes = state.favoriteRecipes.filter(
+            (r) => (r._id || r.id) !== recipeId
+          );
+        } else {
+          state.favoriteRecipes.push({ _id: recipeId });
+        }
+      }),
+});
+
+export default recipeSlice.reducer;
+export const { setPage } = recipeSlice.actions;
