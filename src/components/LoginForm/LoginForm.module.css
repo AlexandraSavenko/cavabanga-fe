@@ -139,13 +139,13 @@
 @media only screen and (min-width: 768px) {
   .container {
     width: 522px;
-    /* margin: 262px auto; */
+    margin: 262px auto;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .container {
     width: 420px;
-    /* margin: 176px auto 156px auto; */
+    margin: 176px auto 156px auto;
   }
 }
