@@ -4,8 +4,8 @@ import css from "./AddRecipesPage.module.css"
 const AddRecipePage = () => {
   return (
     <div className={css.container}>
-      <h1 className={css.title}>Add Recipe</h1>
-<AddRecipeForm />
+      <h2 className={css.title}>Add Recipe</h2>
+      <AddRecipeForm />
     </div>
   );
 };

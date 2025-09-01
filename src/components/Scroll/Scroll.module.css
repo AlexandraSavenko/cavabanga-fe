@@ -1,0 +1,32 @@
+.scrollBtn {
+  position: fixed;
+  right: 30px;
+  /* right: var(--scroll-btn-right, 1px); */
+  opacity: 0.7;
+  background: var(--light-brown);
+  color: white;
+  border: none;
+  border-radius: 100%;
+  border: 1px solid var(--darck-brown);
+  padding: 12px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.scrollBtn:hover {
+  background: var(--darck-brown);
+}
+.iconUp, .iconDown{
+  width: 24px;
+  height: 24px;
+  stroke: var(--white);
+}
+
+.iconUp{
+  transform: rotate(90deg);
+}
+
+.iconDown{
+  transform: rotate(-90deg);
+}

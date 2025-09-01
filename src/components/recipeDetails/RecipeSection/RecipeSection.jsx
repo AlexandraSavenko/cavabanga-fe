@@ -1,6 +1,10 @@
 import css from "./RecipeSection.module.css";
 
 export default function RecipeSection({ about, ingredients, instructions }) {
+  const steps =
+    typeof instructions === "string"
+      ? instructions.split(/\n+/).filter(Boolean)
+      : instructions;
   return (
     <section className={css.recipeSection}>
       <div>
@@ -21,7 +25,13 @@ export default function RecipeSection({ about, ingredients, instructions }) {
 
       <div>
         <h2 className={css.sectionTitle}>Preparation Steps</h2>
-        <p className={css.sectionText}>{instructions}</p>
+        <ul className={css.sectionPrepList}>
+          {steps?.map((step, i) => (
+            <li key={i} className={css.sectionText}>
+              {step.trim()}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { selectToken } from "../auth/selectors";
+import { toast } from "react-hot-toast";
 
 export const getRecipeList = createAsyncThunk(
   "api/recires",
@@ -72,17 +73,20 @@ export const toggleFavorites = createAsyncThunk(
 );
 export const addRecipe = createAsyncThunk(
   "recipes/addRecipe",
-  async (values, thunkAPI) => {
+  async (formData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = selectToken(state);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
-      const res = await axios.post("api/recipes", values)
-     console.log("Success response:", res.data);
-      
+      await axios.post("/api/recipes", formData, {
+  headers: { "Content-Type": "multipart/form-data" },
+});
+      toast.success("The recipe has been successfully added!")
     }
     catch (error) {
-       console.log("Backend error response:", error.response?.data);
-      return thunkAPI.rejectWithValue(error.message);
+      console.log(error.response?.data?.data?.message)
+            console.log(error.message)
+      return thunkAPI.rejectWithValue(error.response?.data?.data?.message);
     }
   }
-
-  
 )

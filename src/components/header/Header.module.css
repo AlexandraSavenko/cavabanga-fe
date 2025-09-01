@@ -52,11 +52,24 @@
   display: none;
 }
 .btn {
-  background-color: var(--light-brown);
+  background: var(--light-brown);
   padding: 12px 16px;
   border-radius: 8px;
   order: 1;
 }
+
+.btn:hover {
+  background: #6d554b;
+}
+.btn:active {
+  background: var(--Light-brown, #9b6c43);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 6px rgba(78, 70, 180, 0.12);
+}
+/* .btn:defined {
+  opacity: 0.3;
+  background: var(--Light-brown, #9b6c43);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 6px rgba(78, 70, 180, 0.12);
+} */
 .userNav {
   display: flex;
   align-items: center;

@@ -14,26 +14,26 @@ import FilterCount from '../../components/filterCount/FilterCount.jsx';
 
 
 const ProfilePage = () => {
-    const { recipeType } = useParams();
-    const dispatch = useDispatch();
-    const recipes = useSelector(selectAllRecipes);
-    const favRecipes = useSelector(selectUserFavourites);
+  const { recipeType } = useParams();
+  const dispatch = useDispatch();
+  const recipes = useSelector(selectAllRecipes);
+  const favRecipes = useSelector(selectUserFavourites);
 
 
   useEffect(() => {
     dispatch(resetFilters())
-    recipeType === "own" ? 
-dispatch(getRecipeList({type: recipeType, page: 1, perPage: 12})) :
-dispatch(getUserFavourites())
+    recipeType === "own" ?
+      dispatch(getRecipeList({ type: recipeType, page: 1, perPage: 12 })) :
+      dispatch(getUserFavourites())
   }, [dispatch, recipeType])
-    return (
-        <div className={styles.container}>
-            <h2 className={styles.title}>My profile</h2>
-            <ProfileNavigation />
-            <FilterCount recipeNumber={recipeType === "own" ? recipes.length : favRecipes.length}/>
-            <RecipesList allRecipes={recipeType === "own" ? recipes : favRecipes} recipeType={recipeType} />
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <h2 className={styles.title}>My profile</h2>
+      <ProfileNavigation />
+      <FilterCount recipeNumber={recipeType === "own" ? recipes.length : favRecipes.length} />
+      <RecipesList allRecipes={recipeType === "own" ? recipes : favRecipes} recipeType={recipeType} />
+    </div>
+  );
 };
 
 export default ProfilePage;

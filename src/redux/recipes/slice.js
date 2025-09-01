@@ -46,6 +46,8 @@ const recipeSlice = createSlice({
         state.loading = false;
         state.error = action.payload || "Something went wrong";
         state.allRecipes = [];
+        state.totalItems = 0;
+        state.totalPages = 0;
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
