@@ -116,8 +116,10 @@
 }
 .linkWrapper {
   display: flex;
+  gap: 2px;
   align-items: center;
-  width: 100%;
+  margin: 0 auto;
+  /* width: 100%; */
 }
 .container .alt {
   font-size: 16px;
@@ -136,13 +138,13 @@
 @media only screen and (min-width: 768px) {
   .container {
     width: 522px;
-    /* margin: 152px auto; */
+    margin: 152px auto;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .container {
     width: 420px;
-    /* margin: 52px auto 34px auto; */
+    margin: 52px auto 34px auto;
   }
 }
