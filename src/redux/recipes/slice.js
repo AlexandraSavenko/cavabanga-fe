@@ -19,6 +19,7 @@ const recipesState = {
   loading: false,
   error: null,
 };
+
 const recipeSlice = createSlice({
   name: "recipes",
   initialState: recipesState,
@@ -32,45 +33,45 @@ const recipeSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+      // Запит списка рецептів
       .addCase(getRecipeList.pending, (state) => {
-        state.loading = true;
+        state.loading = true; // починаємо лоадер
+        state.error = null;
       })
       .addCase(getRecipeList.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loading = false; // зупиняємо лоадер
         state.allRecipes = action.payload?.data || [];
         state.page = action.payload?.page || state.page;
         state.totalItems = action.payload?.totalItems || 0;
         state.totalPages = action.payload?.totalPages || 0;
       })
-      .addCase(getRecipeList.rejected, (state) => {
-        state.loading = false;
-<<<<<<< Updated upstream
-        state.error = true;
-=======
+      .addCase(getRecipeList.rejected, (state, action) => {
+        state.loading = false; // гарантія вимкнення лоадера при помилці
+        state.allRecipes = [];
         state.error = action.error || true;
->>>>>>> Stashed changes
       })
+
+      // Запит фаворитів користувача
       .addCase(getUserFavourites.pending, (state) => {
-        state.loading = true;
+        state.loading = true; // починаємо лоадер при завантаженні фаворитів
+        state.error = null;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
-<<<<<<< Updated upstream
-        state.favoriteRecipes = action.payload;
-      })
-=======
-        state.loading = false; // Зупиняємо лоадер після отримання фаворитів
+        state.loading = false; // зупиняємо лоадер після отримання фаворитів
         state.favoriteRecipes = action.payload || [];
       })
       .addCase(getUserFavourites.rejected, (state, action) => {
-        state.loading = false; // Гарантуємо відключення лоадера при помилці
+        state.loading = false; // гарантуємо відключення лоадера при помилці
         state.error = action.error || true;
       })
->>>>>>> Stashed changes
+
+      // Тоггл фаворитів
       .addCase(toggleFavorites.fulfilled, (state, action) => {
         // Оновлюємо список фаворитів за відповіді бекенду або по id
         const payload = action.payload || {};
-        const recipeId = payload.recipeId || payload.id || null;
+        const recipeId = payload.recipeId || payload.id || payload._id || null;
         if (!recipeId) return;
+
         if (state.favoriteRecipes.some((r) => (r._id || r.id) === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
             (r) => (r._id || r.id) !== recipeId
