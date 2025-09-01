@@ -75,11 +75,11 @@ export const addRecipe = createAsyncThunk(
   async (values, thunkAPI) => {
     try {
       const res = await axios.post("api/recipes", values)
-      console.log(res)
+     console.log("Success response:", res.data);
       
     }
     catch (error) {
-      console.log(error)
+       console.log("Backend error response:", error.response?.data);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
