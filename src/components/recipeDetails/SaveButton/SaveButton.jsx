@@ -6,7 +6,6 @@ export default function SaveButton({ onClick, isFavorite }) {
   const location = useLocation().pathname;
   const isOnMain = !location.includes("recipe");
 
-  clsx( isOnMain && isFavorite ? css.activeMin : css.active, isOnMain ? css.miniIcon : css.icon )
 
   return (
     <button
@@ -15,7 +14,7 @@ export default function SaveButton({ onClick, isFavorite }) {
     >
       {isOnMain ? "" : isFavorite ? "Unsave" : "Save"}
       <svg
-        className={ clsx( isOnMain && isFavorite ? css.activeMin : css.active, isOnMain ? css.miniIcon : css.icon )}
+        className={ clsx( isOnMain && isFavorite ? css.activeMin : isFavorite ? css.active : "", isOnMain ? css.miniIcon : css.icon )}
         width="24"
         height="24"
       >
