@@ -9,7 +9,7 @@ export default function NoMatchFound() {
     }
     return (
         <div className={css.container}>
-            <p className={css.title}>We're sorry! We were not able to find a match.</p>
+            <p className={css.title}>We're sorry! We were not able <span className={css.noBreak}>to find a match.</span></p>
             <button className={css.btn} type="button" onClick={handleResetClick}>Reset search and filters</button>
         </div>
     )
