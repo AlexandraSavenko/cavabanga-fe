@@ -1,5 +1,6 @@
 .saveButton {
   background: #9b6c43;
+  width: 100%;
   border-radius: 8px;
   border: none;
   padding: 16px;
@@ -13,17 +14,34 @@
   cursor: pointer;
   margin-top: 24px;
   font-size: 18px;
+  border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
+}
+.miniBtn {
+  background-color: transparent;
+  border: 1px solid black;
+  height: auto;
+  flex-grow: 0;
+  width: auto;
+  margin-top: 0;
+}
+.miniIcon {
+  stroke: #000;
+  fill: none;
+  border: none;
 }
 .icon {
   fill: none;
-  stroke: #fff;
+  stroke: white;
   border: none;
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 .active {
-  fill: #fff;
+  fill: white;
+}
+.activeMin {
+  stroke: white;
 }
 .saveButton:hover:focus {
   background: #6d554b;
@@ -52,7 +70,7 @@
   }
 }
 /* Стилі для планшету */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
   .saveButton {
     max-width: 249px;
     height: 56px;
@@ -60,8 +78,9 @@
   }
 }
 
-.miniBtn{
+.miniBtn {
   height: auto;
   flex-grow: 0;
   width: auto;
+  margin-top: 0;
 }
