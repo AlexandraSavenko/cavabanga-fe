@@ -14,11 +14,7 @@ const RecipesList = ({ allRecipes, recipeType }) => {
   if (!Array.isArray(allRecipes)) {
     return <p>Something went wrong</p>;
   }
-  // Якщо рецептів немає
-  // if (allRecipes.length === 0) {
-  //   return <p>No recipes available</p>;
-  // }
-
+ 
   return (
     <div ref={listRef} className={style.container}>
       <ul className={style.recipesList}>
@@ -30,7 +26,7 @@ const RecipesList = ({ allRecipes, recipeType }) => {
           );
         })}
       </ul>
-      <Pagination />
+      {allRecipes.length > 0 && <Pagination />}
       {allRecipes.length === 0 && <NoMatchFound/>}
       <Scroll containerRef={listRef} />
     </div>
