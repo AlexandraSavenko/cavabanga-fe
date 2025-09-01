@@ -75,9 +75,46 @@ const validationSchema = Yup.object().shape({
 });
 
   const handleSubmit = (values, actions) => {
-    const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
-    const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
-    dispatch(addRecipe(payload));
+    // const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
+    // const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
+//     const formData = new FormData();
+//     console.log("values", values);
+//       formData.append("name", values.name);
+//       formData.append("decr", values.decr);
+//       formData.append("cookiesTime", values.cookiesTime);
+//       if (values.cals) formData.append("cals", values.cals);
+//       formData.append("category", values.category);
+//       formData.append("instruction", values.instruction);
+// console.log(formData.get("name"))
+//       // правильно називаємо поле для бекенду
+//       formData.append("ingredient", JSON.stringify(values.ingredients));
+//       console.log("Ingredients array:", values.ingredient);
+//       console.log("FormData contents:", formData);
+//       if (values.recipeImg) {
+//         formData.append("recipeImg", values.recipeImg);
+//       }
+//     for (let [key, value] of formData.entries()) {
+//   console.log("formData => key, value",key, value);
+    // }
+    const formData = new FormData();
+
+// Append text fields
+formData.append("name", values.name);
+formData.append("category", values.category);
+formData.append("cals", values.cals);
+formData.append("cookiesTime", values.cookiesTime);
+formData.append("instruction", values.instruction);
+formData.append("decr", values.decr);
+
+// Append array fields (example: ingredients)
+values.ingredient.forEach((ing, index) => {
+  formData.append(`ingredient[${index}][id]`, ing.id);
+  formData.append(`ingredient[${index}][ingredientAmount]`, ing.ingredientAmount);
+});
+
+// Append file (important: must be File/Blob, not base64)
+formData.append("recipeImg", values.recipeImg);
+    dispatch(addRecipe(formData));
     actions.resetForm();
   }
   //  try {
