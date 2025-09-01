@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import css from "./MainPage.module.css";
-
-import Logo from "../../components/logo/Logo";
+import { ClockLoader } from 'react-spinners'
 import RecipesList from "../../components/recipesList/RecipesList";
 
-import SearchBox from "../../components/SearchBox/SearchBox";
+// import SearchBox from "../../components/SearchBox/SearchBox";
 import Filters from "../../components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllRecipes, selectLoading, selectPage } from "../../redux/recipes/selectors";
@@ -36,11 +35,11 @@ const MainPage = () => {
   }, [page, category, name, ingredient, dispatch]);
 
   if(loading){
-    return <p>Loading...</p>
+    return <ClockLoader size={100} color='#3d2218' />
   }
   return (
     <div className={css.wrap}>
-      <SearchBox />
+      {/* <SearchBox /> */}
       {name ? <h2>{`Search Results for “${name}”`}</h2> : <h2>Recepies</h2>}
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
