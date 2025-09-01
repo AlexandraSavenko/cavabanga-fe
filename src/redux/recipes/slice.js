@@ -37,26 +37,43 @@ const recipeSlice = createSlice({
       })
       .addCase(getRecipeList.fulfilled, (state, action) => {
         state.loading = false;
-        state.allRecipes = action.payload.data;
-        state.page = action.payload.page;
-        state.totalItems = action.payload.totalItems;
-        state.totalPages = action.payload.totalPages;
+        state.allRecipes = action.payload?.data || [];
+        state.page = action.payload?.page || state.page;
+        state.totalItems = action.payload?.totalItems || 0;
+        state.totalPages = action.payload?.totalPages || 0;
       })
       .addCase(getRecipeList.rejected, (state) => {
         state.loading = false;
+<<<<<<< Updated upstream
         state.error = true;
+=======
+        state.error = action.error || true;
+>>>>>>> Stashed changes
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
+<<<<<<< Updated upstream
         state.favoriteRecipes = action.payload;
       })
+=======
+        state.loading = false; // Зупиняємо лоадер після отримання фаворитів
+        state.favoriteRecipes = action.payload || [];
+      })
+      .addCase(getUserFavourites.rejected, (state, action) => {
+        state.loading = false; // Гарантуємо відключення лоадера при помилці
+        state.error = action.error || true;
+      })
+>>>>>>> Stashed changes
       .addCase(toggleFavorites.fulfilled, (state, action) => {
-        const { recipeId } = action.payload;
-        if (state.favoriteRecipes.some((recipe) => recipe._id === recipeId)) {
+        // Оновлюємо список фаворитів за відповіді бекенду або по id
+        const payload = action.payload || {};
+        const recipeId = payload.recipeId || payload.id || null;
+        if (!recipeId) return;
+        if (state.favoriteRecipes.some((r) => (r._id || r.id) === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
-            (recipe) => recipe._id !== recipeId
+            (r) => (r._id || r.id) !== recipeId
           );
         } else {
           state.favoriteRecipes.push({ _id: recipeId });

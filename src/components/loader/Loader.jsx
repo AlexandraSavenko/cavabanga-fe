@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react'
 import css from "./Loader.module.css"
 import { ClockLoader } from 'react-spinners'
@@ -13,3 +14,12 @@ const Loader = () => {
 }
 
 export default Loader
+=======
+import css from "./Loader.module.css";
+
+const Loader = () => {
+  return <div className={css.loader}>Завантаження...</div>; // Текст українською
+};
+
+export default Loader;
+>>>>>>> Stashed changes
