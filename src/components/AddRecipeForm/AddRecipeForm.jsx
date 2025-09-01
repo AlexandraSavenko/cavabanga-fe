@@ -27,40 +27,60 @@ const AddRecipeForm = () => {
     category: "",
     currentIngredientId: "",
     currentIngredientAmount: "",
-    ingredients: [],
+    ingredient: [],
     instruction: "",
     recipeImg: null,
   };
+  // const ingredObjectSchema = Yup.object().shape({
+  //   id: Yup.string().required("Select an ingredient"),
+  //   ingredientAmount: Yup.string().min(2).max(16).required("Specify the amount")
+  // });
+  //   const validationSchema = Yup.object().shape({
+  //   name: Yup.string().required("Enter the name of your recipe"),
+  //   decr: Yup.string().required("Enter a brief description of your recipe"),
+  //   cookiesTime: Yup.number()
+  //     .required("Cooking time in minutes")
+  //     .positive()
+  //     .integer(),
+  //   cals: Yup.number().positive().integer(),
+  //   category: Yup.string().required("Select a category"),
+  //   ingredient: Yup.array()
+  //     .of(ingredObjectSchema).min(2, "Add at least 2 ingredients").required("Add at least 2 ingredients"),
+  //   instruction: Yup.string().required("Enter instructions"),
+  //   recipeImg: Yup.mixed(),
+  // });
+  // const validationSchema = Yup.object({
+  //   name: Yup.string().required("Enter the name of your recipe"),
+  //   decr: Yup.string().required("Enter a brief description of your recipe"),
+  //   cookiesTime: Yup.number()
+  //     .required("Cooking time in minutes")
+  //     .positive()
+  //     .integer(),
+  //   cals: Yup.number().positive().integer(),
+  //   category: Yup.string().required("Select a category"),
+  //   ingredients: Yup.array()
+  //     .of(
+  //       Yup.object({
+  //         id: Yup.string().required("Select an ingredient"),
+  //         ingredientAmount: Yup.string()
+  //           .max(60)
+  //           .required("Specify the amount")
+  //           .min(2, "Add at least 2 ingredients")
+  //           .max(16)
+  //       })
+  //     )  
+  //     .required("Add at least 2 ingredients"),
+  //   instruction: Yup.string().required("Enter instructions"),
+  //   recipeImg: Yup.mixed(),
+  // });
 
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Enter the name of your recipe"),
-    decr: Yup.string().required("Enter a brief description of your recipe"),
-    cookiesTime: Yup.number()
-      .required("Cooking time in minutes")
-      .positive()
-      .integer(),
-    cals: Yup.number().positive().integer(),
-    category: Yup.string().required("Select a category"),
-    ingredients: Yup.array()
-      .of(
-        Yup.object({
-          id: Yup.string().required("Select an ingredient"),
-          ingredientAmount: Yup.string()
-            .max(60)
-            .required("Specify the amount")
-          .min(2, "Add at least 2 ingredients")
-      .max(16)
-        })
-      )
-    
-      .required("Add at least 2 ingredients"),
-    instruction: Yup.string().required("Enter instructions"),
-    recipeImg: Yup.mixed().required("Add a photo of the recipe"),
-  });
-
-  const handleSubmit = async (values) => {
-    console.log(values)
-    dispatch(addRecipe())
+  const handleSubmit = (values, actions) => {
+    const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
+    const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
+    console.log("in handleSubmit AddRecipe => values: ", values);
+    console.log("in handleSubmit AddRecipe => payload: ", payload);
+    dispatch(addRecipe(payload));
+    actions.resetForm();
   }
   //  try {
   //     const formData = new FormData();
@@ -101,11 +121,10 @@ const AddRecipeForm = () => {
   //     setSubmitting(false);
   //   }//
   
-
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      // validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       {({ values, setFieldValue, isSubmitting }) => (
@@ -123,18 +142,22 @@ const AddRecipeForm = () => {
                   }}
                   className={css.inputPhoto}
                 />
-                {!previewImage && (
+                {/* {!previewImage && (
                   <svg className={css.icon}>
                     <use href="/public/icons.svg#icon-camera" />
                   </svg>
                 )}
                 {previewImage && (
                   <img src={previewImage} alt="preview" className={css.imagePreview} />
-                )}
+                )} */}
+                {previewImage
+                  ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
+                  : (<svg className={css.icon}>
+                    <use href="/public/icons.svg#icon-camera" />
+                  </svg>)}
               </div>
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
             </div>
-
             <div className={css.formContent}>
               {/* General Information */}
               <section className={css.section}>
@@ -218,14 +241,16 @@ const AddRecipeForm = () => {
                       className={css.buttonNew}
                       type="button"
                       onClick={() => {
+                        // console.log("in submit inged => values: ", values)
                         if (values.currentIngredientId && values.currentIngredientAmount) {
-                          setFieldValue("ingredients", [
-                            ...values.ingredients,
+                          setFieldValue("ingredient", [
+                            ...values.ingredient,
                             {
                               id: values.currentIngredientId,
                               ingredientAmount: values.currentIngredientAmount,
                             },
                           ]);
+                         console.log("in submit inged => values.ingredient: ", values.ingredient)
                           setFieldValue("currentIngredientId", "");
                           setFieldValue("currentIngredientAmount", "");
                         }
@@ -241,7 +266,7 @@ const AddRecipeForm = () => {
                     </div>
 
                     {/* Ingredient list */}
-                    {values.ingredients.length > 0 && (
+                    {values.ingredient.length > 0 && (
                       <div className={css.dropDown}>
                         <div className={css.dropDownColumns}>
                           {/* Table headers for mobile */}
@@ -250,9 +275,12 @@ const AddRecipeForm = () => {
                             <div className={css.column2}>Amount</div>
                           </div>
 
-                          {values.ingredients.map((ing, index) => {
+                          {values.ingredient.map((ing, index) => {
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
+                            // console.log("in values.ingredients.map => ingredientName: ", ingredientName)
+                            // console.log("in values.ingredients.map => ing.ingredientAmount: ", ing.ingredientAmount)
+
                             return (
                               <div key={index} className={css.column}>
                                 <div className={css.columnItem}>{ingredientName}</div>
@@ -262,7 +290,7 @@ const AddRecipeForm = () => {
                                     className={css.buttonDrop}
                                     type="button"
                                     onClick={() => {
-                                      const newIngredients = values.ingredients.filter(
+                                      const newIngredients = values.ingredient.filter(
                                         (_, i) => i !== index
                                       );
                                       setFieldValue("ingredients", newIngredients);
@@ -280,7 +308,7 @@ const AddRecipeForm = () => {
                       </div>
                     )}
                   </div>
-                  <ErrorMessage name="ingredients" component="div" className={css.error} />
+                  <ErrorMessage name="ingredient" component="div" className={css.error} />
                 </div>
               </section>
 

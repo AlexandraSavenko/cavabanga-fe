@@ -73,16 +73,18 @@ export const toggleFavorites = createAsyncThunk(
 export const addRecipe = createAsyncThunk(
   "recipes/addRecipe",
   async (values, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = selectToken(state);
+    console.log("in addRecipe => token: ", token)
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
       const res = await axios.post("api/recipes", values)
       console.log(res)
       
     }
     catch (error) {
-      console.log(error)
+      console.log(error.response?.data?.data?.message)
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-
-  
 )
