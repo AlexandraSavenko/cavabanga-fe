@@ -8,6 +8,7 @@
   box-sizing: border-box;
   display: block;
   unicode-bidi: isolate;
+  margin-bottom: 48px;
 }
 
 .container {
@@ -37,7 +38,7 @@
   width: 100%;
   max-width: 329px;
   line-height: 1.25;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   transition: transform 0.2s ease, background-color 0.2s ease,
     box-shadow 0.2s ease;
 }
@@ -57,7 +58,7 @@
 
 .containerInput {
   display: flex;
-  gap: 24px;
+  gap: 12px;
   flex-direction: column;
   margin-bottom: 98px;
 }
@@ -94,8 +95,8 @@
 @media screen and (min-width: 768px) {
   .container {
     /* max-width: 1440px; */
-    padding-left: 15px;
-    padding-right: 15px;
+    /* padding-left: 15px;
+    padding-right: 15px; */
   }
 
   .wrapper {
