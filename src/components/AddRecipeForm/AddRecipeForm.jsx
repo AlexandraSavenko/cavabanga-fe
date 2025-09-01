@@ -31,54 +31,52 @@ const AddRecipeForm = () => {
     instruction: "",
     recipeImg: null,
   };
-  // const ingredObjectSchema = Yup.object().shape({
-  //   id: Yup.string().required("Select an ingredient"),
-  //   ingredientAmount: Yup.string().min(2).max(16).required("Specify the amount")
-  // });
-  //   const validationSchema = Yup.object().shape({
-  //   name: Yup.string().required("Enter the name of your recipe"),
-  //   decr: Yup.string().required("Enter a brief description of your recipe"),
-  //   cookiesTime: Yup.number()
-  //     .required("Cooking time in minutes")
-  //     .positive()
-  //     .integer(),
-  //   cals: Yup.number().positive().integer(),
-  //   category: Yup.string().required("Select a category"),
-  //   ingredient: Yup.array()
-  //     .of(ingredObjectSchema).min(2, "Add at least 2 ingredients").required("Add at least 2 ingredients"),
-  //   instruction: Yup.string().required("Enter instructions"),
-  //   recipeImg: Yup.mixed(),
-  // });
-  // const validationSchema = Yup.object({
-  //   name: Yup.string().required("Enter the name of your recipe"),
-  //   decr: Yup.string().required("Enter a brief description of your recipe"),
-  //   cookiesTime: Yup.number()
-  //     .required("Cooking time in minutes")
-  //     .positive()
-  //     .integer(),
-  //   cals: Yup.number().positive().integer(),
-  //   category: Yup.string().required("Select a category"),
-  //   ingredients: Yup.array()
-  //     .of(
-  //       Yup.object({
-  //         id: Yup.string().required("Select an ingredient"),
-  //         ingredientAmount: Yup.string()
-  //           .max(60)
-  //           .required("Specify the amount")
-  //           .min(2, "Add at least 2 ingredients")
-  //           .max(16)
-  //       })
-  //     )  
-  //     .required("Add at least 2 ingredients"),
-  //   instruction: Yup.string().required("Enter instructions"),
-  //   recipeImg: Yup.mixed(),
-  // });
+ const ingredObjectSchema = Yup.object().shape({
+  id: Yup.string().required("Select an ingredient"),
+  ingredientAmount: Yup.string()
+    .min(1, "Amount must be at least 1 character")
+    .max(16, "Amount should not exceed 16 characters")
+    .required("Specify the amount"),
+});
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(64, "Title should not exceed 64 characters.")
+    .required("Enter the title of your recipe"),
+    
+  decr: Yup.string()
+    .max(200, "Description should not exceed 200 characters.")
+    .required("Enter a brief description of your recipe"),
+    
+  cookiesTime: Yup.number()
+    .min(1, "Must be at least 1 minute")
+    .max(360, "Cannot exceed 360 minutes")
+    .positive()
+    .integer()
+    .required("Time in minutes is required"),
+    
+  cals: Yup.number()
+    .min(1, "Calories must be at least 1")
+    .max(10000, "Calories must not exceed 10000")
+    .positive()
+    .integer()
+    .nullable(),
+    
+  category: Yup.string().required("Select a category"),
+  
+  ingredient: Yup.array()
+    .of(ingredObjectSchema).min(2).required(),
+    
+  instruction: Yup.string()
+    .max(1200, "Instructions should not exceed 1200 characters")
+    .required("Instructions are required"),
+    
+  // recipeImg: Yup.mixed()
+});
 
   const handleSubmit = (values, actions) => {
     const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
     const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
-    console.log("in handleSubmit AddRecipe => values: ", values);
-    console.log("in handleSubmit AddRecipe => payload: ", payload);
     dispatch(addRecipe(payload));
     actions.resetForm();
   }
@@ -124,7 +122,7 @@ const AddRecipeForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      // validationSchema={validationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       {({ values, setFieldValue, isSubmitting }) => (
@@ -278,9 +276,7 @@ const AddRecipeForm = () => {
                           {values.ingredient.map((ing, index) => {
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
-                            // console.log("in values.ingredients.map => ingredientName: ", ingredientName)
-                            // console.log("in values.ingredients.map => ing.ingredientAmount: ", ing.ingredientAmount)
-
+                        
                             return (
                               <div key={index} className={css.column}>
                                 <div className={css.columnItem}>{ingredientName}</div>
