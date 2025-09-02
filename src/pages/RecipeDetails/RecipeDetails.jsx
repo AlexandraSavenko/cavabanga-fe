@@ -35,6 +35,7 @@ export default function RecipeDetails() {
   const toDo = !isFavorite ? "add" : "delete";
 
   useEffect(() => {
+    console.log("Recipe from backend:", recipe);
     const fetchRecipe = async () => {
       if (existingRecipe) return;
       setIsLoading(true);
@@ -69,18 +70,26 @@ export default function RecipeDetails() {
     <div className={css.recipeDetails}>
       <RecipeTitle title={recipe.name} />
       <RecipeImage src={recipe.recipeImg} alt={recipe.name} />
-      <GeneralInfo
-        category={recipe.category?.name || "Unknown"}
-        cookingTime={recipe.cookingTime}
-        calories={recipe.cals}
-      />
-      <RecipeSection
-        about={recipe.decr}
-        ingredients={recipe.ingredient}
-        instructions={recipe.instruction}
-      />
-      <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
-      {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+      <div className={css.DesctopWrap}>
+        <div className={css.generalButtonWrap}>
+          <GeneralInfo
+            category={recipe.category || "Unknown"}
+            cookingTime={recipe.cookiesTime}
+            cals={recipe.cals}
+          />
+          <SaveButton onClick={handleFavoriteClick} isFavorite={isFavorite} />
+          {showModal && <ModalNotAutor modalOpen={setShowModal} />}
+        </div>
+        <div className={css.infoContainer}>
+          <div className={css.textInfoWrap}>
+            <RecipeSection
+              about={recipe.decr}
+              ingredients={recipe.ingredient}
+              instructions={recipe.instruction}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
