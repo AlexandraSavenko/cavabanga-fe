@@ -24,23 +24,14 @@ const MainPage = () => {
     dispatch(getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient }));
   }, [page, category, name, ingredient, dispatch]);
 
-  if (isLoading) {
-    return (
-      <div className={css.wrap}>
-        <SearchBox />
-        <h2>Рецепти</h2>
-        <Filters />
-        <Loader /> {/* Показуємо лоадер поки іде запит */}
-      </div>
-    );
-  }
-
   return (
     <div className={css.wrap}>
-      <SearchBox />
-      <h2>Рецепти</h2> {/* українською */}
       <Filters />
-      <RecipesList allRecipes={allRecipes} recipeType={"all"} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <RecipesList allRecipes={allRecipes} recipeType={"all"} />
+      )}
     </div>
   );
 };

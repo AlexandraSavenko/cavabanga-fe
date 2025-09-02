@@ -22,7 +22,7 @@ const AddRecipeForm = () => {
   const initialValues = {
     name: "",
     decr: "",
-    cookiesTime: "",
+    cookingTime: "",
     cals: "",
     category: "",
     currentIngredientId: "",
