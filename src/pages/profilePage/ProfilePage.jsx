@@ -5,7 +5,7 @@ import ProfileNavigation from '../../components/profileNavigation/ProfileNavigat
 import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import styles from './ProfilePage.module.css';
 import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
-import { selectAllRecipes, selectUserFavourites, selectTotalItems } from '../../redux/recipes/selectors.js';
+import { selectAllRecipes, selectUserFavourites, selectTotalItems, selectPage } from '../../redux/recipes/selectors.js';
 import { resetFilters } from '../../redux/filters/slice.js';
 import FilterCount from '../../components/filterCount/FilterCount.jsx';
 import NoRecipesYet from '../../components/NoRecipesYet/NoRecipesYet.jsx';
@@ -17,13 +17,14 @@ const ProfilePage = () => {
   const recipes = useSelector(selectAllRecipes);
   const favRecipes = useSelector(selectUserFavourites);
   const totalItems = useSelector(selectTotalItems);
+  const page = useSelector(selectPage)
   
   useEffect(() => {
     dispatch(resetFilters())
     recipeType === "own" ?
-    dispatch(getRecipeList({ type: recipeType, page: 1, perPage: 12 })) :
+    dispatch(getRecipeList({ type: recipeType, page, perPage: 12 })) :
     dispatch(getUserFavourites())
-  }, [dispatch, recipeType])
+  }, [dispatch, recipeType, page])
   
   let showedRecipes = [];
   if (recipeType === "own") {
@@ -39,14 +40,14 @@ const ProfilePage = () => {
       <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
       {totalItems > 12 && <Pagination />}
-      {showedRecipes.length === 0 &&
-        recipeType === "own"
-        ? <NoRecipesYet recipesType={"own"}>
+      {showedRecipes.length === 0
+        && recipeType === "own"
+        && <NoRecipesYet recipesType={"own"}>
           <Link className={styles.linkBtn} to={"/add-recipe"}>
             Add Recipe
           </Link>
-        </NoRecipesYet>
-        : <NoRecipesYet recipesType={"favorites"}>
+        </NoRecipesYet>}
+        {showedRecipes.length === 0 && <NoRecipesYet recipesType={"favorites"}>
           <Link className={styles.linkBtn} to={"/"}>
             Browse Recipes
           </Link>

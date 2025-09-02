@@ -59,9 +59,9 @@ const recipeSlice = createSlice({
         state.favoriteRecipes = action.payload;
         state.loading = false;
         state.error = null;
-        state.page = action.payload.page;
-        state.totalItems = action.payload.totalItems;
-        state.totalPages = action.payload.totalPages;
+        state.page = 1;
+        state.totalItems = action.payload.length;
+        state.totalPages = 1;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
         const { recipeId } = action.payload;
@@ -72,6 +72,7 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
+        state.totalItems = action.favoriteRecipes.length;
       }),
 });
 
