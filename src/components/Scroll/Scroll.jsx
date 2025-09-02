@@ -9,6 +9,7 @@ const Scroll = ({ containerRef }) => {
 
   // автоскрол при зміні сторінки
   useEffect(() => {
+    if (currentPage === 1) return; // пропуск
     if (containerRef.current) {
       const y =
         containerRef.current.getBoundingClientRect().top + window.scrollY - 150;
@@ -56,17 +57,17 @@ const Scroll = ({ containerRef }) => {
         style={{ top: '70%' }}
       >
         <svg className={style.iconUp}>
-                            <use href={`/icons.svg#icon-pagination-backwards`}></use>
-                          </svg>
+          <use href={`/icons.svg#icon-pagination-backwards`}></use>
+        </svg>
       </button>
       <button
         className={style.scrollBtn}
         onClick={scrollToBottom}
         style={{ top: '80%' }}
       >
-       <svg className={style.iconDown}>
-                            <use href={`/icons.svg#icon-pagination-backwards`}></use>
-                          </svg>
+        <svg className={style.iconDown}>
+          <use href={`/icons.svg#icon-pagination-backwards`}></use>
+        </svg>
       </button>
     </>
   );

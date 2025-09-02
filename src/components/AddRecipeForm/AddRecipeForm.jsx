@@ -1,195 +1,372 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import Loader from "../loader/Loader";
 import css from "./AddRecipeForm.module.css";
 
+import { selectCategories, selectIngredients } from "../../redux/filters/selectors";
+import { fetchCategories, fetchIngredients } from "../../redux/filters/operations";
+import { addRecipe } from "../../redux/recipes/operations";
+
 const AddRecipeForm = () => {
-  const [categories, setCategories] = useState([]);
-  const [ingredientsList, setIngredientsList] = useState([]);
+  const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
+  const ingredientsList = useSelector(selectIngredients);
   const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
-    // Підвантажуємо категорії та інгредієнти для селектів (не критично)
-    let mounted = true;
-    (async () => {
-      try {
-        const [catRes, ingRes] = await Promise.all([
-          axios.get("/api/categories"),
-          axios.get("/api/ingredients"),
-        ]);
-        if (!mounted) return;
-        setCategories(catRes.data || []);
-        setIngredientsList(ingRes.data || []);
-      } catch (err) {
-        console.error("Error loading categories/ingredients", err);
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, []);
+    if (!categories.length) dispatch(fetchCategories());
+    if (!ingredientsList.length) dispatch(fetchIngredients());
+  }, [dispatch, categories.length, ingredientsList.length]);
 
   const initialValues = {
     name: "",
     decr: "",
-    cookingTime: "",
+    cookiesTime: "",
     cals: "",
     category: "",
-    ingredients: [{ ingredient: "", ingredientAmount: "" }],
-    instructions: "",
-    photo: null,
+    currentIngredientId: "",
+    currentIngredientAmount: "",
+    ingredient: [],
+    instruction: "",
+    recipeImg: null,
   };
+ const ingredObjectSchema = Yup.object().shape({
+  id: Yup.string().required("Select an ingredient"),
+  ingredientAmount: Yup.string()
+    .min(1, "Amount must be at least 1 character")
+    .max(16, "Amount should not exceed 16 characters")
+    .required("Specify the amount"),
+});
 
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Введіть назву рецепту"),
-    decr: Yup.string().required("Дайте короткий опис рецепту"),
-    cookingTime: Yup.number().required("Час приготування у хвилинах").positive().integer(),
-    cals: Yup.number().positive().integer().nullable(),
-    category: Yup.string().required("Оберіть категорію"),
-    ingredients: Yup.array()
-      .of(
-        Yup.object({
-          ingredient: Yup.string().required("Оберіть інгредієнт"),
-          ingredientAmount: Yup.string().required("Вкажіть кількість"),
-        })
-      )
-      .min(1, "Додайте хоча б один інгредієнт"),
-    instructions: Yup.string().required("Введіть інструкцію"),
-    photo: Yup.mixed().required("Додайте фото рецепту"),
-  });
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(64, "Title should not exceed 64 characters.")
+    .required("Enter the title of your recipe"),
+    
+  decr: Yup.string()
+    .max(200, "Description should not exceed 200 characters.")
+    .required("Enter a brief description of your recipe"),
+    
+  cookiesTime: Yup.number()
+    .min(1, "Must be at least 1 minute")
+    .max(360, "Cannot exceed 360 minutes")
+    .positive()
+    .integer()
+    .required("Time in minutes is required"),
+    
+  cals: Yup.number()
+    .min(1, "Calories must be at least 1")
+    .max(10000, "Calories must not exceed 10000")
+    .positive()
+    .integer()
+    .nullable(),
+    
+  category: Yup.string().required("Select a category"),
+  
+  ingredient: Yup.array()
+    .of(ingredObjectSchema).min(2).required(),
+    
+  instruction: Yup.string()
+    .max(1200, "Instructions should not exceed 1200 characters")
+    .required("Instructions are required"),
+    
+  // recipeImg: Yup.mixed()
+});
 
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    setSubmitting(true);
-    try {
-      // Формуємо FormData та відправляємо на бек (адаптуй шлях при потребі)
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("decr", values.decr);
-      formData.append("cookingTime", values.cookingTime);
-      formData.append("cals", values.cals || "");
-      formData.append("category", values.category);
-      formData.append("instructions", values.instructions);
-      if (values.photo) formData.append("photo", values.photo);
-      formData.append("ingredients", JSON.stringify(values.ingredients));
+  const handleSubmit = (values, actions) => {
+    // const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
+    // const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
+//     const formData = new FormData();
+//     console.log("values", values);
+//       formData.append("name", values.name);
+//       formData.append("decr", values.decr);
+//       formData.append("cookiesTime", values.cookiesTime);
+//       if (values.cals) formData.append("cals", values.cals);
+//       formData.append("category", values.category);
+//       formData.append("instruction", values.instruction);
+// console.log(formData.get("name"))
+//       // правильно називаємо поле для бекенду
+//       formData.append("ingredient", JSON.stringify(values.ingredients));
+//       console.log("Ingredients array:", values.ingredient);
+//       console.log("FormData contents:", formData);
+//       if (values.recipeImg) {
+//         formData.append("recipeImg", values.recipeImg);
+//       }
+//     for (let [key, value] of formData.entries()) {
+//   console.log("formData => key, value",key, value);
+    // }
+    const formData = new FormData();
 
-      await axios.post("/api/recipes", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+// Append text fields
+formData.append("name", values.name);
+formData.append("category", values.category);
+formData.append("cals", values.cals);
+formData.append("cookiesTime", values.cookiesTime);
+formData.append("instruction", values.instruction);
+formData.append("decr", values.decr);
 
-      resetForm();
-      setPreviewImage(null);
-      // Можна додати навігацію або повідомлення про успіх
-    } catch (error) {
-      console.error("Помилка при створенні рецепту", error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+// Append array fields (example: ingredients)
+values.ingredient.forEach((ing, index) => {
+  formData.append(`ingredient[${index}][id]`, ing.id);
+  formData.append(`ingredient[${index}][ingredientAmount]`, ing.ingredientAmount);
+});
 
+// Append file (important: must be File/Blob, not base64)
+formData.append("recipeImg", values.recipeImg);
+    dispatch(addRecipe(formData));
+    actions.resetForm();
+  }
+  //  try {
+  //     const formData = new FormData();
+  //     formData.append("name", values.name);
+  //     formData.append("decr", values.decr);
+  //     formData.append("cookiesTime", values.cookiesTime);
+  //     if (values.cals) formData.append("cals", values.cals);
+  //     formData.append("category", values.category);
+  //     formData.append("instruction", values.instruction);
+
+  //     // правильно називаємо поле для бекенду
+  //     formData.append("ingredient", JSON.stringify(values.ingredients));
+  //     console.log("Ingredients array:", values.ingredients);
+  //     console.log("FormData contents:", [...formData.entries()]);
+
+
+  //     if (values.recipeImg) {
+  //       formData.append("recipeImg", values.recipeImg);
+  //     }
+
+  //     console.log("Submitting recipe values:", values);
+  //     console.log("Submitting FormData:", [...formData.entries()]);
+     
+
+
+  //     await axios.post("/api/recipes", formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+
+  //     alert("Recipe successfully added!");
+  //     window.location.href = "/recipes";
+  //   } catch (error) {
+  //     console.error("Submit error:", error.response?.data || error.message);
+  //     alert(
+  //       "Error adding recipe: " + (error.response?.data?.message || error.message)
+  //     );
+  //   } finally {
+  //     setSubmitting(false);
+  //   }//
+  
   return (
-    <div className={css.formWrap}>
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-        {({ values, setFieldValue, isSubmitting }) => (
-          <>
-            {isSubmitting && <Loader />} {/* Показ лоадера під час сабміту */}
-            <Form className={css.form}>
-              <label>
-                Назва
-                <Field name="name" placeholder="Назва рецепту" />
-              </label>
-
-              <label>
-                Короткий опис
-                <Field name="decr" as="textarea" placeholder="Короткий опис" />
-              </label>
-
-              <label>
-                Час приготування (хв)
-                <Field name="cookingTime" type="number" />
-              </label>
-
-              <label>
-                Калорії
-                <Field name="cals" type="number" />
-              </label>
-
-              <label>
-                Категорія
-                <Field name="category" as="select">
-                  <option value="">Оберіть категорію</option>
-                  {categories.map((c) => (
-                    <option key={c._id || c.id || c} value={c._id || c.id || c}>
-                      {c.name || c}
-                    </option>
-                  ))}
-                </Field>
-              </label>
-
-              <FieldArray name="ingredients">
-                {({ remove, push }) => (
-                  <div>
-                    <h4>Інгредієнти</h4>
-                    {values.ingredients &&
-                      values.ingredients.map((_, index) => (
-                        <div key={index} className={css.ingredientRow}>
-                          <Field name={`ingredients.${index}.ingredient`} as="select">
-                            <option value="">Оберіть інгредієнт</option>
-                            {ingredientsList.map((ing) => (
-                              <option key={ing._id || ing.id || ing} value={ing._id || ing.id || ing}>
-                                {ing.name || ing}
-                              </option>
-                            ))}
-                          </Field>
-                          <Field name={`ingredients.${index}.ingredientAmount`} placeholder="Кількість" />
-                          <button type="button" onClick={() => remove(index)}>
-                            Видалити
-                          </button>
-                        </div>
-                      ))}
-                    <button type="button" onClick={() => push({ ingredient: "", ingredientAmount: "" })}>
-                      Додати інгредієнт
-                    </button>
-                  </div>
-                )}
-              </FieldArray>
-
-              <label>
-                Інструкції
-                <Field name="instructions" as="textarea" />
-              </label>
-
-              <label>
-                Фото
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, setFieldValue, isSubmitting }) => (
+        <Form className={css.form}>
+          <div className={css.addRecipeContainer}>
+            {/* Upload photo */}
+            <div className={css.photoboxWrapper}>
+              <label className={css.label}>Upload Photo</label>
+              <div className={css.photobox}>
                 <input
-                  name="photo"
                   type="file"
-                  accept="image/*"
                   onChange={(e) => {
-                    const file = e.currentTarget.files[0];
-                    setFieldValue("photo", file);
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = () => setPreviewImage(reader.result);
-                      reader.readAsDataURL(file);
-                    } else {
-                      setPreviewImage(null);
-                    }
+                    setFieldValue("recipeImg", e.currentTarget.files[0]);
+                    setPreviewImage(URL.createObjectURL(e.currentTarget.files[0]));
                   }}
+                  className={css.inputPhoto}
                 />
-              </label>
+                {/* {!previewImage && (
+                  <svg className={css.icon}>
+                    <use href="/public/icons.svg#icon-camera" />
+                  </svg>
+                )}
+                {previewImage && (
+                  <img src={previewImage} alt="preview" className={css.imagePreview} />
+                )} */}
+                {previewImage
+                  ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
+                  : (<svg className={css.icon}>
+                    <use href="/public/icons.svg#icon-camera" />
+                  </svg>)}
+              </div>
+              <ErrorMessage name="recipeImg" component="div" className={css.error} />
+            </div>
+            <div className={css.formContent}>
+              {/* General Information */}
+              <section className={css.section}>
+                General Information
+                <div className={css.fieldBlock}>
+                  <label className={css.labels}>Recipe Title</label>
+                  <Field
+                    name="name"
+                    className={css.text}
+                    placeholder="Enter the name of your recipe"
+                  />
+                  <ErrorMessage name="name" component="div" className={css.error} />
+                </div>
 
-              {previewImage && <img src={previewImage} alt="preview" className={css.preview} />}
+                <div className={css.fieldBlock}>
+                  <label className={css.labels}>Recipe Description</label>
+                  <Field
+                    as="textarea"
+                    name="decr"
+                    className={css.textarea}
+                    placeholder="Enter a brief description of your recipe"
+                  />
+                  <ErrorMessage name="decr" component="div" className={css.error} />
+                </div>
 
-              <button type="submit" disabled={isSubmitting}>
-                Додати рецепт
+                <div className={css.fieldBlock}>
+                  <label className={css.labels}>Cooking time in minutes</label>
+                  <Field type="number" name="cookiesTime" className={css.input} placeholder="10" />
+                  <ErrorMessage name="cookiesTime" component="div" className={css.error} />
+                </div>
+
+                <div className={css.twoColumns}>
+                  <div className={css.fieldBlock}>
+                    <label className={css.labels}>Calories</label>
+                    <Field type="number" name="cals" className={css.inputs} placeholder="150 cals" />
+                    <ErrorMessage name="cals" component="div" className={css.error} />
+                  </div>
+
+                  <div className={css.fieldBlock}>
+                    <label className={css.labels}>Category</label>
+                    <Field as="select" name="category" className={css.inputs}>
+                      <option value="">Select category</option>
+                      {categories.map((cat) => (
+                        <option key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="category" component="div" className={css.error} />
+                  </div>
+                </div>
+              </section>
+
+              {/* Ingredients */}
+              <section className={css.section}>
+                Ingredients
+                <div className={css.blocks}>
+                  <div className={css.fieldGroup}>
+                    <label className={css.labels}>Name</label>
+                    <Field as="select" name="currentIngredientId" className={css.input1}>
+                      <option value="">Select ingredient</option>
+                      {ingredientsList.map((ing) => (
+                        <option key={ing._id} value={ing._id}>
+                          {ing.name}
+                        </option>
+                      ))}
+                    </Field>
+                  </div>
+
+                  <div className={css.amountbox}>
+                    <div className={css.fieldGroup}>
+                      <label className={css.labels}>Amount</label>
+                      <Field
+                        name="currentIngredientAmount"
+                        placeholder="100g"
+                        className={css.input2}
+                      />
+                    </div>
+
+                    <button
+                      className={css.buttonNew}
+                      type="button"
+                      onClick={() => {
+                        // console.log("in submit inged => values: ", values)
+                        if (values.currentIngredientId && values.currentIngredientAmount) {
+                          setFieldValue("ingredient", [
+                            ...values.ingredient,
+                            {
+                              id: values.currentIngredientId,
+                              ingredientAmount: values.currentIngredientAmount,
+                            },
+                          ]);
+                         console.log("in submit inged => values.ingredient: ", values.ingredient)
+                          setFieldValue("currentIngredientId", "");
+                          setFieldValue("currentIngredientAmount", "");
+                        }
+                      }}
+                    >
+                      Add new ingredient
+                    </button>
+
+                    {/* Table headers for tablet */}
+                    <div className={css.tabletOnly}>
+                      <div className={css.column1}>Name</div>
+                      <div className={css.column2}>Amount</div>
+                    </div>
+
+                    {/* Ingredient list */}
+                    {values.ingredient.length > 0 && (
+                      <div className={css.dropDown}>
+                        <div className={css.dropDownColumns}>
+                          {/* Table headers for mobile */}
+                          <div className={css.mobileOnly}>
+                            <div className={css.column1}>Name</div>
+                            <div className={css.column2}>Amount</div>
+                          </div>
+
+                          {values.ingredient.map((ing, index) => {
+                            const ingredientName =
+                              ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
+                        
+                            return (
+                              <div key={index} className={css.column}>
+                                <div className={css.columnItem}>{ingredientName}</div>
+                                <div className={css.columnItem}>
+                                  {ing.ingredientAmount}
+                                  <button
+                                    className={css.buttonDrop}
+                                    type="button"
+                                    onClick={() => {
+                                      const newIngredients = values.ingredient.filter(
+                                        (_, i) => i !== index
+                                      );
+                                      setFieldValue("ingredients", newIngredients);
+                                    }}
+                                  >
+                                    <svg className={css.icons}>
+                                      <use href="/public/icons.svg#icon-trash-can" width="16" height="16" />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <ErrorMessage name="ingredient" component="div" className={css.error} />
+                </div>
+              </section>
+
+              {/* Instructions */}
+              <section className={css.section}>
+                <div className={css.fieldBlock}>
+                  <label className={css.label}>Instructions</label>
+                  <Field
+                    as="textarea"
+                    name="instruction"
+                    className={css.textareas}
+                    placeholder="Enter instructions"
+                  />
+                  <ErrorMessage name="instruction" component="div" className={css.error} />
+                </div>
+              </section>
+
+              <button type="submit" disabled={isSubmitting} className={css.button}>
+                Publish Recipe
               </button>
-            </Form>
-          </>
-        )}
-      </Formik>
-    </div>
+            </div>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

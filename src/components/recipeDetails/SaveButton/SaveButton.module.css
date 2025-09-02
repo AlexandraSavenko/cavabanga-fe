@@ -1,5 +1,6 @@
 .saveButton {
-  background: #faf3e0;
+  background: #9b6c43;
+  width: 100%;
   border-radius: 8px;
   border: none;
   padding: 16px;
@@ -14,18 +15,38 @@
   margin-top: 24px;
   font-size: 18px;
   border-radius: var(--Interactive-border-radius---radius-i-sm, 8px);
-  border: 1px solid var(--Black, #000);
+}
+.miniBtn {
+  background-color: transparent;
+    border-radius: 8px;
+  border: 1px solid black;
+  height: auto;
+  flex-grow: 0;
+  width: auto;
+  margin-top: 0;
+  padding: 4px;
+}
+.miniIcon {
+  stroke: #000;
+  fill: none;
+  border: none;
 }
 .icon {
   fill: none;
-  stroke: #000;
+  stroke: white;
+  fill: none;
   border: none;
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 .active {
-  stroke: #000;
+  fill: white !important;
+}
+.activeMin {
+background-color: #9b6c43;
+  stroke: white;
+  border-color: white;
 }
 .saveButton:hover:focus {
   background: #6d554b;
@@ -54,7 +75,7 @@
   }
 }
 /* Стилі для планшету */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
   .saveButton {
     max-width: 249px;
     height: 56px;

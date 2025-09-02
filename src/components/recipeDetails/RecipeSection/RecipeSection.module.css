@@ -19,3 +19,8 @@
   list-style-type: disc;
   padding-left: 20px;
 }
+.sectionPrepList {
+  display: flex;
+  gap: 13px;
+  flex-direction: column;
+}

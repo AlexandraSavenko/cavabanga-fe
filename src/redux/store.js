@@ -21,12 +21,13 @@ const persistAuthConfig = {
 };
 const persistFiltersConfig = {
   key: "filters",
-  storage
+  storage,
+  blacklist: ["searchQuery"]
 }
 const persistRecipesConfig = {
   key: "recipes",
   storage, 
-      whitelist: ["favoriteRecipes"],
+  whitelist: ["favoriteRecipes"],
 }
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedFiltersReducer = persistReducer(persistFiltersConfig, filtersReducer);
