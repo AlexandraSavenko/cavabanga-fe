@@ -1,8 +1,6 @@
 .wrapper {
-  /* margin-bottom: 24px; */
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .filtersCount {
@@ -11,4 +9,5 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-bottom: 16px;
 }
