@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import css from "./MainPage.module.css";
 import { ClockLoader } from 'react-spinners'
 import RecipesList from "../../components/recipesList/RecipesList";
+import NoMatchFound from "../../components/NoMatchFound/NoMatchFound"
+import Pagination from "../../components/pagination/Pagination"
 
 // import SearchBox from "../../components/SearchBox/SearchBox";
 import Filters from "../../components/Filters/Filters";
@@ -43,6 +45,8 @@ const MainPage = () => {
       {name ? <h2>{`Search Results for “${name}”`}</h2> : <h2 className={css.title}>Recepies</h2>}
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
+      {allRecipes.length > 12 && <Pagination />}
+      {allRecipes.length === 0 && <NoMatchFound/>}
     </div>
   );
 };

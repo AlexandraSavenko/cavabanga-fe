@@ -1,0 +1,31 @@
+.container {
+  background: var(--light-beige);
+  margin: 48px auto;
+  border-radius: 16px;
+  padding: 40px 24px;
+  max-width: 361px;
+  /* height: 270px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+.title {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: var(--black);
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 522px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 598px;
+  }
+}

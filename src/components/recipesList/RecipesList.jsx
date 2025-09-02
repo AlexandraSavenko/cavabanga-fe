@@ -1,12 +1,7 @@
 import { useRef } from 'react';
-
 import RecipeCard from '../recipeCard/RecipeCard.jsx';
-import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn.jsx';
-import Pagination from '../pagination/Pagination.jsx';
 import Scroll from '../Scroll/Scroll.jsx';
-
 import style from './RecipesList.module.css';
-import NoMatchFound from '../NoMatchFound/NoMatchFound.jsx';
 
 const RecipesList = ({ allRecipes, recipeType }) => {
   const listRef = useRef(null); // посилання на контейнер для скролу
@@ -26,8 +21,6 @@ const RecipesList = ({ allRecipes, recipeType }) => {
           );
         })}
       </ul>
-      {allRecipes.length > 0 && <Pagination />}
-      {allRecipes.length === 0 && <NoMatchFound/>}
       <Scroll containerRef={listRef} />
     </div>
   );
