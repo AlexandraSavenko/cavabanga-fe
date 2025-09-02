@@ -34,7 +34,6 @@
   .recipeImage {
     display: block;
     border-radius: 8px;
-    min-width: 361px;
     width: 100%;
     height: auto;
   }
