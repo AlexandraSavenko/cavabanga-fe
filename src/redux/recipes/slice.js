@@ -34,9 +34,11 @@ const recipeSlice = createSlice({
     builder
       .addCase(getRecipeList.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getRecipeList.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.allRecipes = action.payload.data;
         state.page = action.payload.page;
         state.totalItems = action.payload.totalItems;
@@ -51,9 +53,15 @@ const recipeSlice = createSlice({
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
         state.favoriteRecipes = action.payload;
+        state.loading = false;
+        state.error = null;
+        state.page = action.payload.page;
+        state.totalItems = action.payload.totalItems;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
         const { recipeId } = action.payload;

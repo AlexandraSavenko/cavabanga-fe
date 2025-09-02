@@ -5,7 +5,7 @@ import ProfileNavigation from '../../components/profileNavigation/ProfileNavigat
 import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import styles from './ProfilePage.module.css';
 import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
-import { selectAllRecipes, selectUserFavourites } from '../../redux/recipes/selectors.js';
+import { selectAllRecipes, selectUserFavourites, selectTotalItems } from '../../redux/recipes/selectors.js';
 import { resetFilters } from '../../redux/filters/slice.js';
 import FilterCount from '../../components/filterCount/FilterCount.jsx';
 import NoRecipesYet from '../../components/NoRecipesYet/NoRecipesYet.jsx';
@@ -16,6 +16,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectAllRecipes);
   const favRecipes = useSelector(selectUserFavourites);
+  const totalItems = useSelector(selectTotalItems);
   
   useEffect(() => {
     dispatch(resetFilters())
@@ -35,9 +36,9 @@ const ProfilePage = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>My profile</h2>
       <ProfileNavigation />
-      <FilterCount recipeNumber={showedRecipes.length} />
+      <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
-      {showedRecipes.length > 12 && <Pagination />}
+      {totalItems > 12 && <Pagination />}
       {showedRecipes.length === 0 &&
         recipeType === "own"
         ? <NoRecipesYet recipesType={"own"}>
