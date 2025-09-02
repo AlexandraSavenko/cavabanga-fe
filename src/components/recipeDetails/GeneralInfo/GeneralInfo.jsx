@@ -1,6 +1,6 @@
 import css from "./GeneralInfo.module.css";
 
-export default function GeneralInfo({ category, cookingTime, calories }) {
+export default function GeneralInfo({ category, cookingTime, cals }) {
   return (
     <div className={css.generalInfo}>
       <h2 className={css.generalInfoTitle}>General information</h2>
@@ -14,7 +14,9 @@ export default function GeneralInfo({ category, cookingTime, calories }) {
         </li>
         <li className={css.recipeDetailItem}>
           Calories:{" "}
-          <span className={css.recipeDetailValue}>{calories} kcal</span>
+          <span className={css.recipeDetailValue}>
+            {cals ? `${cals} kcal` : "N/A"}
+          </span>
         </li>
       </ul>
     </div>

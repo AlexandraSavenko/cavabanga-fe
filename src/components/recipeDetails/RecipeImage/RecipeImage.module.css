@@ -1,22 +1,32 @@
-.recipeImage {
-  max-width: 622px;
-  height: auto;
-}
-.recipeImageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 32 px;
-  width: 100%;
-  background-color: #2b2d30;
-  border-radius: 8px;
-  order: 2;
+@media only screen and (min-width: 1200px) {
+  .recipeImage {
+    min-width: 627px;
+    height: auto;
+  }
+  .recipeImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+    width: 100%;
+    background-color: #2b2d30;
+    border-radius: 8px;
+    order: 2;
+  }
 }
 /* Стилі для Tablet */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
   .recipeImage {
-    min-width: 622px;
+    width: 100%;
     height: auto;
+    order: 2;
+    margin-bottom: 32px;
+  }
+  .recipeImageContainer {
+    margin-bottom: 32px;
+    background: none;
+    width: 100%;
+    order: 2;
   }
 }
 /* Cтилі для мобільного */
@@ -29,8 +39,21 @@
   }
   .recipeImageContainer {
     background: none;
-    padding: 0 16px 0 16px;
     order: 1;
     max-width: 767px;
+    margin-bottom: 32px;
+  }
+  .recipeDetails {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  .infoContainer {
+    order: 4;
+    flex-direction: column;
+  }
+
+  .generalButtonWrap {
+    order: 3;
   }
 }

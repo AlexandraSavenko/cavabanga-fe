@@ -1,3 +1,10 @@
+.wrapper {
+  /* margin-bottom: 24px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .filtersCount {
   color: var(--black);
   font-size: 18px;

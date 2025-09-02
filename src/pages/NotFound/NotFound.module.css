@@ -23,7 +23,9 @@
   color: #fff;
   display: flex;
   align-items: center;
+  gap: 16px;
   justify-content: center;
+  font-size: 18px;
 }
 .notFoundWrapper {
   margin: 32px auto;
@@ -36,7 +38,51 @@
   max-width: 600px;
   height: auto;
   margin-bottom: 32px;
+  width: 100%;
 }
 .icon {
-  fill: #fff;
+  stroke: #fff;
+}
+.notFoundLink:focus {
+  background: #6d554b;
+  border: none;
+}
+.notFoundLink:active {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+}
+.notFoundLink:disabled {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.notFoundLink:focus-visible {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
+  background: #9b6c43;
+  outline: none;
+}
+/* Стилі для мобільного */
+@media only screen and (max-width: 767px) {
+  .notFoundImg {
+    max-width: 361px;
+    width: 100%;
+  }
+  .notFoundLink {
+    width: 100%;
+    max-width: 361px;
+    height: 56px;
+    font-size: 16px;
+    padding: 12px;
+  }
+  .notFoundWrapper {
+    justify-content: center;
+  }
+}
+/* Мобільні стилі */
+@media only screen and (max-width: 767px) {
+  .notFoundWrapper {
+    justify-content: center;
+    margin: auto 0;
+  }
 }

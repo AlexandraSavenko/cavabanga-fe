@@ -1,7 +1,7 @@
-.wrap{
-    background-color: var(--darck-brown);
-    width: 100%;
-    padding: 24px;
+.wrap {
+  background-color: var(--darck-brown);
+  width: 100%;
+  padding: 24px;
 }
 
 .footer {
@@ -9,70 +9,69 @@
   align-items: center;
   justify-content: space-between;
 }
-.footer p{
-    color: var(--white);
-    font-weight: 400;
-font-size: 12px;
+.footer p {
+  text-align: center;
+  color: var(--white);
+  font-weight: 400;
+  font-size: 12px;
 }
 
-.footerNav{
-
-    display: flex;
-    gap: 32px;
+.footerNav {
+  display: flex;
+  gap: 32px;
 }
 
 .footerNav * {
-        color: var(--white);
-
+  color: var(--white);
 }
 
-.active{
+/* .active{
     text-decoration: underline;
+} */
+
+.modalText {
+  text-align: center;
+}
+.linkWrap {
+  display: flex;
+  justify-content: center;
+  gap: 27px;
+  width: 100%;
+}
+.login {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--black);
+  flex-grow: 1;
 }
 
-.modalText{
-    text-align: center;
-}
-.linkWrap{
-    display: flex;
-    justify-content: center;
-    gap: 27px;
-    width: 100%;
-}
-.login{
-    cursor: pointer;
-    text-align: center;
-    border: 1px solid var(--black);
-border-radius: 8px;
-padding: 8px;
-font-weight: 600;
-font-size: 16px;
-color: var(--black);
-flex-grow: 1;
-}
-
-.register{
-        cursor: pointer;
-    text-align: center;
-    background: var(--light-brown);
-    border-radius: 8px;
-padding: 8px;
-font-weight: 600;
-font-size: 16px;
-color: var(--white);
-flex-grow: 1;
+.register {
+  cursor: pointer;
+  text-align: center;
+  background: var(--light-brown);
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white);
+  flex-grow: 1;
 }
 @media (max-width: 768px) {
-    .footer{
-        min-height: fit-content;
-        flex-direction: column;
-        gap: 32px;
-    }
+  .footer {
+    min-height: fit-content;
+    flex-direction: column;
+    gap: 32px;
+  }
 }
 
 @media (max-width: 393px) {
-    .footerNav {
-        flex-direction: column;
-        gap: 40px;
-    }
+  .footerNav {
+    flex-direction: column;
+    gap: 40px;
+  }
 }

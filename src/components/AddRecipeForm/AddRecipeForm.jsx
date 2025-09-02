@@ -27,40 +27,95 @@ const AddRecipeForm = () => {
     category: "",
     currentIngredientId: "",
     currentIngredientAmount: "",
-    ingredients: [],
+    ingredient: [],
     instruction: "",
     recipeImg: null,
   };
+ const ingredObjectSchema = Yup.object().shape({
+  id: Yup.string().required("Select an ingredient"),
+  ingredientAmount: Yup.string()
+    .min(1, "Amount must be at least 1 character")
+    .max(16, "Amount should not exceed 16 characters")
+    .required("Specify the amount"),
+});
 
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Enter the name of your recipe"),
-    decr: Yup.string().required("Enter a brief description of your recipe"),
-    cookiesTime: Yup.number()
-      .required("Cooking time in minutes")
-      .positive()
-      .integer(),
-    cals: Yup.number().positive().integer(),
-    category: Yup.string().required("Select a category"),
-    ingredients: Yup.array()
-      .of(
-        Yup.object({
-          id: Yup.string().required("Select an ingredient"),
-          ingredientAmount: Yup.string()
-            .max(60)
-            .required("Specify the amount")
-          .min(2, "Add at least 2 ingredients")
-      .max(16)
-        })
-      )
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(64, "Title should not exceed 64 characters.")
+    .required("Enter the title of your recipe"),
     
-      .required("Add at least 2 ingredients"),
-    instruction: Yup.string().required("Enter instructions"),
-    recipeImg: Yup.mixed().required("Add a photo of the recipe"),
-  });
+  decr: Yup.string()
+    .max(200, "Description should not exceed 200 characters.")
+    .required("Enter a brief description of your recipe"),
+    
+  cookiesTime: Yup.number()
+    .min(1, "Must be at least 1 minute")
+    .max(360, "Cannot exceed 360 minutes")
+    .positive()
+    .integer()
+    .required("Time in minutes is required"),
+    
+  cals: Yup.number()
+    .min(1, "Calories must be at least 1")
+    .max(10000, "Calories must not exceed 10000")
+    .positive()
+    .integer()
+    .nullable(),
+    
+  category: Yup.string().required("Select a category"),
+  
+  ingredient: Yup.array()
+    .of(ingredObjectSchema).min(2).required(),
+    
+  instruction: Yup.string()
+    .max(1200, "Instructions should not exceed 1200 characters")
+    .required("Instructions are required"),
+    
+  // recipeImg: Yup.mixed()
+});
 
-  const handleSubmit = async (values) => {
-    console.log(values)
-    dispatch(addRecipe())
+  const handleSubmit = (values, actions) => {
+    // const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
+    // const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
+//     const formData = new FormData();
+//     console.log("values", values);
+//       formData.append("name", values.name);
+//       formData.append("decr", values.decr);
+//       formData.append("cookiesTime", values.cookiesTime);
+//       if (values.cals) formData.append("cals", values.cals);
+//       formData.append("category", values.category);
+//       formData.append("instruction", values.instruction);
+// console.log(formData.get("name"))
+//       // правильно називаємо поле для бекенду
+//       formData.append("ingredient", JSON.stringify(values.ingredients));
+//       console.log("Ingredients array:", values.ingredient);
+//       console.log("FormData contents:", formData);
+//       if (values.recipeImg) {
+//         formData.append("recipeImg", values.recipeImg);
+//       }
+//     for (let [key, value] of formData.entries()) {
+//   console.log("formData => key, value",key, value);
+    // }
+    const formData = new FormData();
+
+// Append text fields
+formData.append("name", values.name);
+formData.append("category", values.category);
+formData.append("cals", values.cals);
+formData.append("cookiesTime", values.cookiesTime);
+formData.append("instruction", values.instruction);
+formData.append("decr", values.decr);
+
+// Append array fields (example: ingredients)
+values.ingredient.forEach((ing, index) => {
+  formData.append(`ingredient[${index}][id]`, ing.id);
+  formData.append(`ingredient[${index}][ingredientAmount]`, ing.ingredientAmount);
+});
+
+// Append file (important: must be File/Blob, not base64)
+formData.append("recipeImg", values.recipeImg);
+    dispatch(addRecipe(formData));
+    actions.resetForm();
   }
   //  try {
   //     const formData = new FormData();
@@ -101,7 +156,6 @@ const AddRecipeForm = () => {
   //     setSubmitting(false);
   //   }//
   
-
   return (
     <Formik
       initialValues={initialValues}
@@ -123,18 +177,22 @@ const AddRecipeForm = () => {
                   }}
                   className={css.inputPhoto}
                 />
-                {!previewImage && (
+                {/* {!previewImage && (
                   <svg className={css.icon}>
                     <use href="/public/icons.svg#icon-camera" />
                   </svg>
                 )}
                 {previewImage && (
                   <img src={previewImage} alt="preview" className={css.imagePreview} />
-                )}
+                )} */}
+                {previewImage
+                  ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
+                  : (<svg className={css.icon}>
+                    <use href="/public/icons.svg#icon-camera" />
+                  </svg>)}
               </div>
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
             </div>
-
             <div className={css.formContent}>
               {/* General Information */}
               <section className={css.section}>
@@ -218,14 +276,16 @@ const AddRecipeForm = () => {
                       className={css.buttonNew}
                       type="button"
                       onClick={() => {
+                        // console.log("in submit inged => values: ", values)
                         if (values.currentIngredientId && values.currentIngredientAmount) {
-                          setFieldValue("ingredients", [
-                            ...values.ingredients,
+                          setFieldValue("ingredient", [
+                            ...values.ingredient,
                             {
                               id: values.currentIngredientId,
                               ingredientAmount: values.currentIngredientAmount,
                             },
                           ]);
+                         console.log("in submit inged => values.ingredient: ", values.ingredient)
                           setFieldValue("currentIngredientId", "");
                           setFieldValue("currentIngredientAmount", "");
                         }
@@ -241,7 +301,7 @@ const AddRecipeForm = () => {
                     </div>
 
                     {/* Ingredient list */}
-                    {values.ingredients.length > 0 && (
+                    {values.ingredient.length > 0 && (
                       <div className={css.dropDown}>
                         <div className={css.dropDownColumns}>
                           {/* Table headers for mobile */}
@@ -250,9 +310,10 @@ const AddRecipeForm = () => {
                             <div className={css.column2}>Amount</div>
                           </div>
 
-                          {values.ingredients.map((ing, index) => {
+                          {values.ingredient.map((ing, index) => {
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
+                        
                             return (
                               <div key={index} className={css.column}>
                                 <div className={css.columnItem}>{ingredientName}</div>
@@ -262,7 +323,7 @@ const AddRecipeForm = () => {
                                     className={css.buttonDrop}
                                     type="button"
                                     onClick={() => {
-                                      const newIngredients = values.ingredients.filter(
+                                      const newIngredients = values.ingredient.filter(
                                         (_, i) => i !== index
                                       );
                                       setFieldValue("ingredients", newIngredients);
@@ -280,7 +341,7 @@ const AddRecipeForm = () => {
                       </div>
                     )}
                   </div>
-                  <ErrorMessage name="ingredients" component="div" className={css.error} />
+                  <ErrorMessage name="ingredient" component="div" className={css.error} />
                 </div>
               </section>
 

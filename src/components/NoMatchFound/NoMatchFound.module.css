@@ -1,19 +1,26 @@
 .container {
-  margin: 0 auto;
-  max-width: 393px;
+  background: var(--light-beige);
+  margin: 48px auto;
+  border-radius: 16px;
+  padding: 40px 24px;
+  width: 361px;
+  /* height: 270px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
 }
-
 .title {
-  color: var(--Black, #000);
-  font-family: Montserrat;
-  font-size: 40px;
-  font-style: normal;
+  font-family: var(--font-family);
   font-weight: 600;
-  line-height: normal;
-  margin-bottom: 16px;
-  text-align: start;
+  font-size: 24px;
+  text-align: center;
+  color: var(--black);
 }
-.linkBtn {
+.noBreak {
+  white-space: nowrap;
+}
+.btn {
   border: 1px solid var(--black);
   border-radius: 8px;
   padding: 16px;
@@ -29,12 +36,12 @@
 }
 @media only screen and (min-width: 768px) {
   .container {
-    max-width: 768px;
+    width: 522px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .container {
-    max-width: 1440px;
+    width: 598px;
   }
 }
