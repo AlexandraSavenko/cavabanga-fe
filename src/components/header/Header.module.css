@@ -125,6 +125,7 @@
 .modalBtnWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
 
@@ -132,7 +133,7 @@
   border: 1px solid var(--black) !important;
   font-family: var(--font-family);
   border-radius: 8px;
-  width: 314px;
+  width: 300px;
   background-color: transparent;
   color: var(--black);
   padding: 16px;
@@ -149,7 +150,7 @@
   color: var(--white);
   font-family: var(--font-family);
   border-radius: 8px;
-  width: 314px;
+  width: 300px;
   padding: 16px;
   font-weight: 600;
   font-size: 18px;

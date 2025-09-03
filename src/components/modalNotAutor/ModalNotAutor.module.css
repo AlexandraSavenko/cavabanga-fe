@@ -6,6 +6,7 @@
   width: 100%;
   background: var(--black);
   opacity: 0.6;
+  z-index: 11111;
 }
 .wrap {
   position: fixed;
@@ -15,7 +16,10 @@
   background: var(--light-beige);
   border-radius: 32px;
   padding: 56px 32px;
-  width: 420px;
+
+  max-width: 420px;
+  width: 95%; /* модалка завжди займає максимум 95% ширини */
+  min-width: 270px;
   height: 277px;
   display: flex;
   flex-direction: column;
