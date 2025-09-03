@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchRecipe,
   getRecipeList,
   getUserFavourites,
   toggleFavorites,
 } from "./operations";
 import { logout } from "../auth/operations";
-
 
 const recipesState = {
   allRecipes: [],
@@ -19,6 +19,7 @@ const recipesState = {
   filters: {},
   title: "",
   loading: false,
+  oneRecipe: null,
   // isToggleFavoritesLoading: false,
   error: null,
 };
@@ -74,6 +75,7 @@ const recipeSlice = createSlice({
       })
       .addCase(toggleFavorites.pending, (state) => {
         state.loading = true;
+        state.error = false;
       })
       .addCase(toggleFavorites.rejected, (state) => {
         state.loading = false;
@@ -93,6 +95,17 @@ const recipeSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.favoriteRecipes = [];
         state.page = 1;
+      })
+      .addCase(fetchRecipe.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchRecipe.fulfilled, (state, action) => {
+        state.loading = false;
+        state.oneRecipe = action.payload;
+      })
+      .addCase(fetchRecipe.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }),
 });
 

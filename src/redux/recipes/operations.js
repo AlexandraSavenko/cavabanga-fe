@@ -80,3 +80,16 @@ export const addRecipe = createAsyncThunk(
     }
   }
 )
+
+export const fetchRecipe = createAsyncThunk("recipes/fetchOneRecipe", 
+  async (id, thunkAPI) => {
+      try {
+        const res = await axios.get(`/api/recipes/${id}`);
+return res.data.data
+        // setRecipe(data.data || data);
+      } catch (error) {
+        toast.error("Something went wrong")
+    return thunkAPI.rejectWithValue(error.response?.data?.data?.message);
+       
+    }}
+) 
