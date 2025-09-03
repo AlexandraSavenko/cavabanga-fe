@@ -3,11 +3,11 @@ import css from "./Loader.module.css"
 import { ClockLoader } from 'react-spinners'
 
 
-const Loader = () => {
+const Loader = ({color = '#3d2218'}) => {
     
   return (
     <div className={css.wrap}>
-        <ClockLoader size={100} color='#3d2218' />
+        <ClockLoader size={100} color={color} />
     </div>
   )
 }

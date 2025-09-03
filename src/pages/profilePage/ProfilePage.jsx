@@ -35,7 +35,7 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>My profile</h2>
+      <h2 className={styles.title}>Мій профіль</h2> {/* українською */}
       <ProfileNavigation />
       <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
