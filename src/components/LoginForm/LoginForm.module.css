@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 20px;
   max-width: 362px;
-  /* margin: 91px auto; */
+  margin: 91px auto;
 }
 .header {
   color: var(--black);

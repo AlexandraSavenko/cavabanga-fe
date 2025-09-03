@@ -8,8 +8,6 @@
   gap: 24px;
   align-items: stretch;
   margin-bottom: 24px;
-  position: relative;
-  z-index: -1;
 }
 .item {
   display: flex;

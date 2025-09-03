@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchRecipe,
   getRecipeList,
   getUserFavourites,
   toggleFavorites,
 } from "./operations";
+import { logout } from "../auth/operations";
 
 const recipesState = {
   allRecipes: [],
@@ -17,7 +19,8 @@ const recipesState = {
   filters: {},
   title: "",
   loading: false,
-  isToggleFavoritesLoading: false,
+  oneRecipe: null,
+  // isToggleFavoritesLoading: false,
   error: null,
 };
 
@@ -36,9 +39,11 @@ const recipeSlice = createSlice({
     builder
       .addCase(getRecipeList.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getRecipeList.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.allRecipes = action.payload.data;
         state.page = action.payload.page;
         state.totalItems = action.payload.totalItems;
@@ -53,23 +58,30 @@ const recipeSlice = createSlice({
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
         state.loading = false; // Зупиняємо лоадер після отримання фаворитів
         state.favoriteRecipes = action.payload;
+        state.loading = false;
+        state.error = null;
+        state.page = 1;
+        state.totalItems = action.payload.length;
+        state.totalPages = 1;
       })
       .addCase(getUserFavourites.rejected, (state) => {
         state.loading = false; // Гарантія вимкнення лоадера при помилці
         state.error = true;
       })
       .addCase(toggleFavorites.pending, (state) => {
-        state.isToggleFavoritesLoading = true;
+        state.loading = true;
+        state.error = false;
       })
       .addCase(toggleFavorites.rejected, (state) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
         const { recipeId } = action.payload;
         if (state.favoriteRecipes.some((recipe) => recipe._id === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
@@ -78,6 +90,22 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
+        state.totalItems = state.favoriteRecipes.length;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.favoriteRecipes = [];
+        state.page = 1;
+      })
+      .addCase(fetchRecipe.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchRecipe.fulfilled, (state, action) => {
+        state.loading = false;
+        state.oneRecipe = action.payload;
+      })
+      .addCase(fetchRecipe.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }),
 });
 

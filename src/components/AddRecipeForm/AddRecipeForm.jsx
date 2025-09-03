@@ -73,6 +73,9 @@ const validationSchema = Yup.object().shape({
   instruction: Yup.string()
     .max(1200, "Instructions should not exceed 1200 characters")
     .required("Instructions are required"),
+
+recipeImg: Yup.mixed()
+
     });
 
 const handleSubmit = async (values, actions) => {
@@ -90,16 +93,14 @@ values.ingredient.forEach((ing, index) => {
 });
 
 formData.append("recipeImg", values.recipeImg);
-  try {
-  await dispatch(addRecipe(formData)).unwrap();
+dispatch(addRecipe(formData)).unwrap();
 
-    navigate(`/profile/own`); 
+navigate(`/profile/own`); 
 
     actions.resetForm();
     setPreviewImage(null);
-  } catch (error) {
-    console.error("Error while creating recipe:", error);
-  }
+
+
 };
   return (
 
@@ -218,7 +219,6 @@ formData.append("recipeImg", values.recipeImg);
                               ingredientAmount: values.currentIngredientAmount,
                             },
                           ]);
-                         console.log("in submit inged => values.ingredient: ", values.ingredient)
                           setFieldValue("currentIngredientId", "");
                           setFieldValue("currentIngredientAmount", "");
                         }
@@ -246,7 +246,6 @@ formData.append("recipeImg", values.recipeImg);
                           {values.ingredient.map((ing, index) => {
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
-                        
                             return (
                               <div key={index} className={css.column}>
                                 <div className={css.columnItem}>{ingredientName}</div>
@@ -259,7 +258,7 @@ formData.append("recipeImg", values.recipeImg);
                                       const newIngredients = values.ingredient.filter(
                                         (_, i) => i !== index
                                       );
-                                      setFieldValue("ingredients", newIngredients);
+                                      setFieldValue("ingredient", newIngredients);
                                     }}
                                   >
                                     <svg className={css.icons}>

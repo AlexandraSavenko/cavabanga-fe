@@ -8,19 +8,15 @@ import {
 } from "react-redux"
 import {
     selectAuthError,
-    selectIsLoading
 } from "../../redux/auth/selectors"
-import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
 import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
-// import toast from "react-hot-toast"
 
 export default function AuthPage() {
     const { authType } = useParams()
     const dispatch = useDispatch();
     const error = useSelector(selectAuthError);
-    const isLoading = useSelector(selectIsLoading);
     
     useEffect(() => {
         dispatch(clearAuthError())
@@ -29,13 +25,6 @@ export default function AuthPage() {
     const handleCloseModal = () => {
         dispatch(clearAuthError())
     };
-    // To prevent DOUBLE render of the toast (if using):
-    // useEffect(() => {
-    //    if (error) {
-    //      toast.error(error);
-    //      dispatch(clearAuthError())
-    //     }
-    //  }, [dispatch, error]);
 
     return (
         <div className={css.container}>
@@ -47,7 +36,6 @@ export default function AuthPage() {
             </ModalErrorCommon>
             {authType === "register" && <RegistrationForm />}
             {authType === "login" && <LoginForm />}
-            {isLoading && <Loader />}
         </div>
     )
 };
