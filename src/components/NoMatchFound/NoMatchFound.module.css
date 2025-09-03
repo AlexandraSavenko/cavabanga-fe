@@ -34,6 +34,11 @@
   color: var(--black);
   cursor: pointer;
 }
+.btn:hover,
+.btn:focus {
+  border: 1px solid #6d554b;
+  color: #6d554b;
+}
 @media only screen and (min-width: 768px) {
   .container {
     width: 522px;
