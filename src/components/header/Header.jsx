@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
@@ -13,6 +13,7 @@ const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [mobileNav, setMobileNav] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const navigate = useNavigate();
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };
@@ -20,6 +21,7 @@ const Header = () => {
       setIsConfirmModalOpen(false);
       setMobileNav(false);
       dispatch(logout());
+      navigate('/');
   };
   const confirmLogout = () => {
     setIsConfirmModalOpen(true);

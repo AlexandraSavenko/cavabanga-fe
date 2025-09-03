@@ -42,6 +42,7 @@ const authSlice = createSlice({
         state.authError = null;
       })
       .addCase(register.rejected, handleError)
+      .addCase(login.pending, handlePending)
       .addCase(login.fulfilled, (state, action) => {
         state.user.id = action.payload.user._id;
         state.user.name = action.payload.user.name;
@@ -52,6 +53,7 @@ const authSlice = createSlice({
         state.authError = null;
         state.isLoading = false;
       })
+      .addCase(login.rejected, handleError)
       .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, (state) => {
         state.isLoggedIn = false;
@@ -63,7 +65,16 @@ const authSlice = createSlice({
         state.user.savedRecipes = [];
         state.isLoading = false;
       })
-      .addCase(login.rejected, handleError)
+      .addCase(logout.rejected, (state) => {
+        state.token = null;
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.user.name = null;
+        state.authError = null;
+        state.user.id = null;
+        state.user.email = null;
+        state.user.savedRecipes = [];
+      })
 });
 
 export default authSlice.reducer;

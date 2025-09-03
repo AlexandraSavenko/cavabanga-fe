@@ -4,6 +4,8 @@ import {
   getUserFavourites,
   toggleFavorites,
 } from "./operations";
+import { logout } from "../auth/operations";
+
 
 const recipesState = {
   allRecipes: [],
@@ -73,6 +75,10 @@ const recipeSlice = createSlice({
           state.favoriteRecipes.push({ _id: recipeId });
         }
         state.totalItems = action.favoriteRecipes.length;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.favoriteRecipes = [];
+        state.page = 1;
       }),
 });
 
