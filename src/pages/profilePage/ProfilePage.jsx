@@ -39,7 +39,7 @@ const ProfilePage = () => {
       <ProfileNavigation />
       <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
-      {totalItems && recipeType === "own" > 12 && <Pagination />}
+      {totalItems > 12 && recipeType === "own" && <Pagination />}
       {recipeType === "own"
         && showedRecipes.length === 0
         && <NoRecipesYet recipesType={"own"}>

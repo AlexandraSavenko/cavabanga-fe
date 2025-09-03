@@ -246,7 +246,6 @@ formData.append("recipeImg", values.recipeImg);
                           {values.ingredient.map((ing, index) => {
                             const ingredientName =
                               ingredientsList.find((i) => i._id === ing.id)?.name || ing.id;
-                        console.log(values.ingredient)
                             return (
                               <div key={index} className={css.column}>
                                 <div className={css.columnItem}>{ingredientName}</div>
@@ -256,12 +255,9 @@ formData.append("recipeImg", values.recipeImg);
                                     className={css.buttonDrop}
                                     type="button"
                                     onClick={() => {
-                                      console.log("onbtnclick" ,values.ingredient)
                                       const newIngredients = values.ingredient.filter(
                                         (_, i) => i !== index
                                       );
-                                      console.log(newIngredients)
-
                                       setFieldValue("ingredient", newIngredients);
                                     }}
                                   >
