@@ -21,7 +21,6 @@ const MainPage = () => {
   const category = useSelector(selectCategory);
   const name = useSelector(selectSearchQuery);
   const ingredient = useSelector(selectIngredient);
-  const isLoading = useSelector((state) => state.recipes.loading); // Стейт завантаження
   const totalItems = useSelector(selectTotalItems)
 
   useEffect(() => {
