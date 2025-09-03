@@ -17,8 +17,10 @@ const recipesState = {
   filters: {},
   title: "",
   loading: false,
+  isToggleFavoritesLoading: false,
   error: null,
 };
+
 const recipeSlice = createSlice({
   name: "recipes",
   initialState: recipesState,
@@ -53,9 +55,21 @@ const recipeSlice = createSlice({
         state.loading = true;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
+        state.loading = false; // Зупиняємо лоадер після отримання фаворитів
         state.favoriteRecipes = action.payload;
       })
+      .addCase(getUserFavourites.rejected, (state) => {
+        state.loading = false; // Гарантія вимкнення лоадера при помилці
+        state.error = true;
+      })
+      .addCase(toggleFavorites.pending, (state) => {
+        state.isToggleFavoritesLoading = true;
+      })
+      .addCase(toggleFavorites.rejected, (state) => {
+        state.isToggleFavoritesLoading = false;
+      })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
+        state.isToggleFavoritesLoading = false;
         const { recipeId } = action.payload;
         if (state.favoriteRecipes.some((recipe) => recipe._id === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
