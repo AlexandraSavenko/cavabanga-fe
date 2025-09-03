@@ -13,7 +13,6 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/slice";
 import recipesReducer from "./recipes/slice";
 import filtersReducer from "./filters/slice";
-// import favoritesSlice from "./recipes/favoritesSlice";
 
 const persistAuthConfig = {
   key: "auth",
@@ -24,20 +23,20 @@ const persistFiltersConfig = {
   storage,
   blacklist: ["searchQuery"]
 }
-const persistRecipesConfig = {
-  key: "recipes",
-  storage, 
-  whitelist: ["favoriteRecipes"],
-}
+// const persistRecipesConfig = {
+//   key: "recipes",
+//   storage, 
+//   whitelist: ["favoriteRecipes"],
+// }
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedFiltersReducer = persistReducer(persistFiltersConfig, filtersReducer);
-const persistedRecipesReducer = persistReducer(persistRecipesConfig, recipesReducer);
+// const persistedRecipesReducer = persistReducer(persistRecipesConfig, recipesReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     filters: persistedFiltersReducer,
-    recipes: persistedRecipesReducer,
+    recipes: recipesReducer,
     // favorites: favoritesSlice,
   },
   middleware: (getDefaultMiddleware) =>

@@ -47,9 +47,11 @@
     row-gap: 28px;
     column-gap: 24px;
     flex-direction: row;
+
   }
 
   .item {
     width: calc((100% - 96px) / 4);
+        flex-grow: 0;
   }
 }

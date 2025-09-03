@@ -17,13 +17,15 @@ const MainPage = () => {
   const category = useSelector(selectCategory);
   const name = useSelector(selectSearchQuery);
   const ingredient = useSelector(selectIngredient);
-  const totalItems = useSelector(selectTotalItems)
+  const totalItems = useSelector(selectTotalItems);
+  console.log("main", allRecipes)
   useEffect(() => {
     // Запит списку рецептів з урахуванням фільтрів та пошуку
     dispatch(getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient }));
   }, [page, category, name, ingredient, dispatch]);
   return (
     <div className={css.wrap}>
+      <h2 className={css.title}>Recepies</h2>
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
       {totalItems > 12 && <Pagination />}

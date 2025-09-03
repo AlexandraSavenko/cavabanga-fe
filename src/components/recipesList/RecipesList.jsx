@@ -5,7 +5,6 @@ import style from './RecipesList.module.css';
 
 const RecipesList = ({ allRecipes, recipeType }) => {
   const listRef = useRef(null); // посилання на контейнер для скролу
-
   if (!Array.isArray(allRecipes)) {
     return <p>Something went wrong</p>;
   }
