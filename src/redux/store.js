@@ -27,7 +27,7 @@ const persistFiltersConfig = {
 const persistRecipesConfig = {
   key: "recipes",
   storage, 
-  whitelist: ["favoriteRecipes", "totalItems"],
+  whitelist: ["favoriteRecipes"],
 }
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedFiltersReducer = persistReducer(persistFiltersConfig, filtersReducer);
