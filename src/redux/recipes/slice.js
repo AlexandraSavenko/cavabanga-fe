@@ -88,7 +88,7 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
-        state.totalItems = action.favoriteRecipes.length;
+        state.totalItems = state.favoriteRecipes.length;
       })
       .addCase(logout.fulfilled, (state) => {
         state.favoriteRecipes = [];

@@ -218,7 +218,6 @@ formData.append("recipeImg", values.recipeImg);
                               ingredientAmount: values.currentIngredientAmount,
                             },
                           ]);
-                        //  console.log("in submit inged => values.ingredient: ", values.ingredient)
                           setFieldValue("currentIngredientId", "");
                           setFieldValue("currentIngredientAmount", "");
                         }

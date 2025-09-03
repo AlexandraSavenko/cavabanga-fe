@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import css from "./RecipeDetails.module.css";
-import Loader from "../../components/loader/Loader";
+// import Loader from "../../components/loader/Loader";
 import ModalNotAutor from "../../components/modalNotAutor/ModalNotAutor";
 import RecipeTitle from "../../components/recipeDetails/RecipeTitle/RecipeTitle";
 import RecipeImage from "../../components/recipeDetails/RecipeImage/RecipeImage";
@@ -35,7 +35,6 @@ export default function RecipeDetails() {
   const toDo = !isFavorite ? "add" : "delete";
 
   useEffect(() => {
-    console.log("Recipe from backend:", recipe);
     const fetchRecipe = async () => {
       if (existingRecipe) return;
       setIsLoading(true);
@@ -56,7 +55,7 @@ export default function RecipeDetails() {
     fetchRecipe();
   }, [id, navigate, existingRecipe]);
 
-  if (isLoading || !recipe) return <Loader />; // Показуємо лоадер поки нема даних
+  if (isLoading || !recipe) return <p>Please wait</p>; // Показуємо лоадер поки нема даних
 
   const handleFavoriteClick = () => {
     if (!isAuth) {

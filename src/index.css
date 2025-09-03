@@ -24,7 +24,9 @@
 a {
   text-decoration: none;
 }
-
+button{
+  cursor: pointer;
+}
 ol,
 ul {
   list-style: none;
