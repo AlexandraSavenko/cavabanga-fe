@@ -66,18 +66,41 @@ Our application is built with attention to both user experience and robust archi
 
 This project was built with passion, creativity, and teamwork.  
 
-[@AlexandraSavenko](https://github.com/AlexandraSavenko) — Team Lead 
-[@katuha2024] (https://github.com/katuha2024) - Scrum Master
-[@SerbynS] (https://github.com/SerbynS) - Developer / BackEnd /api/users
-[@Golotniks94](https://github.com/Golotniks94) -
-[@Anastasiia23120](https://github.com/Anastasiia23120) — Developer / SearchBox & Filters  
-[@YuliaKolinko](https://github.com/YuliaKolinko) — Developer / Recipe Details Page & Not Found Page & BackEnd /api/recipes
-[@valentina2209](https://github.com/valentina2209) — Developer / Profile Page & Private Endpoint for User’s Own Recipes  
+## 👥 Team
 
-[@TaniaDymych](https://github.com/TaniaDumych) -
-[@vanisimov4] (https://github.com/vanisimov4)-
-[@hisio13] (https://github.com/hisio13) -
-[@hanna-uler] (https://github.com/hanna-uler) -
+- [@AlexandraSavenko](https://github.com/AlexandraSavenko) — **Team Lead**  
+  _Front-end setup, Header, Footer_
+
+- [@katuha2024](https://github.com/katuha2024) — **Scrum Master**  
+  _Main Page, Pagination_
+
+- [@SerbynS](https://github.com/SerbynS) — **Developer / BackEnd /api/users**  
+  _Swagger, Back-end setup, Private & Public Endpoints_
+
+- [@Golotniks94](https://github.com/Golotniks94) — **Developer**  
+  _Loader_
+
+- [@Anastasiia23120](https://github.com/Anastasiia23120) — **Developer / SearchBox & Filters**  
+  _Recipe filtering & search_
+
+- [@YuliaKolinko](https://github.com/YuliaKolinko) — **Developer / Recipe Details Page & Not Found Page & BackEnd /api/recipes**  
+  _Recipe Details Page_
+
+- [@valentina2209](https://github.com/valentina2209) — **Developer / Profile Page & Private Endpoint for User’s Own Recipes**  
+  _Profile Page, Recipes List & Card_
+
+- [@TaniaDumych](https://github.com/TaniaDumych) — **Developer**  
+  _Add Recipe Page_
+
+- [@vanisimov4](https://github.com/vanisimov4) — **Developer**  
+  _Add & Remove Favorites, Scroll_
+
+- [@hisio13](https://github.com/hisio13) — **Developer**  
+  _Back-end Recipes, Search & Filtering_
+
+- [@hanna-uler](https://github.com/hanna-uler) — **Developer**  
+  _Registration & Login_
+
 
 ## 🙏 Acknowledgements  
 

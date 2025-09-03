@@ -5,3 +5,4 @@ export const selectCategories = (state) => state.filters.categories;
 export const selectIngredients = (state) => state.filters.ingredients;
 export const selectSearchQuery = (state) => state.filters.searchQuery;
 export const selectFiltError = (state) => state.filters.error;
+export const selectFilterLoading = (state) => state.filters.loading;

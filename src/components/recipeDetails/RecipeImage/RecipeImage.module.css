@@ -34,6 +34,7 @@
   .recipeImage {
     display: block;
     border-radius: 8px;
+    min-width: 361px;
     width: 100%;
     height: auto;
   }
@@ -55,5 +56,10 @@
 
   .generalButtonWrap {
     order: 3;
+  }
+}
+@media only screen and (max-width: 393px) {
+  .recipeImage{
+min-width: auto;
   }
 }

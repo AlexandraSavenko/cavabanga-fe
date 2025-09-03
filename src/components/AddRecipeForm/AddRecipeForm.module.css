@@ -1,19 +1,23 @@
 .addRecipeContainer {
   display: block;
 }
+
 .photoboxWrapper {
   margin-bottom: 24px;
 }
+
 .section {
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 40px;
 }
+
 .label {
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 4px;
 }
+
 .photobox {
   width: 361px;
   border-radius: 16px;
@@ -25,11 +29,14 @@
   position: relative;
   cursor: pointer;
   overflow: hidden;
+ 
 }
+
 .labels {
   font-weight: 400;
   font-size: 18px;
 }
+
 .text {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -42,11 +49,13 @@
   font-size: 18px;
   color: #595d62;
 }
+
 .text:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
 .textarea {
   background: #fff;
   border: 1px solid #d9d9d9;
@@ -59,11 +68,13 @@
   font-size: 18px;
   color: #595d62;
 }
+
 .textarea:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
 .input {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -77,11 +88,14 @@
   font-size: 18px;
   color: #595d62;
 }
+
 .input:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
+
 .input1 {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -95,12 +109,15 @@
   font-weight: 400;
   font-size: 18px;
   color: #595d62;
+  z-index: -1;
 }
+
 .input1:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
 .input2 {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -113,17 +130,20 @@
   font-weight: 400;
   font-size: 18px;
   color: #595d62;
+  z-index: -1;
 }
+
 .input2:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
 .twoColumns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+display: flex;
   gap: 16px;
 }
+
 .inputs {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -135,12 +155,15 @@
   font-size: 18px;
   color: #595d62;
 }
+
 .inputs:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
 }
+
 .textareas {
+  font-family: "Montserrat", sans-serif;
   background: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
@@ -152,53 +175,62 @@
   font-size: 18px;
   color: #9f9f9f;
 }
+
 .textareas:focus {
   font-size: 16px;
   line-height: 155%;
   color: #000;
   font-family: "Montserrat", sans-serif;
 }
+
 .blocks {
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr;
 }
+
 .icon {
   width: 52px;
   height: 52px;
   pointer-events: none;
   stroke-width: 2.56px;
 }
+
 .icons {
   width: 16px;
   height: 16px;
   stroke-width: 1px;
 }
+
 .imagePreview {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .inputPhoto {
   position: absolute;
   width: 100%;
   height: 100%;
   opacity: 0;
   cursor: pointer;
+  z-index: 1;
 }
-.error {
-  color: red;
-  font-size: 10px;
-  margin-top: 5px;
-  padding: 4px;
-  border-radius: 4px;
-  display: block;
+
+.errorField {
+  border: 1.5px solid var(--red);
+  color: var(--red);
+}
+
+.errorField::placeholder {
+  color: var(--red);
 }
 
 .dropDown {
   border-bottom: 1px solid #c5c5c5;
   padding: 16px 0px;
 }
+
 .dropDownColumns {
   display: flex;
   flex-direction: column;
@@ -206,12 +238,14 @@
   font-weight: 600;
   font-size: 16px;
 }
+
 .column {
   display: grid;
   grid-template-columns: 1fr 180px;
   gap: 12px;
   align-items: center;
 }
+
 .columnItem {
   font-weight: 400;
   font-size: 16px;
@@ -222,12 +256,14 @@
   display: flex;
   justify-content: space-between;
 }
+
 .column1 .column2 {
   flex: 1;
   text-align: center;
   font-weight: bold;
   padding: 5px;
 }
+
 .mobileOnly {
   display: block;
   flex: 1;
@@ -239,9 +275,11 @@
   border-bottom: 1px solid #c5c5c5;
   padding: 16px 0px;
 }
+
 .tabletOnly {
   display: none;
 }
+
 .button {
   border-radius: 8px;
   padding: 12px 16px;
@@ -256,6 +294,7 @@
   font-family: "Montserrat", sans-serif;
   margin-bottom: 48px;
 }
+
 .buttonNew {
   border-radius: 8px;
   padding: 12px 16px;
@@ -268,12 +307,14 @@
   color: #fff;
   font-family: "Montserrat", sans-serif;
 }
+
 .button:hover,
 .button:focus,
 .buttonNew:hover,
 .buttonNew:focus {
   background: #6d554b;
 }
+
 .button:active,
 .buttonNew:active {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
@@ -289,46 +330,92 @@
   padding: 0;
   margin-left: 3px;
 }
+
+@media only screen and (max-width: 393px) {
+.contaner{
+  min-width: none;
+}
+  .photobox {
+    width: 100%;
+  }
+  .text{
+    display: block;
+    width: 100%;
+  }
+  .text::placeholder{
+    font-size: 8px;
+  }
+  .section .textarea{
+    width: 100%;
+  }
+  .textareas{
+    width: 100%;
+  }
+  .twoColumns{
+    flex-direction: column;
+  }
+  .input, .input1, .input2{
+    width: 100%;
+  }
+  .buttonNew{
+    width: 100%;
+  }
+  .button{
+    width: 100%;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .label {
     font-size: 32px;
   }
+
   .photobox {
     width: 704px;
   }
+
   .section {
     font-size: 32px;
   }
+
   .text {
     width: 704px;
   }
+
   .textarea {
     width: 704px;
   }
+
   .input {
     width: 704px;
   }
+
   .inputs {
     width: 340px;
   }
+
   .blocks {
     grid-template-columns: 1fr 1fr;
     align-items: start;
     position: relative;
     gap: 24px;
   }
+
   .amountbox {
     flex-direction: column;
     display: contents;
   }
+
   .input1 {
     width: 431px;
     height: 48px;
   }
+
   .input2 {
     width: 249px;
     height: 46px;
   }
+
   .buttonNew {
     padding: 8px;
     width: 249px;
@@ -336,9 +423,11 @@
     grid-column: 2;
     justify-self: start;
   }
+
   .dropDownColumns {
     margin-bottom: 10px;
   }
+
   .tabletOnly {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -351,9 +440,11 @@
     max-width: 431px;
     grid-column: 1 / -1;
   }
+
   .mobileOnly {
     display: none;
   }
+
   .columnItem {
     display: flex;
     justify-content: space-between;
@@ -362,9 +453,11 @@
     background: #f9f9f9;
     margin-bottom: 8px;
   }
+
   .button {
     width: 704px;
   }
+
   .textareas {
     width: 704px;
   }
@@ -376,52 +469,67 @@
     align-items: flex-start;
     gap: 24px;
   }
+
   .photoboxWrapper {
     width: 391px;
     margin-left: auto;
     margin-top: 0;
     order: 2;
+    margin-bottom: 0;
   }
+
   .formContent {
     flex: 1;
     order: 1;
   }
+
   .photobox {
     border-radius: 16px;
     width: 391px;
     height: 374px;
   }
+
   .section {
     font-size: 32px;
     margin-bottom: 32px;
   }
+
   .label {
     font-size: 32px;
     margin-bottom: 4px;
   }
+
   .labels {
     display: flex;
     flex-direction: column;
     margin-top: 32px;
   }
+
   .text {
     width: 809px;
   }
+
   .textarea {
     width: 809px;
   }
+
   .input {
     width: 809px;
+    margin-bottom: 0;
   }
+
   .inputs {
     width: 392px;
   }
+
   .input1 {
     width: 497px;
   }
+
   .input2 {
     width: 288px;
   }
+
   .textareas {
     width: 809px;
   }
@@ -429,21 +537,24 @@
   .button {
     width: 809px;
   }
+
   .buttonNew {
     border-radius: 8px;
     padding: 4px 8px;
     font-size: 12px;
-    height: 23px;
     width: 247px;
-    height: 23px;
+
   }
+
   .error {
     font-size: 15px;
   }
+
   .tabletOnly {
     border-bottom: 1px solid #c5c5c5;
     width: 332px;
   }
+
   .dropDown {
     border-bottom: 1px solid #c5c5c5;
     width: 332px;

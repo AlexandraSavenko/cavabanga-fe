@@ -1,6 +1,7 @@
 .container {
   margin: 0 auto;
   max-width: 393px;
+  margin-top: 48px;
 }
 
 .title {
@@ -26,6 +27,11 @@
   background-color: transparent;
   color: var(--black);
   cursor: pointer;
+}
+.linkBtn:hover,
+.linkBtn:focus {
+  border: 1px solid #6d554b !important;
+  color: #6d554b;
 }
 @media only screen and (min-width: 768px) {
   .container {
