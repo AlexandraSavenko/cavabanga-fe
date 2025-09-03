@@ -140,8 +140,7 @@
 }
 
 .twoColumns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+display: flex;
   gap: 16px;
 }
 
@@ -330,6 +329,40 @@
   cursor: pointer;
   padding: 0;
   margin-left: 3px;
+}
+
+@media only screen and (max-width: 393px) {
+.contaner{
+  min-width: none;
+}
+  .photobox {
+    width: 100%;
+  }
+  .text{
+    display: block;
+    width: 100%;
+  }
+  .text::placeholder{
+    font-size: 8px;
+  }
+  .section .textarea{
+    width: 100%;
+  }
+  .textareas{
+    width: 100%;
+  }
+  .twoColumns{
+    flex-direction: column;
+  }
+  .input, .input1, .input2{
+    width: 100%;
+  }
+  .buttonNew{
+    width: 100%;
+  }
+  .button{
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 768px) {

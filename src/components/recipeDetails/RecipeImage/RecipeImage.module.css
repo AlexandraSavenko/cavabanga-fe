@@ -58,3 +58,8 @@
     order: 3;
   }
 }
+@media only screen and (max-width: 393px) {
+  .recipeImage{
+min-width: auto;
+  }
+}

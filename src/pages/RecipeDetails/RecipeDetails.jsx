@@ -15,6 +15,7 @@ import SaveButton from "../../components/recipeDetails/SaveButton/SaveButton";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectAllRecipes, selectFavRecipesIds } from "../../redux/recipes/selectors";
 import { toggleFavorites } from "../../redux/recipes/operations";
+import Loader from "../../components/loader/Loader";
 
 export default function RecipeDetails() {
   const [showModal, setShowModal] = useState(false);
@@ -55,7 +56,7 @@ export default function RecipeDetails() {
     fetchRecipe();
   }, [id, navigate, existingRecipe]);
 
-  if (isLoading || !recipe) return <p>Please wait</p>; // Показуємо лоадер поки нема даних
+  if (isLoading || !recipe) return <Loader/>; // Показуємо лоадер поки нема даних
 
   const handleFavoriteClick = () => {
     if (!isAuth) {
