@@ -90,16 +90,12 @@ values.ingredient.forEach((ing, index) => {
 });
 
 formData.append("recipeImg", values.recipeImg);
-  try {
-  await dispatch(addRecipe(formData)).unwrap();
+ dispatch(addRecipe(formData)).unwrap();
 
     navigate(`/profile/own`); 
 
     actions.resetForm();
     setPreviewImage(null);
-  } catch (error) {
-    console.error("Error while creating recipe:", error);
-  }
 };
   return (
 

@@ -74,7 +74,8 @@ export const addRecipe = createAsyncThunk(
       toast.success("The recipe has been successfully added!")
     }
     catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.data?.message);
+    toast.error("Error while creating recipe")
+    return thunkAPI.rejectWithValue(error.response?.data?.data?.message);
 
     }
   }
