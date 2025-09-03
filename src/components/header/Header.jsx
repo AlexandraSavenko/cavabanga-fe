@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
+import { resetFilters } from "../../redux/filters/slice";
 import CommonModal from "../ModalErrorCommon/ModalErrorCommon"
 
 const Header = () => {
@@ -20,6 +21,7 @@ const Header = () => {
     const handleLogout = () => {
       setIsConfirmModalOpen(false);
       setMobileNav(false);
+      dispatch(resetFilters())
       dispatch(logout());
       navigate('/');
   };
