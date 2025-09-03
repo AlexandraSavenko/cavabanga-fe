@@ -4,6 +4,8 @@ import {
   getUserFavourites,
   toggleFavorites,
 } from "./operations";
+import { logout } from "../auth/operations";
+
 
 const recipesState = {
   allRecipes: [],
@@ -36,9 +38,11 @@ const recipeSlice = createSlice({
     builder
       .addCase(getRecipeList.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getRecipeList.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = null;
         state.allRecipes = action.payload.data;
         state.page = action.payload.page;
         state.totalItems = action.payload.totalItems;
@@ -53,10 +57,16 @@ const recipeSlice = createSlice({
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getUserFavourites.fulfilled, (state, action) => {
         state.loading = false; // Зупиняємо лоадер після отримання фаворитів
         state.favoriteRecipes = action.payload;
+        state.loading = false;
+        state.error = null;
+        state.page = 1;
+        state.totalItems = action.payload.length;
+        state.totalPages = 1;
       })
       .addCase(getUserFavourites.rejected, (state) => {
         state.loading = false; // Гарантія вимкнення лоадера при помилці
@@ -78,6 +88,11 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
+        state.totalItems = action.favoriteRecipes.length;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.favoriteRecipes = [];
+        state.page = 1;
       }),
 });
 

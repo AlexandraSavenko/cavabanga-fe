@@ -14,7 +14,6 @@ import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
 import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
-// import toast from "react-hot-toast"
 
 export default function AuthPage() {
     const { authType } = useParams()
@@ -29,13 +28,6 @@ export default function AuthPage() {
     const handleCloseModal = () => {
         dispatch(clearAuthError())
     };
-    // To prevent DOUBLE render of the toast (if using):
-    // useEffect(() => {
-    //    if (error) {
-    //      toast.error(error);
-    //      dispatch(clearAuthError())
-    //     }
-    //  }, [dispatch, error]);
 
     return (
         <div className={css.container}>

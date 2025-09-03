@@ -127,13 +127,7 @@
   flex-direction: column;
   gap: 16px;
 }
-/* .modalBtn {
-  width: 314px !important;
-  border-radius: 8px !important;
-  padding: 16px !important;
-  font-weight: 600 !important;
-  font-size: 18px !important;
-} */
+
 .modalBtnCancel {
   border: 1px solid var(--black) !important;
   font-family: var(--font-family);
@@ -145,6 +139,11 @@
   font-weight: 600;
   font-size: 18px;
 }
+.modalBtnCancel:hover,
+.modalBtnCancel:focus {
+  border: 1px solid var(--light-brown) !important;
+  color: var(--light-brown);
+}
 .modalBtnLogout {
   background-color: var(--red) !important;
   color: var(--white);
@@ -154,6 +153,11 @@
   padding: 16px;
   font-weight: 600;
   font-size: 18px;
+}
+.modalBtnLogout:hover,
+.modalBtnLogout:focus {
+  border: 1px solid var(--darck-brown) !important;
+  color: var(--darck-brown);
 }
 @media (max-width: 767.5px) {
   .header a:first-child {
@@ -212,8 +216,7 @@
   }
   .closeModalNav svg {
     display: block;
-    
-    
+
     width: 100%;
     height: 100%;
     stroke: var(--white);

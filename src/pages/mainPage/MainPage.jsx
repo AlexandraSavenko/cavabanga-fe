@@ -10,7 +10,7 @@ import Pagination from "../../components/pagination/Pagination"
 import Filters from "../../components/Filters/Filters";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllRecipes, selectPage } from "../../redux/recipes/selectors";
+import { selectAllRecipes, selectPage, selectTotalItems } from "../../redux/recipes/selectors";
 import { getRecipeList } from "../../redux/recipes/operations";
 import { selectCategory, selectSearchQuery, selectIngredient } from "../../redux/filters/selectors";
 
@@ -22,17 +22,17 @@ const MainPage = () => {
   const name = useSelector(selectSearchQuery);
   const ingredient = useSelector(selectIngredient);
   const isLoading = useSelector((state) => state.recipes.loading); // Стейт завантаження
+  const totalItems = useSelector(selectTotalItems)
 
   useEffect(() => {
     // Запит списку рецептів з урахуванням фільтрів та пошуку
     dispatch(getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient }));
   }, [page, category, name, ingredient, dispatch]);
-
   return (
     <div className={css.wrap}>
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
-      {allRecipes.length > 12 && <Pagination />}
+      {totalItems > 12 && <Pagination />}
       {allRecipes.length === 0 && <NoMatchFound/>}
     </div>
   );
