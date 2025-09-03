@@ -11,8 +11,8 @@ import GeneralInfo from "../../components/recipeDetails/GeneralInfo/GeneralInfo"
 import RecipeSection from "../../components/recipeDetails/RecipeSection/RecipeSection";
 import SaveButton from "../../components/recipeDetails/SaveButton/SaveButton";
 
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { selectFavRecipesIds, selectOneRecipe } from "../../redux/recipes/selectors";
+import { selectFavIds, selectIsLoggedIn } from "../../redux/auth/selectors";
+import { selectOneRecipe } from "../../redux/recipes/selectors";
 import { fetchRecipe, toggleFavorites } from "../../redux/recipes/operations";
 
 export default function RecipeDetails() {
@@ -24,7 +24,7 @@ const recipe = useSelector(selectOneRecipe)
   const isAuth = useSelector(selectIsLoggedIn);
 
 
-  const favorites = useSelector(selectFavRecipesIds) || []; // Захист від undefined
+  const favorites = useSelector(selectFavIds) || []; // Захист від undefined
   const isFavorite = favorites.includes(id);
 
   const toDo = !isFavorite ? "add" : "delete";

@@ -9,7 +9,6 @@ const RecipesList = ({ allRecipes, recipeType }) => {
   if (!Array.isArray(allRecipes)) {
     return <p>Something went wrong</p>;
   }
- 
   return (
     <div ref={listRef} className={style.container}>
       <ul className={style.recipesList}>
