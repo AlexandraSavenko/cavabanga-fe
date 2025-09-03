@@ -126,7 +126,7 @@ formData.append("recipeImg", values.recipeImg);
                 {previewImage
                   ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
                   : (<svg className={css.icon}>
-                    <use href="/public/icons.svg#icon-camera" />
+                    <use href="/icons.svg#icon-camera" />
                   </svg>)}
               </div>
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
@@ -263,7 +263,7 @@ formData.append("recipeImg", values.recipeImg);
                                     }}
                                   >
                                     <svg className={css.icons}>
-                                      <use href="/public/icons.svg#icon-trash-can" width="16" height="16" />
+                                      <use href="/icons.svg#icon-trash-can" width="16" height="16" />
                                     </svg>
                                   </button>
                                 </div>
