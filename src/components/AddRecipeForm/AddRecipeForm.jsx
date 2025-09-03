@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./AddRecipeForm.module.css";
-
+import clsx from "clsx";
 import { selectCategories, selectIngredients } from "../../redux/filters/selectors";
 import { fetchCategories, fetchIngredients } from "../../redux/filters/operations";
 import { addRecipe } from "../../redux/recipes/operations";
+import { useNavigate } from "react-router-dom"; 
+
 
 const AddRecipeForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const categories = useSelector(selectCategories);
   const ingredientsList = useSelector(selectIngredients);
   const [previewImage, setPreviewImage] = useState(null);
@@ -22,7 +25,7 @@ const AddRecipeForm = () => {
   const initialValues = {
     name: "",
     decr: "",
-    cookingTime: "",
+    cookiesTime: "",
     cals: "",
     category: "",
     currentIngredientId: "",
@@ -70,35 +73,10 @@ const validationSchema = Yup.object().shape({
   instruction: Yup.string()
     .max(1200, "Instructions should not exceed 1200 characters")
     .required("Instructions are required"),
-    
-  // recipeImg: Yup.mixed()
-});
+    });
 
-  const handleSubmit = (values, actions) => {
-    // const {cals, category, cookiesTime, decr, ingredient, instruction, name} = values;
-    // const payload = {cals, category, cookiesTime, decr, ingredient, instruction, name};
-//     const formData = new FormData();
-//     console.log("values", values);
-//       formData.append("name", values.name);
-//       formData.append("decr", values.decr);
-//       formData.append("cookiesTime", values.cookiesTime);
-//       if (values.cals) formData.append("cals", values.cals);
-//       formData.append("category", values.category);
-//       formData.append("instruction", values.instruction);
-// console.log(formData.get("name"))
-//       // правильно називаємо поле для бекенду
-//       formData.append("ingredient", JSON.stringify(values.ingredients));
-//       console.log("Ingredients array:", values.ingredient);
-//       console.log("FormData contents:", formData);
-//       if (values.recipeImg) {
-//         formData.append("recipeImg", values.recipeImg);
-//       }
-//     for (let [key, value] of formData.entries()) {
-//   console.log("formData => key, value",key, value);
-    // }
+const handleSubmit = async (values, actions) => {
     const formData = new FormData();
-
-// Append text fields
 formData.append("name", values.name);
 formData.append("category", values.category);
 formData.append("cals", values.cals);
@@ -106,66 +84,34 @@ formData.append("cookiesTime", values.cookiesTime);
 formData.append("instruction", values.instruction);
 formData.append("decr", values.decr);
 
-// Append array fields (example: ingredients)
 values.ingredient.forEach((ing, index) => {
   formData.append(`ingredient[${index}][id]`, ing.id);
   formData.append(`ingredient[${index}][ingredientAmount]`, ing.ingredientAmount);
 });
 
-// Append file (important: must be File/Blob, not base64)
 formData.append("recipeImg", values.recipeImg);
-    dispatch(addRecipe(formData));
+  try {
+  await dispatch(addRecipe(formData)).unwrap();
+
+    navigate(`/profile/own`); 
+
     actions.resetForm();
+    setPreviewImage(null);
+  } catch (error) {
+    console.error("Error while creating recipe:", error);
   }
-  //  try {
-  //     const formData = new FormData();
-  //     formData.append("name", values.name);
-  //     formData.append("decr", values.decr);
-  //     formData.append("cookiesTime", values.cookiesTime);
-  //     if (values.cals) formData.append("cals", values.cals);
-  //     formData.append("category", values.category);
-  //     formData.append("instruction", values.instruction);
-
-  //     // правильно називаємо поле для бекенду
-  //     formData.append("ingredient", JSON.stringify(values.ingredients));
-  //     console.log("Ingredients array:", values.ingredients);
-  //     console.log("FormData contents:", [...formData.entries()]);
-
-
-  //     if (values.recipeImg) {
-  //       formData.append("recipeImg", values.recipeImg);
-  //     }
-
-  //     console.log("Submitting recipe values:", values);
-  //     console.log("Submitting FormData:", [...formData.entries()]);
-     
-
-
-  //     await axios.post("/api/recipes", formData, {
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     });
-
-  //     alert("Recipe successfully added!");
-  //     window.location.href = "/recipes";
-  //   } catch (error) {
-  //     console.error("Submit error:", error.response?.data || error.message);
-  //     alert(
-  //       "Error adding recipe: " + (error.response?.data?.message || error.message)
-  //     );
-  //   } finally {
-  //     setSubmitting(false);
-  //   }//
-  
+};
   return (
+
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, setFieldValue, isSubmitting }) => (
+      {({ values, errors, touched, setFieldValue, isSubmitting }) => (
         <Form className={css.form}>
           <div className={css.addRecipeContainer}>
-            {/* Upload photo */}
+         
             <div className={css.photoboxWrapper}>
               <label className={css.label}>Upload Photo</label>
               <div className={css.photobox}>
@@ -177,14 +123,6 @@ formData.append("recipeImg", values.recipeImg);
                   }}
                   className={css.inputPhoto}
                 />
-                {/* {!previewImage && (
-                  <svg className={css.icon}>
-                    <use href="/public/icons.svg#icon-camera" />
-                  </svg>
-                )}
-                {previewImage && (
-                  <img src={previewImage} alt="preview" className={css.imagePreview} />
-                )} */}
                 {previewImage
                   ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
                   : (<svg className={css.icon}>
@@ -194,46 +132,41 @@ formData.append("recipeImg", values.recipeImg);
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
             </div>
             <div className={css.formContent}>
-              {/* General Information */}
+             
               <section className={css.section}>
                 General Information
                 <div className={css.fieldBlock}>
                   <label className={css.labels}>Recipe Title</label>
-                  <Field
-                    name="name"
-                    className={css.text}
-                    placeholder="Enter the name of your recipe"
-                  />
-                  <ErrorMessage name="name" component="div" className={css.error} />
+                  <Field  className={clsx(css.text, touched.name &&  errors.name && css.errorField)} name="name" placeholder="Enter the name of your recipe" />
+            <ErrorMessage className={css.error} name="name" component={() => null}/>
                 </div>
-
-                <div className={css.fieldBlock}>
+                
+        <div className={css.fieldBlock}>
                   <label className={css.labels}>Recipe Description</label>
-                  <Field
+                  <Field  className={clsx(css.textarea, touched.decr &&  errors.decr && css.errorField)}
                     as="textarea"
                     name="decr"
-                    className={css.textarea}
                     placeholder="Enter a brief description of your recipe"
                   />
-                  <ErrorMessage name="decr" component="div" className={css.error} />
+                  <ErrorMessage name="decr" component={() => null} />
                 </div>
 
                 <div className={css.fieldBlock}>
                   <label className={css.labels}>Cooking time in minutes</label>
-                  <Field type="number" name="cookiesTime" className={css.input} placeholder="10" />
-                  <ErrorMessage name="cookiesTime" component="div" className={css.error} />
+                  <Field className= {clsx(css.input, touched.number &&  errors.cookiesTime && css.errorField)} type="number" name="cookiesTime"  placeholder="10" />
+                  <ErrorMessage name="cookiesTime" component={() => null} />
                 </div>
 
                 <div className={css.twoColumns}>
                   <div className={css.fieldBlock}>
                     <label className={css.labels}>Calories</label>
-                    <Field type="number" name="cals" className={css.inputs} placeholder="150 cals" />
-                    <ErrorMessage name="cals" component="div" className={css.error} />
+                    <Field  className={clsx(css.inputs, touched.cals &&  errors.cals && css.errorField)}type="number" name="cals"  placeholder="150 cals" />
+                    <ErrorMessage name="cals" component={() => null} />
                   </div>
 
-                  <div className={css.fieldBlock}>
+             <div className={css.fieldBlock}>
                     <label className={css.labels}>Category</label>
-                    <Field as="select" name="category" className={css.inputs}>
+                    <Field  className={clsx(css.inputs, touched.category &&  errors.category&& css.errorField)} as="select" name="category" >
                       <option value="">Select category</option>
                       {categories.map((cat) => (
                         <option key={cat._id} value={cat.name}>
@@ -241,18 +174,19 @@ formData.append("recipeImg", values.recipeImg);
                         </option>
                       ))}
                     </Field>
-                    <ErrorMessage name="category" component="div" className={css.error} />
-                  </div>
+                    <ErrorMessage name="category" component={() => null} />
+
+               </div>
                 </div>
               </section>
 
-              {/* Ingredients */}
+             
               <section className={css.section}>
                 Ingredients
                 <div className={css.blocks}>
                   <div className={css.fieldGroup}>
                     <label className={css.labels}>Name</label>
-                    <Field as="select" name="currentIngredientId" className={css.input1}>
+                    <Field  className={clsx(css.input1, touched.currentIngredientId &&  errors.currentIngredientId && css.errorField)} as="select" name="currentIngredientId">
                       <option value="">Select ingredient</option>
                       {ingredientsList.map((ing) => (
                         <option key={ing._id} value={ing._id}>
@@ -260,15 +194,15 @@ formData.append("recipeImg", values.recipeImg);
                         </option>
                       ))}
                     </Field>
-                  </div>
+
+                       </div>
 
                   <div className={css.amountbox}>
                     <div className={css.fieldGroup}>
                       <label className={css.labels}>Amount</label>
-                      <Field
+                      <Field className= {clsx(css.input2, touched.currentIngredientAmount &&  errors.currentIngredientAmount && css.errorField)}
                         name="currentIngredientAmount"
                         placeholder="100g"
-                        className={css.input2}
                       />
                     </div>
 
@@ -276,7 +210,6 @@ formData.append("recipeImg", values.recipeImg);
                       className={css.buttonNew}
                       type="button"
                       onClick={() => {
-                        // console.log("in submit inged => values: ", values)
                         if (values.currentIngredientId && values.currentIngredientAmount) {
                           setFieldValue("ingredient", [
                             ...values.ingredient,
@@ -294,17 +227,17 @@ formData.append("recipeImg", values.recipeImg);
                       Add new ingredient
                     </button>
 
-                    {/* Table headers for tablet */}
+                   
                     <div className={css.tabletOnly}>
                       <div className={css.column1}>Name</div>
                       <div className={css.column2}>Amount</div>
                     </div>
 
-                    {/* Ingredient list */}
+              
                     {values.ingredient.length > 0 && (
                       <div className={css.dropDown}>
                         <div className={css.dropDownColumns}>
-                          {/* Table headers for mobile */}
+                         
                           <div className={css.mobileOnly}>
                             <div className={css.column1}>Name</div>
                             <div className={css.column2}>Amount</div>
@@ -341,21 +274,20 @@ formData.append("recipeImg", values.recipeImg);
                       </div>
                     )}
                   </div>
-                  <ErrorMessage name="ingredient" component="div" className={css.error} />
+                  <ErrorMessage name="ingredient" component={css.error} />
                 </div>
               </section>
 
-              {/* Instructions */}
+              
               <section className={css.section}>
                 <div className={css.fieldBlock}>
                   <label className={css.label}>Instructions</label>
-                  <Field
+                  <Field className={clsx(css.textareas, touched.instruction &&  errors.instruction && css.errorField)}
                     as="textarea"
                     name="instruction"
-                    className={css.textareas}
                     placeholder="Enter instructions"
                   />
-                  <ErrorMessage name="instruction" component="div" className={css.error} />
+                  <ErrorMessage name="instruction" component={() => null} />
                 </div>
               </section>
 
@@ -371,3 +303,4 @@ formData.append("recipeImg", values.recipeImg);
 };
 
 export default AddRecipeForm;
+
