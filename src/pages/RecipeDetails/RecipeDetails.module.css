@@ -3,6 +3,44 @@
   gap: 24px;
   order: 2;
 }
+.errorMessWrap{
+  background: var(--light-beige);
+  margin: 48px auto;
+  border-radius: 16px;
+  padding: 40px 24px;
+  max-width: 361px;
+  /* height: 270px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+.errorMessWrap p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: var(--black);
+}
+.messLink{
+    border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  height: 54px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  background-color: transparent;
+  color: var(--black);
+  cursor: pointer;
+}
+.messLink:hover,
+.messLink:focus {
+  border: 1px solid #6d554b !important;
+  color: #6d554b;
+}
 @media only screen and (min-width: 1200px) {
   .DesctopWrap {
     display: flex;

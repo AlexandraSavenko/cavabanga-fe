@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchRecipe,
   getRecipeList,
   getUserFavourites,
   toggleFavorites,
 } from "./operations";
 import { logout } from "../auth/operations";
-
 
 const recipesState = {
   allRecipes: [],
@@ -19,7 +19,8 @@ const recipesState = {
   filters: {},
   title: "",
   loading: false,
-  isToggleFavoritesLoading: false,
+  oneRecipe: null,
+  // isToggleFavoritesLoading: false,
   error: null,
 };
 
@@ -73,13 +74,14 @@ const recipeSlice = createSlice({
         state.error = true;
       })
       .addCase(toggleFavorites.pending, (state) => {
-        state.isToggleFavoritesLoading = true;
+        state.loading = true;
+        state.error = false;
       })
       .addCase(toggleFavorites.rejected, (state) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
         const { recipeId } = action.payload;
         if (state.favoriteRecipes.some((recipe) => recipe._id === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
@@ -88,11 +90,22 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
-        state.totalItems = action.favoriteRecipes.length;
+        state.totalItems = state.favoriteRecipes.length;
       })
       .addCase(logout.fulfilled, (state) => {
         state.favoriteRecipes = [];
         state.page = 1;
+      })
+      .addCase(fetchRecipe.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchRecipe.fulfilled, (state, action) => {
+        state.loading = false;
+        state.oneRecipe = action.payload;
+      })
+      .addCase(fetchRecipe.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }),
 });
 

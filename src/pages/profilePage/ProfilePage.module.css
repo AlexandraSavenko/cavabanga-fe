@@ -1,6 +1,7 @@
 .container {
   margin: 0 auto;
   max-width: 393px;
+  margin-top: 48px;
 }
 
 .title {

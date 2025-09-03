@@ -20,7 +20,7 @@ const AddRecipesPage = lazy(() =>
 function App() {
   return (
     <Layout>
-      <Suspense fallback={<Loader />}>
+      <Suspense>
         <Routes>
             <Route path="/" element={<MainPage />} />
             <Route

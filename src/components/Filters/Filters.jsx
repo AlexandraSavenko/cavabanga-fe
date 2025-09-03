@@ -74,12 +74,10 @@ export default function Filter() {
   };
   const handleCategoryChange = (e) => {
     const filterValue = e.target.value;
-    // console.log("in handleCategoryChange => filterValue: ",filterValue)
     dispatch(changeCategoryFilter(filterValue));
   };
   const handleIngredientChange = (e) => {
     const filterValue = e.target.value;
-    // console.log("in handleIngredientChange => filterValue: ",filterValue)
     dispatch(changeIngredientFilter(filterValue));
   };
   

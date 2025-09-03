@@ -35,11 +35,11 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Мій профіль</h2> {/* українською */}
+      <h2 className={styles.title}>My profile</h2> {/* українською */}
       <ProfileNavigation />
       <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
-      {totalItems > 12 && <Pagination />}
+      {totalItems > 12 && recipeType === "own" && <Pagination />}
       {recipeType === "own"
         && showedRecipes.length === 0
         && <NoRecipesYet recipesType={"own"}>
