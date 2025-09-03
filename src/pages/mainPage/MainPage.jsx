@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import css from "./MainPage.module.css";
-import Loader from "../../components/loader/Loader";
 import RecipesList from "../../components/recipesList/RecipesList";
 import NoMatchFound from "../../components/NoMatchFound/NoMatchFound"
 import Pagination from "../../components/pagination/Pagination"
-
-// import SearchBox from "../../components/SearchBox/SearchBox";
-
 import Filters from "../../components/Filters/Filters";
 
 import { useDispatch, useSelector } from "react-redux";

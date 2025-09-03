@@ -20,7 +20,6 @@ export const fetchCategories = createAsyncThunk(
     return res.data.data;
   } catch (error) {
     showCategErToast("Failed to load categories");
-    //  toast.error("Failed to load categories");
     return thunkAPI.rejectWithValue(error.response?.data?.data?.message || error.message || genericErrorMessage)
   }
   })
@@ -33,7 +32,6 @@ export const fetchIngredients = createAsyncThunk(
     return res.data.data;
   } catch (error) {
     showIngredErToast("Failed to load ingredients");
-    // toast.error("Failed to load ingredients");
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || genericErrorMessage)
   }
   })
