@@ -17,7 +17,6 @@ const authSlice = createSlice({
       name: null,
       email: null,
       savedRecipes: [],
-      // ownRecipes: []
     },
     token: null,
     isLoggedIn: false,
@@ -26,7 +25,6 @@ const authSlice = createSlice({
   },
   reducers: {
     clearAuthError: (state) => {
-      console.log("executing clearAuthError")
       state.authError = null;
     }
   },
