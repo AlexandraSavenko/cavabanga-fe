@@ -19,7 +19,7 @@ const recipesState = {
   filters: {},
   title: "",
   loading: false,
-  isToggleFavoritesLoading: false,
+  // isToggleFavoritesLoading: false,
   error: null,
 };
 
@@ -73,13 +73,13 @@ const recipeSlice = createSlice({
         state.error = true;
       })
       .addCase(toggleFavorites.pending, (state) => {
-        state.isToggleFavoritesLoading = true;
+        state.loading = true;
       })
       .addCase(toggleFavorites.rejected, (state) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
       })
       .addCase(toggleFavorites.fulfilled, (state, action) => {
-        state.isToggleFavoritesLoading = false;
+        state.loading = false;
         const { recipeId } = action.payload;
         if (state.favoriteRecipes.some((recipe) => recipe._id === recipeId)) {
           state.favoriteRecipes = state.favoriteRecipes.filter(
