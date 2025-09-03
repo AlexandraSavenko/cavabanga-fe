@@ -73,6 +73,9 @@ const validationSchema = Yup.object().shape({
   instruction: Yup.string()
     .max(1200, "Instructions should not exceed 1200 characters")
     .required("Instructions are required"),
+  
+  recipeImg: Yup.mixed()
+    .required("Picture is required")
     });
 
 const handleSubmit = async (values, actions) => {

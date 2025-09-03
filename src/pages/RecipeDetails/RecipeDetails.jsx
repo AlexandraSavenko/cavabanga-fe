@@ -14,7 +14,6 @@ import SaveButton from "../../components/recipeDetails/SaveButton/SaveButton";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectFavRecipesIds, selectOneRecipe } from "../../redux/recipes/selectors";
 import { fetchRecipe, toggleFavorites } from "../../redux/recipes/operations";
-import Loader from "../../components/loader/Loader";
 
 export default function RecipeDetails() {
   const [showModal, setShowModal] = useState(false);

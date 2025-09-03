@@ -8,9 +8,7 @@ import {
 } from "react-redux"
 import {
     selectAuthError,
-    selectIsLoading
 } from "../../redux/auth/selectors"
-import Loader from "../../components/loader/Loader"
 import { useEffect } from "react"
 import {clearAuthError} from "../../redux/auth/slice"
 import ModalErrorCommon from "../../components/ModalErrorCommon/ModalErrorCommon"
@@ -19,7 +17,6 @@ export default function AuthPage() {
     const { authType } = useParams()
     const dispatch = useDispatch();
     const error = useSelector(selectAuthError);
-    const isLoading = useSelector(selectIsLoading);
     
     useEffect(() => {
         dispatch(clearAuthError())
@@ -39,7 +36,6 @@ export default function AuthPage() {
             </ModalErrorCommon>
             {authType === "register" && <RegistrationForm />}
             {authType === "login" && <LoginForm />}
-            {isLoading && <Loader />}
         </div>
     )
 };

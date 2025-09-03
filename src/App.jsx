@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import RestrictedRoute from "./components/RestrictedRoute";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
 
-const Loader = lazy(() => import("./components/loader/Loader"));
+// const Loader = lazy(() => import("./components/loader/Loader"));
 const Layout = lazy(() => import("./components/layout/Layout"));
 const MainPage = lazy(() => import("./pages/mainPage/MainPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
