@@ -78,7 +78,7 @@ export const addRecipe = createAsyncThunk(
     const token = selectToken(state);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     try {
-      await axios.post("/api/recipes", formData, {
+ await axios.post("/api/recipes", formData, {
   headers: { "Content-Type": "multipart/form-data" },
 });
       toast.success("The recipe has been successfully added!")
@@ -87,6 +87,7 @@ export const addRecipe = createAsyncThunk(
       console.log(error.response?.data?.data?.message)
             console.log(error.message)
       return thunkAPI.rejectWithValue(error.response?.data?.data?.message);
+
     }
   }
 )

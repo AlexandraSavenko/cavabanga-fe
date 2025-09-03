@@ -45,7 +45,6 @@ const Header = () => {
               </button>
             </div>
           )}
-          <div className={css.siteNav}>
             <NavLink
               className={({ isActive }) => (isActive ? css.active : "")}
               onClick={() => setMobileNav(false)}
@@ -106,7 +105,7 @@ const Header = () => {
                 </button>{" "}
               </div>
             )}
-          </div>
+          
         </nav>
         <button
           onClick={toggleModalNav}

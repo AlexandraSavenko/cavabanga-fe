@@ -4,6 +4,7 @@ import css from './ModalErrorCommon.module.css';
 export default function ModalErrorCommon({ isopen, onClose, children }) {
   // Закриття по Escape
   useEffect(() => {
+    // Закриття по Escape
     const handleKeyDown = e => {
       if (e.key === 'Escape') {
         onClose();
@@ -11,10 +12,18 @@ export default function ModalErrorCommon({ isopen, onClose, children }) {
     };
 
     if (isopen) {
+      // disable scroll
+      document.body.style.overflow = 'hidden';
+      // add esc listener
       document.addEventListener('keydown', handleKeyDown);
+    } else {
+      // re-enable scroll
+      document.body.style.overflow = '';
     }
 
     return () => {
+      // cleanup: re-enable scroll, esc
+      document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isopen, onClose]);

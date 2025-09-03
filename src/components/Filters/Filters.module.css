@@ -182,6 +182,7 @@
   font-weight: 600;
   line-height: normal;
   border: none;
+  border-bottom: 1px solid var(--black);
 }
 
 .filtersForm select {

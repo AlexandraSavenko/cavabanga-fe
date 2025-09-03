@@ -41,9 +41,15 @@ body {
   min-height: 100vh;
 }
 .container {
+  width: 100%;
   margin: 0 auto;
 }
 
+@media only screen and (max-width: 392.5px) {
+  .container {
+    padding: 8px;
+  }
+}
 @media only screen and (min-width: 393px) {
   .container {
     padding: 16px;
