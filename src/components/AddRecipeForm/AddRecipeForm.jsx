@@ -66,6 +66,9 @@ const validationSchema = Yup.object().shape({
     .nullable(),
     
   category: Yup.string().required("Select a category"),
+
+  currentIngredientId: Yup.string().required("Select ingredient"),
+  currentIngredientAmount: Yup.string().required("Enter amount"),
   
   ingredient: Yup.array()
     .of(ingredObjectSchema).min(2).required(),
@@ -93,14 +96,14 @@ values.ingredient.forEach((ing, index) => {
 });
 
 formData.append("recipeImg", values.recipeImg);
-dispatch(addRecipe(formData)).unwrap();
 
-navigate(`/profile/own`); 
+ dispatch(addRecipe(formData)).unwrap();
+
+
+    navigate(`/profile/own`); 
 
     actions.resetForm();
     setPreviewImage(null);
-
-
 };
   return (
 
@@ -195,6 +198,8 @@ navigate(`/profile/own`);
                         </option>
                       ))}
                     </Field>
+                    <ErrorMessage name="currentIngredientId" component={() => null} />
+
 
                        </div>
 
@@ -205,6 +210,7 @@ navigate(`/profile/own`);
                         name="currentIngredientAmount"
                         placeholder="100g"
                       />
+                       <ErrorMessage name="currentIngredientAmount" component={() => null} />
                     </div>
 
                     <button
@@ -229,8 +235,8 @@ navigate(`/profile/own`);
 
                    
                     <div className={css.tabletOnly}>
-                      <div className={css.column1}>Name</div>
-                      <div className={css.column2}>Amount</div>
+                      <div className={clsx(css.column1,errors.currentIngredientId && touched.currentIngredientId && css.errorColumn)}>Name</div>
+                      <div className={clsx (css.column2,errors.currentIngredientAmount && touched.currentIngredientAmount && css.errorColumn)}>Amount</div>
                     </div>
 
               
@@ -239,8 +245,8 @@ navigate(`/profile/own`);
                         <div className={css.dropDownColumns}>
                          
                           <div className={css.mobileOnly}>
-                            <div className={css.column1}>Name</div>
-                            <div className={css.column2}>Amount</div>
+                             <div className={clsx(css.column1,errors.currentIngredientId && touched.currentIngredientId && css.errorColumn)}>Name</div>
+                      <div className={clsx (css.column2,errors.currentIngredientAmount && touched.currentIngredientAmount && css.errorColumn)}>Amount</div>
                           </div>
 
                           {values.ingredient.map((ing, index) => {
@@ -273,12 +279,18 @@ navigate(`/profile/own`);
                       </div>
                     )}
                   </div>
-                  <ErrorMessage name="ingredient" component={css.error} />
-                </div>
+                 <ErrorMessage name="currentIngredientId">
+                 {msg => <div className={css.errorColumn}>{msg}</div>}
+                  </ErrorMessage>
+
+            <ErrorMessage name="currentIngredientAmount">
+              {msg => <div className={css.errorColumn}>{msg}</div>}
+             </ErrorMessage>
+                   </div>
               </section>
 
               
-              <section className={css.section}>
+            <section className={css.section}>
                 <div className={css.fieldBlock}>
                   <label className={css.label}>Instructions</label>
                   <Field className={clsx(css.textareas, touched.instruction &&  errors.instruction && css.errorField)}
