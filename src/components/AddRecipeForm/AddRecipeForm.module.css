@@ -561,3 +561,9 @@ display: flex;
     width: 332px;
   }
 }
+
+.errorMess{
+  color: var(--red);
+  font-weight: 400;
+    font-size: 18px;
+}

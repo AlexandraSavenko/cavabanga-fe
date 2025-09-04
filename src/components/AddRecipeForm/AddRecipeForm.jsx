@@ -68,7 +68,7 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Select a category"),
   
   ingredient: Yup.array()
-    .of(ingredObjectSchema).min(2).max(10).required("Two ingredients please"),
+    .of(ingredObjectSchema).min(2).required("Two ingredients please"),
     
   instruction: Yup.string()
     .max(1200, "Instructions should not exceed 1200 characters")
@@ -271,7 +271,7 @@ formData.append("recipeImg", values.recipeImg);
                       </div>
                     )}
                   </div>
-                  <ErrorMessage name="ingredient" component={css.error} />
+                  <ErrorMessage className={css.errorMess} name="ingredient" component={css.error} />
                 </div>
               </section>
 
