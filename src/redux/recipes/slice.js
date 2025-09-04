@@ -60,10 +60,18 @@ const recipeSlice = createSlice({
         state.allRecipes = [];
         state.totalItems = 0;
         state.totalPages = 0;
-      }).addCase(getOwnRecipeList.fulfilled, (state, action) => {
+      }).addCase(getOwnRecipeList.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getOwnRecipeList.fulfilled, (state, action) => {
+                state.loading = false;
 state.ownRecipes = action.payload.data,
 state.ownPage = action.payload.page,
 state.totalOwnItems = action.payload.totalItems
+      }).addCase(getOwnRecipeList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Something went wrong";
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
