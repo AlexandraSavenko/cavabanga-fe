@@ -23,7 +23,8 @@ const MainPage = () => {
     dispatch(getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient }));
   }, [page, category, name, ingredient, dispatch]);
   return (
-    <div className={css.wrap}>
+    <div>
+      <h2 className={css.title}>Recepies</h2>
       <Filters />
       <RecipesList allRecipes={allRecipes} recipeType={"all"} />
       {totalItems > 12 && <Pagination />}
