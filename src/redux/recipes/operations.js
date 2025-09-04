@@ -28,6 +28,22 @@ export const getRecipeList = createAsyncThunk(
   }
 );
 
+export const getOwnRecipeList = createAsyncThunk(
+  "api/own",
+  async (params, thunkAPI) => {
+    const state = thunkAPI.getState();
+  const token = selectToken(state);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  try {
+    const {page, perPage} = params;
+    const res = await axios.get(`/api/recipes/own/?page=${page}&perPage=${perPage}`);
+    return res.data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.data?.message || "Something went wrong. Please try again later.");
+  }
+  }
+) 
+
 export const getUserFavourites = createAsyncThunk(
   "user/getFavourites",
   async (_, thunkAPI) => {

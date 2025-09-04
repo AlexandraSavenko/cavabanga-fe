@@ -1,0 +1,84 @@
+.pagination {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 4px;
+  margin-bottom: 48px;
+}
+
+.pagination button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+.page,
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+.arrow {
+  background: #9b6c43;
+}
+
+.arrow:active {
+  background-color: #8a5f3b;
+  color: #fff;
+}
+
+.page {
+  background: transparent;
+  color: #000;
+  border: 1px solid transparent;
+}
+
+.page:hover {
+  border: 1px solid #9b6c43;
+}
+
+.page.active {
+  background: #9b6c43;
+  color: #fff;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+}
+@media only screen and (min-width: 768px) {
+  .pagination {
+    gap: 8px;
+  }
+  .page,
+  .arrow {
+    border-radius: 8px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .pagination {
+    gap: 4px;
+  }
+  .page,
+  .arrow {
+    padding: 4px 8px;
+    width: 32px;
+    height: 32px;
+  }
+}

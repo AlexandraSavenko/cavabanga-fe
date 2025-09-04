@@ -11,3 +11,7 @@ export const selectOneRecipe = state => state.recipes.oneRecipe;
 export const selectFavRecipesIds = createSelector(
     [selectUserFavourites], (userFavorites) =>  (userFavorites ?? []).map(recipe => recipe._id)
 )
+export const selectOwnPage = state => state.recipes.ownPage;
+export const selectOwnRecipes = state => state.recipes.ownRecipes;
+export const selectTotalOwnItems = state => state.recipes.totalOwnItems;
+export const selectTotalOwnPages = state => state.recipes.totalOwnPages;
