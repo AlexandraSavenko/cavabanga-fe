@@ -4,16 +4,20 @@ import {
   getRecipeList,
   getUserFavourites,
   toggleFavorites,
+  getOwnRecipeList
 } from "./operations";
 import { logout } from "../auth/operations";
 
 const recipesState = {
   allRecipes: [],
   // listOfFavorites: [],
+  ownRecipes: [],
   favoriteRecipes: [],
   page: 1,
+  ownPage: 1,
   perPage: 12,
   totalItems: 0,
+  totalOwnItems: 0,
   totalPages: 0,
   currentView: "",
   filters: {},
@@ -34,6 +38,7 @@ const recipeSlice = createSlice({
         state.page = newPage;
       }
     },
+    setPageToOne: (state) => {state.page = 1}
   },
   extraReducers: (builder) =>
     builder
@@ -55,6 +60,10 @@ const recipeSlice = createSlice({
         state.allRecipes = [];
         state.totalItems = 0;
         state.totalPages = 0;
+      }).addCase(getOwnRecipeList.fulfilled, (state, action) => {
+state.ownRecipes = action.payload.data,
+state.ownPage = action.payload.page,
+state.totalOwnItems = action.payload.totalItems
       })
       .addCase(getUserFavourites.pending, (state) => {
         state.loading = true;
@@ -65,7 +74,7 @@ const recipeSlice = createSlice({
         state.favoriteRecipes = action.payload;
         state.loading = false;
         state.error = null;
-        // state.page = 1;
+        state.page = 1;
         // state.totalItems = action.payload.length;
         // state.totalPages = 1;
       })
@@ -110,4 +119,4 @@ const recipeSlice = createSlice({
 });
 
 export default recipeSlice.reducer;
-export const { setPage } = recipeSlice.actions;
+export const { setPage, setPageToOne } = recipeSlice.actions;
