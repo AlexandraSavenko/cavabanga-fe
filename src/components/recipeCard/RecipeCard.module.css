@@ -24,6 +24,7 @@
   display: flex;
   align-items: flex-start;
   align-self: stretch;
+  flex-wrap: wrap;
 }
 
 .title {
@@ -31,6 +32,9 @@
   color: var(--Black, #000);
   font-size: 24px;
   font-weight: 700;
+  white-space: normal;
+  overflow-wrap: break-word;
+  width: 100%;
 }
 .timeWrapper {
   display: flex;
