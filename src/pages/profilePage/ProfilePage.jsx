@@ -10,6 +10,7 @@ import { resetFilters } from '../../redux/filters/slice.js';
 import FilterCount from '../../components/filterCount/FilterCount.jsx';
 import NoRecipesYet from '../../components/NoRecipesYet/NoRecipesYet.jsx';
 import Pagination from '../../components/pagination/Pagination.jsx';
+import OwnPagination from '../../components/ownPagination/OwnPagination.jsx';
 
 
 const ProfilePage = () => {
@@ -43,7 +44,7 @@ const isLoading = useSelector(selectLoading)
       <ProfileNavigation />
       <FilterCount recipeNumber={totalItems} />
       <RecipesList allRecipes={showedRecipes} recipeType={recipeType} />
-      {totalItems > 12 && recipeType === "own" && <Pagination />}
+      {totalItems > 12 && recipeType === "own" && <OwnPagination/>}
       
       {recipeType === "own"
         && showedRecipes.length === 0 && !isLoading

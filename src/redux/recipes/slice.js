@@ -18,6 +18,7 @@ const recipesState = {
   perPage: 12,
   totalItems: 0,
   totalOwnItems: 0,
+  totalOwnPages: 0,
   totalPages: 0,
   currentView: "",
   filters: {},
@@ -38,7 +39,12 @@ const recipeSlice = createSlice({
         state.page = newPage;
       }
     },
-    setPageToOne: (state) => {state.page = 1}
+    setOwnPage: (state, action) => {
+      const newPage = action.payload;
+      if (newPage >= 1 && newPage <= state.totalOwnPages) {
+        state.ownPage = newPage;
+      }
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -68,7 +74,8 @@ const recipeSlice = createSlice({
                 state.loading = false;
 state.ownRecipes = action.payload.data,
 state.ownPage = action.payload.page,
-state.totalOwnItems = action.payload.totalItems
+state.totalOwnItems = action.payload.totalItems,
+state.totalOwnPages = action.payload.totalPages
       }).addCase(getOwnRecipeList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Something went wrong";
@@ -127,4 +134,4 @@ state.totalOwnItems = action.payload.totalItems
 });
 
 export default recipeSlice.reducer;
-export const { setPage, setPageToOne } = recipeSlice.actions;
+export const { setPage, setOwnPage } = recipeSlice.actions;

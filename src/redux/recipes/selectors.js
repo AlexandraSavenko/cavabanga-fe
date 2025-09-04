@@ -14,3 +14,4 @@ export const selectFavRecipesIds = createSelector(
 export const selectOwnPage = state => state.recipes.ownPage;
 export const selectOwnRecipes = state => state.recipes.ownRecipes;
 export const selectTotalOwnItems = state => state.recipes.totalOwnItems;
+export const selectTotalOwnPages = state => state.recipes.totalOwnPages;
