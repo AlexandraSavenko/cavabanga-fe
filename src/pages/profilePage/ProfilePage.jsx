@@ -5,7 +5,7 @@ import ProfileNavigation from '../../components/profileNavigation/ProfileNavigat
 import RecipesList from '../../components/recipesList/RecipesList.jsx';
 import styles from './ProfilePage.module.css';
 import { getRecipeList, getUserFavourites } from '../../redux/recipes/operations.js';
-import { selectAllRecipes, selectUserFavourites, selectTotalItems, selectPage } from '../../redux/recipes/selectors.js';
+import { selectAllRecipes, selectUserFavourites, selectPage } from '../../redux/recipes/selectors.js';
 import { resetFilters } from '../../redux/filters/slice.js';
 import FilterCount from '../../components/filterCount/FilterCount.jsx';
 import NoRecipesYet from '../../components/NoRecipesYet/NoRecipesYet.jsx';
@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectAllRecipes);
   const favRecipes = useSelector(selectUserFavourites);
-  const totalItems = useSelector(selectTotalItems);
+
   const page = useSelector(selectPage)
   
   useEffect(() => {
@@ -32,7 +32,7 @@ const ProfilePage = () => {
   } else if (recipeType === "favorites") {
     showedRecipes = favRecipes;
   }
-
+  const totalItems = showedRecipes.length;
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>My profile</h2> {/* українською */}

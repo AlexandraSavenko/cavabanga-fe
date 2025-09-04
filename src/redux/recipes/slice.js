@@ -65,9 +65,9 @@ const recipeSlice = createSlice({
         state.favoriteRecipes = action.payload;
         state.loading = false;
         state.error = null;
-        state.page = 1;
-        state.totalItems = action.payload.length;
-        state.totalPages = 1;
+        // state.page = 1;
+        // state.totalItems = action.payload.length;
+        // state.totalPages = 1;
       })
       .addCase(getUserFavourites.rejected, (state) => {
         state.loading = false; // Гарантія вимкнення лоадера при помилці
@@ -90,7 +90,7 @@ const recipeSlice = createSlice({
         } else {
           state.favoriteRecipes.push({ _id: recipeId });
         }
-        state.totalItems = state.favoriteRecipes.length;
+        // state.totalItems = state.favoriteRecipes.length;
       })
       .addCase(logout.fulfilled, (state) => {
         state.favoriteRecipes = [];

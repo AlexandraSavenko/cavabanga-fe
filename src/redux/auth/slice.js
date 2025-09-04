@@ -26,6 +26,12 @@ const authSlice = createSlice({
   reducers: {
     clearAuthError: (state) => {
       state.authError = null;
+    },
+    addToFav: (state, action) => {
+      state.user.savedRecipes = [...state.user.savedRecipes, action.payload]
+    },
+    deleteFromFav: (state, action) => {
+      state.user.savedRecipes = state.user.savedRecipes.filter(recipeId => recipeId !== action.payload)
     }
   },
   extraReducers: builder =>
@@ -78,4 +84,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { clearAuthError } = authSlice.actions;
+export const { clearAuthError, addToFav, deleteFromFav } = authSlice.actions;
