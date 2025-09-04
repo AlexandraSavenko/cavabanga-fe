@@ -348,11 +348,12 @@ display: flex;
   .section .textarea{
     width: 100%;
   }
-  .textareas{
+  .textarea{
     width: 100%;
   }
   .twoColumns{
     flex-direction: column;
+    gap: 1px;
   }
   .input, .input1, .input2{
     width: 100%;

@@ -68,7 +68,7 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Select a category"),
   
   ingredient: Yup.array()
-    .of(ingredObjectSchema).min(2).required(),
+    .of(ingredObjectSchema).min(2).max(10).required("Two ingredients please"),
     
   instruction: Yup.string()
     .max(1200, "Instructions should not exceed 1200 characters")
@@ -125,7 +125,7 @@ formData.append("recipeImg", values.recipeImg);
                 {previewImage
                   ? (<img src={previewImage} alt="preview" className={css.imagePreview} />)
                   : (<svg className={css.icon}>
-                    <use href="/public/icons.svg#icon-camera" />
+                    <use href="/icons.svg#icon-camera" />
                   </svg>)}
               </div>
               <ErrorMessage name="recipeImg" component="div" className={css.error} />
@@ -260,7 +260,7 @@ formData.append("recipeImg", values.recipeImg);
                                     }}
                                   >
                                     <svg className={css.icons}>
-                                      <use href="/public/icons.svg#icon-trash-can" width="16" height="16" />
+                                      <use href="/icons.svg#icon-trash-can" width="16" height="16" />
                                     </svg>
                                   </button>
                                 </div>
