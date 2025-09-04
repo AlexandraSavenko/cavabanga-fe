@@ -348,11 +348,12 @@ display: flex;
   .section .textarea{
     width: 100%;
   }
-  .textareas{
+  .textarea{
     width: 100%;
   }
   .twoColumns{
     flex-direction: column;
+    gap: 1px;
   }
   .input, .input1, .input2{
     width: 100%;
@@ -559,4 +560,10 @@ display: flex;
     border-bottom: 1px solid #c5c5c5;
     width: 332px;
   }
+}
+
+.errorMess{
+  color: var(--red);
+  font-weight: 400;
+    font-size: 18px;
 }
