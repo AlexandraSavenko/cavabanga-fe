@@ -67,6 +67,7 @@
   font-weight: 400;
   font-size: 18px;
   color: #595d62;
+  resize: none !important;
 }
 
 .textarea:focus {
@@ -174,6 +175,7 @@ display: flex;
   font-weight: 400;
   font-size: 18px;
   color: #9f9f9f;
+  resize: none;
 }
 
 .textareas:focus {
