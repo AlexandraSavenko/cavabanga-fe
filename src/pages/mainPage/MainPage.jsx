@@ -18,7 +18,6 @@ const MainPage = () => {
   const name = useSelector(selectSearchQuery);
   const ingredient = useSelector(selectIngredient);
   const totalItems = useSelector(selectTotalItems)
-console.log(allRecipes)
   useEffect(() => {
     // Запит списку рецептів з урахуванням фільтрів та пошуку
     dispatch(getRecipeList({ type: "all", page, perPage: 12, category, name, ingredient }));

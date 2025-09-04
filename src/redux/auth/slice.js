@@ -28,7 +28,6 @@ const authSlice = createSlice({
       state.authError = null;
     },
     addToFav: (state, action) => {
-      console.log(action.payload)
       state.user.savedRecipes = [...state.user.savedRecipes, action.payload]
     },
     deleteFromFav: (state, action) => {
