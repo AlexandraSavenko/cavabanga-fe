@@ -14,9 +14,18 @@
   flex-grow: 1;
   flex-direction: column;
 }
-
-.image {
+.imgWrap{
+  overflow: hidden;
+width: 100%;
+aspect-ratio: 1/1;
+  background-color: var(--light-brown);
   border-radius: 8px;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .wrapper {

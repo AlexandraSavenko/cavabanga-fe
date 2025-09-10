@@ -33,13 +33,13 @@ const RecipeCard = ({ recipe, recipeType }) => {
   };
   return (
     <div className={css.card}>
-
+<div className={css.imgWrap}>
       <img
         src={recipe.recipeImg || "/placeholder.jpg"}
         alt={recipe.name}
         className={css.image}
       />
-
+</div>
       <div className={css.cardContent}>
 
         <div className={css.wrapper}>
