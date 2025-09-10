@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./Header.module.css";
 import Logo from "../logo/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -15,6 +15,19 @@ const Header = () => {
   const [mobileNav, setMobileNav] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (mobileNav) {
+      // disable scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // re-enable scroll
+      document.body.style.overflow = '';
+    }
+     return () => {
+      // cleanup: re-enable scroll, esc
+      document.body.style.overflow = '';
+    };
+  },[mobileNav])
   const toggleModalNav = () => {
     setMobileNav(!mobileNav);
   };

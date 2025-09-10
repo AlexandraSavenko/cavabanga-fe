@@ -242,13 +242,17 @@ display: flex;
 }
 
 .column {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 180px;
   gap: 12px;
-  align-items: center;
+  align-items: center; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .columnItem {
+  flex-grow: 1;
   font-weight: 400;
   font-size: 16px;
   line-height: 155%;
@@ -367,7 +371,11 @@ display: flex;
     width: 100%;
   }
 }
-
+@media only screen and (max-width: 768px) {
+  .column{
+    flex-direction: column;
+  }
+}
 @media only screen and (min-width: 768px) {
   .label {
     font-size: 32px;

@@ -93,12 +93,11 @@ values.ingredient.forEach((ing, index) => {
 });
 
 formData.append("recipeImg", values.recipeImg);
- dispatch(addRecipe(formData)).unwrap();
-
-    navigate(`/profile/own`); 
-
+dispatch(addRecipe(formData)).unwrap();
+  navigate(`/profile/own`); 
     actions.resetForm();
     setPreviewImage(null);
+   
 };
   return (
 
