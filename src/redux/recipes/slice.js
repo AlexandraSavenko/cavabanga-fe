@@ -71,7 +71,7 @@ const recipeSlice = createSlice({
         state.error = null;
       })
       .addCase(getOwnRecipeList.fulfilled, (state, action) => {
-                state.loading = false;
+        state.loading = false;
 state.ownRecipes = action.payload.data,
 state.ownPage = action.payload.page,
 state.totalOwnItems = action.payload.totalItems,
